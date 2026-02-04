@@ -1,0 +1,43 @@
+@import url(./header.css);
+@import url(./footer.css);
+@import url(./results.css);
+@import url(./home.css);
+@import url(./countdown.css);
+@import url(./aboutus.css);
+@import url(./team.css);
+@import url(./competition.css);
+@import url(./sponsors.css);
+@import url(./contact.css);
+
+@font-face {
+    font-family: 'Conthrax';
+    src: url('../fonts/Conthrax.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    background-color: var(--black-collor);
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth !important;
+    
+    overscroll-behavior-y: none;
+}
+
+
+body::-webkit-scrollbar {
+    display: none;
+    width: 0; 
+    height: 0;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Helvetica", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
