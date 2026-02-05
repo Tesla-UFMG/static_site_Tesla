@@ -1,5 +1,5 @@
 /* =========================================
-   SEÇÃO COMPETIÇÃO (FINAL - COLORIDO & 100VH)
+   SEÇÃO COMPETIÇÃO (OTIMIZADO - LEVE)
    ========================================= */
 
 :root {
@@ -63,7 +63,7 @@
     /* COLUNAS: Menu | Flex | Flex | Galeria Larga */
     grid-template-columns: 260px 1.2fr 0.8fr 380px; 
     
-    /* LINHAS INDEPENDENTES: Ajuste a altura de cada linha aqui */
+    /* LINHAS INDEPENDENTES */
     grid-template-rows: 45% 52%; 
     
     gap: 1.2rem;
@@ -71,11 +71,15 @@
 }
 
 /* =========================================
-   ESTILO GERAL DOS CARDS
+   ESTILO GERAL DOS CARDS (OTIMIZADO)
    ========================================= */
 .dashboard-item {
-    background-color: rgba(13, 13, 13, 0.6);
-    backdrop-filter: blur(10px);
+    /* PERFORMANCE: Fundo mais sólido para evitar recálculo constante de pixels */
+    background-color: rgba(13, 13, 13, 0.95);
+    
+    /* PERFORMANCE: Blur removido para evitar travamentos */
+    /* backdrop-filter: blur(10px); */
+    
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 1.2rem;
@@ -237,14 +241,11 @@
 .map-container { width: 100%; height: 100%; position: relative; }
 
 .map-container iframe {
-    /* REMOVIDO O GRAYSCALE. 
-       Apenas um leve ajuste de contraste para manter a nitidez do satélite. */
     filter: brightness(0.9) contrast(1.1);
     width: 100%; height: 100%; opacity: 1; transition: all 0.5s ease;
 }
 
 .map-container:hover iframe {
-    /* Brilho total no hover */
     filter: brightness(1) contrast(1);
 }
 .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; box-shadow: inset 0 0 30px rgba(0,0,0,0.8); }
@@ -278,7 +279,7 @@
 
 
 /* =========================================
-   GALERIA INFINITA (COLORIDA & GRID 2)
+   GALERIA INFINITA (OTIMIZADA)
    ========================================= */
 
 .gallery-mask {
@@ -294,6 +295,11 @@
     flex-direction: column;
     gap: 12px; 
     animation: scrollVertical 30s linear infinite;
+    
+    /* PERFORMANCE: Avisa o navegador que vai mover e força aceleração de hardware */
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
 }
 
 .gallery-track:hover {
@@ -314,8 +320,8 @@
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     
-    /* REMOVIDO O GRAYSCALE (Cores Originais) */
-    transition: all 0.3s ease;
+    /* REMOVIDO FILTROS PESADOS PARA PERFORMANCE */
+    transition: transform 0.3s ease; /* Anima apenas o transform */
     cursor: pointer;
 }
 
@@ -328,7 +334,7 @@
 .gallery-group img:hover {
     border-color: var(--primary-collor);
     transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(54, 211, 102, 0.4);
+    /* Removido box-shadow pesado no hover para evitar engasgos */
     z-index: 2;
 }
 
