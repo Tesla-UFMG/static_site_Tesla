@@ -66,3 +66,108 @@
     from { width: 0; opacity: 0; }
     to { width: 100%; opacity: 1; }
 }
+
+/* =========================================
+   MENU MOBILE (RESPONSIVO)
+   ========================================= */
+
+/* Esconde o botão em telas grandes */
+#btn-mobile {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    /* Ajuste do Header para Mobile */
+    .header {
+        justify-content: space-between;
+        padding: 0 1.5rem;
+    }
+
+    /* Mostra o botão Hambúrguer */
+    #btn-mobile {
+        display: flex;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border: none;
+        background: none;
+        cursor: pointer;
+        gap: 0.5rem;
+        color: var(--primary-collor); /* Verde Neon */
+        z-index: 2000;
+    }
+
+    /* Desenho das linhas do Hambúrguer */
+    #hamburguer {
+        display: block;
+        border-top: 2px solid var(--primary-collor);
+        width: 25px;
+        transition: 0.3s;
+    }
+    
+    #hamburguer::after, #hamburguer::before {
+        content: '';
+        display: block;
+        width: 25px;
+        height: 2px;
+        background: var(--primary-collor);
+        margin-top: 6px;
+        transition: 0.3s;
+        position: relative;
+    }
+
+    /* Estilo do Menu quando fechado (Escondido) */
+    .Navegacao-header {
+        display: block;
+        position: absolute;
+        width: 100%;
+        top: 90px; /* Altura do header */
+        right: 0;
+        background: rgba(13, 13, 13, 0.98); /* Fundo quase preto */
+        backdrop-filter: blur(10px);
+        height: 0; /* Começa fechado */
+        transition: 0.4s;
+        z-index: 1000;
+        visibility: hidden;
+        overflow-y: hidden;
+        border-bottom: 2px solid var(--primary-collor);
+    }
+
+    /* Estilo do Menu quando ABERTO (Classe .active via JS) */
+    .Navegacao-header.active {
+        height: calc(100vh - 90px); /* Ocupa a tela toda menos o header */
+        visibility: visible;
+        overflow-y: auto;
+    }
+
+    /* Links no Mobile */
+    .items-navegacao {
+        padding: 1.5rem 0;
+        margin: 0 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: block;
+        text-align: center;
+        font-size: 1.2rem;
+        font-family: "Conthrax", sans-serif;
+    }
+
+    .items-navegacao:hover {
+        background: rgba(55, 211, 102, 0.1);
+        color: var(--primary-collor);
+        padding-left: 10px; /* Efeito de movimento */
+    }
+
+    /* Animação do ícone X quando aberto */
+    .Navegacao-header.active ~ #btn-mobile #hamburguer {
+        border-top-color: transparent;
+    }
+    
+    .Navegacao-header.active ~ #btn-mobile #hamburguer::before {
+        transform: rotate(135deg);
+        top: 0px; 
+    }
+    
+    .Navegacao-header.active ~ #btn-mobile #hamburguer::after {
+        transform: rotate(-135deg);
+        top: -8px; 
+    }
+}

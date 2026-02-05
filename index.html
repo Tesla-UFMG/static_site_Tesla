@@ -17,19 +17,24 @@
 </head>
 <body>
     <header class="header">
-        <a class="logo-header" href="/index.html">
-            <img class="logo-image" src="./assets/images/VERDE E BRANCO.png" alt="logo"/>
-        </a>
-        <nav class="Navegacao-header">
-            <a class="items-navegacao" href="#home">Início</a>
-            <a class="items-navegacao" href="#sobre">Sobre nós</a>
-            <a class="items-navegacao" href="#resultados">Resultados e Protótipos</a>
-            <a class="items-navegacao" href="#competicao">Competição</a>
-            <a class="items-navegacao" href="#equipe">Equipe</a>
-            <a class="items-navegacao" href="#patrocinios">Patrocínio</a>
-            <a class="items-navegacao" href="#contato">Contatos</a>
-        </nav>
-    </header>
+    <a class="logo-header" href="/index.html">
+        <img class="logo-image" src="./assets/images/VERDE E BRANCO.png" alt="logo"/>
+    </a>
+
+    <button id="btn-mobile" aria-label="Abrir Menu">
+        <span id="hamburguer"></span>
+    </button>
+
+    <nav class="Navegacao-header" id="nav">
+        <a class="items-navegacao" href="#home" onclick="toggleMenu()">Início</a>
+        <a class="items-navegacao" href="#sobre" onclick="toggleMenu()">Sobre nós</a>
+        <a class="items-navegacao" href="#resultados" onclick="toggleMenu()">Resultados</a>
+        <a class="items-navegacao" href="#competicao" onclick="toggleMenu()">Competição</a>
+        <a class="items-navegacao" href="#equipe" onclick="toggleMenu()">Equipe</a>
+        <a class="items-navegacao" href="#patrocinios" onclick="toggleMenu()">Patrocínio</a>
+        <a class="items-navegacao" href="#contato" onclick="toggleMenu()">Contatos</a>
+    </nav>
+</header>
     <main>
         <section id="home" class="section-home">
             <div class="home-background">
@@ -736,5 +741,6 @@
     <script src="./assets/js/homeAnimation.js"></script>
     <script src="./assets/js/scrollDisappear.js"></script>
     <script src="./assets/js/competitionNavigation.js"></script>
+    <script src="./assets/js/mobileNavBar.js"></script>
 </body>
 </html>
