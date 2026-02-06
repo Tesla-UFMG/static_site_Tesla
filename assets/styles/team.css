@@ -1,7 +1,8 @@
 /* =========================================
-   SEÇÃO EQUIPE (FINAL - JS TOGGLE + TEXTO VISÍVEL)
+   SEÇÃO EQUIPE (FINAL - HÍBRIDO HOVER/CLICK)
    ========================================= */
 
+/* Variáveis locais para garantir funcionamento isolado */
 :root {
     --primary-collor: rgb(54, 211, 102);
     --second-collor: rgba(0, 102, 94, 1);
@@ -13,7 +14,10 @@
     scroll-margin-top: 4rem;
     min-height: 100vh; 
     padding: 3rem 1rem 4rem 1rem;
+    
+    /* Fundo Dark Radial */
     background: radial-gradient(circle at center, #1a1a1a 0%, var(--black-collor) 80%);
+    
     text-align: center;
     display: flex;
     justify-content: center;
@@ -24,6 +28,7 @@
     width: 100%;
 }
 
+/* --- TÍTULO --- */
 .titulo-equipe {
     color: var(--white-collor);
     font-family: "Conthrax", sans-serif;
@@ -46,8 +51,10 @@
     border-radius: 2px;
 }
 
+/* --- CONTAINER CARDS (GRID) --- */
 .container-cards {
     display: grid;
+    /* Desktop: 4 colunas */
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     width: 100%;
@@ -55,30 +62,42 @@
     perspective: 1000px;
 }
 
+/* --- ESTRUTURA DO CARD --- */
 .card-container {
     background-color: transparent;
     width: 100%;
-    height: 28rem; 
+    height: 28rem; /* Altura Desktop */
     perspective: 1000px;
 }
 
 .card {
     width: 100%;
-    height: 100%;
+    height: 80%;
     position: relative;
     transform-style: preserve-3d; 
     transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
     border-radius: 15px;
+    
+    /* Remove highlight azul de toque no mobile */
     -webkit-tap-highlight-color: transparent; 
 }
 
-/* 2. Mobile/JS: Gira quando a classe .flipped é adicionada pelo clique */
+/* --- LÓGICA DE GIRO (CRUCIAL) --- */
+
+/* 1. Mobile/JS: Gira quando a classe .flipped é adicionada pelo clique */
 .card.flipped {
     transform: rotateY(180deg);
 }
 
-/* --- ESTILOS COMUNS --- */
+/* 2. Desktop: Gira ao passar o mouse (Só ativa se o dispositivo tiver mouse) */
+@media (hover: hover) {
+    .card-container:hover .card {
+        transform: rotateY(180deg);
+    }
+}
+
+/* --- ESTILOS COMUNS (Frente e Verso) --- */
 .card-front, .card-back {
     padding: 1.5rem;
     position: absolute;
@@ -86,16 +105,19 @@
     height: 100%;
     backface-visibility: hidden;
     border-radius: 15px;
+    
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     color: var(--white-collor);
     box-sizing: border-box;
 }
 
+/* --- FRENTE --- */
 .card-front {
     background: rgba(20, 20, 20, 0.95);
     border-top: 3px solid var(--primary-collor);
@@ -109,6 +131,7 @@
     transition: transform 0.3s ease;
 }
 
+/* Efeito Zoom Ícone (Apenas Desktop) */
 @media (hover: hover) {
     .card-container:hover .card-icon-front {
         transform: scale(1.1);
@@ -142,6 +165,7 @@
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
+/* --- VERSO --- */
 .card-back {
     background: linear-gradient(135deg, rgba(20, 20, 20, 0.98), #0d0d0d);
     transform: rotateY(180deg); 
@@ -193,6 +217,7 @@
     margin-left: auto;
 }
 
+/* --- BOTÃO --- */
 .btn-saiba-equipe {
     margin-top: 3rem;
     background-color: transparent;
@@ -217,10 +242,11 @@
 }
 
 /* =========================================
-   RESPONSIVIDADE (MOBILE)
+   RESPONSIVIDADE (MOBILE AJUSTADO)
    ========================================= */
 
 @media screen and (max-width: 1024px) {
+    /* Tablet: 2 colunas */
     .container-cards {
         grid-template-columns: repeat(2, 1fr);
         max-width: 700px;
@@ -233,22 +259,24 @@
     }
 
     .container-cards {
+        /* Grid 2 colunas no celular (economiza altura) */
         grid-template-columns: 1fr 1fr; 
         gap: 10px;
     }
 
     .card-container {
-        /* Altura 320px para caber texto + aviso */
+        /* Altura calculada para caber Texto + Hint */
         height: 320px; 
     }
 
+    /* Ajustes FRENTE */
     .card-front { padding: 1rem 0.5rem; }
     
     .card-icon-front { font-size: 2rem; margin-bottom: 0.5rem; }
     
     .titulo-card-front { font-size: 0.85rem; margin-bottom: 0.3rem; }
     
-    /* Texto Visível */
+    /* Texto Visível (Fonte menor) */
     .card-front p { 
         display: block; 
         font-size: 0.65rem; 
@@ -261,7 +289,7 @@
         margin-top: 0.2rem; 
     }
 
-    /* Aviso "Toque para ver" */
+    /* AVISO DE TOQUE (Rodapé do card) */
     .card-front::after {
         content: 'Toque para detalhes';
         font-family: 'Poppins', sans-serif;
@@ -272,6 +300,7 @@
         font-style: italic;
     }
 
+    /* Ajustes VERSO */
     .card-back { padding: 0.8rem; }
     .titulo-card-back { font-size: 0.85rem; margin-bottom: 0.5rem; }
     .card-back ul { gap: 0.2rem; }
