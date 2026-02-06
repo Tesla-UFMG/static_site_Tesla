@@ -1,15 +1,23 @@
+/* =========================================
+   SEÇÃO PATROCÍNIOS (CORRIGIDO MOBILE)
+   ========================================= */
+
 .section-patrocinios {
     scroll-margin-top: 4rem;
     min-height: 100vh;
     padding: 3rem 2rem 6rem 2rem;
     
-    /* Fundo Dark Tech (Contraste com os cards claros) */
+    /* Fundo Dark Tech */
     background: radial-gradient(circle at center, #1f1f1f 0%, var(--black-collor) 90%);
     
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
+    
+    /* Garante que nada vaze lateralmente */
+    width: 100%;
+    overflow: hidden; 
 }
 
 /* --- TÍTULO --- */
@@ -17,12 +25,22 @@
     color: var(--white-collor);
     font-family: "Conthrax", sans-serif;
     font-weight: 700;
-    font-size: 3.5rem;
+    
+    /* CORREÇÃO DE LARGURA: 
+       Usa 'clamp' para ajustar o tamanho dinamicamente entre 1.8rem e 3.5rem.
+       5vw faz a fonte crescer conforme a largura da tela. */
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    
     text-transform: uppercase;
     letter-spacing: 4px;
     margin-bottom: 4rem;
     position: relative;
     text-shadow: 0 0 15px rgba(55, 211, 102, 0.6);
+    text-align: center;
+    
+    /* SEGURANÇA MOBILE: Impede que o texto estoure a tela */
+    max-width: 95%; 
+    word-wrap: break-word;
 }
 
 .titulo-patrocinios::after {
@@ -50,10 +68,9 @@
     width: 220px;
     height: 130px;
     
-    /* Fundo Branco: Garante que logos pretas/escuras apareçam */
+    /* Fundo Branco */
     background: #ffffff; 
     
-    /* Borda sutil para não ficar "chapado" */
     border: 1px solid #ccc;
     border-radius: 8px;
     
@@ -62,7 +79,6 @@
     justify-content: center;
     padding: 1.5rem;
     
-    /* Sombra para destacar do fundo preto do site */
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -71,34 +87,30 @@
     overflow: hidden;
 }
 
-/* Hover: O card "acende" com a borda verde */
+/* Hover: Glow Verde */
 .logo-item:hover {
-    border-color: var(--primary-collor); /* Borda Verde Neon */
-    transform: translateY(-5px); /* Flutua */
+    border-color: var(--primary-collor); 
+    transform: translateY(-5px); 
     
-    /* Glow verde ao redor do card branco */
     box-shadow: 
         0 10px 25px rgba(0, 0, 0, 0.5),
         0 0 15px rgba(55, 211, 102, 0.4); 
 }
 
-/* --- A LOGO (Colorida e Adaptável) --- */
+/* --- A LOGO --- */
 .logo-item img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
     
-    /* SEM FILTROS DE COR: As cores originais aparecem vivas */
     filter: none; 
     
-    /* TRUQUE MÁGICO PARA MANUTENÇÃO: */
-    /* Se a logo for JPG com fundo branco, isso remove o fundo branco visualmente */
+    /* Remove fundo branco de JPGs visualmente */
     mix-blend-mode: multiply; 
     
     transition: transform 0.3s ease;
 }
 
-/* Leve zoom ao passar o mouse */
 .logo-item:hover img {
     transform: scale(1.1);
 }
@@ -115,6 +127,7 @@
     border-radius: 5px;
     background: transparent;
     transition: all 0.3s ease;
+    text-align: center;
 }
 
 .btn-seja-patrocinador:hover {
@@ -125,14 +138,32 @@
 
 /* --- RESPONSIVIDADE --- */
 @media screen and (max-width: 768px) {
-    .section-patrocinios { padding: 6rem 1rem; }
-    .logos-grid { gap: 1rem; }
-    
-    .logo-item {
-        width: 150px; /* Menor no celular */
-        height: 100px;
-        padding: 1rem;
+    .section-patrocinios { 
+        padding: 6rem 1rem; /* Padding lateral reduzido para caber mais coisa */
     }
     
-    .titulo-patrocinios { font-size: 2.5rem; }
+    .logos-grid { 
+        gap: 1rem; 
+    }
+    
+    .logo-item {
+        /* Ajuste para caber 2 cards por linha em telas pequenas (360px+) */
+        width: 45%; 
+        min-width: 140px; 
+        max-width: 160px;
+        height: 100px;
+        padding: 0.8rem;
+    }
+    
+    .titulo-patrocinios { 
+        /* Reduz fonte e espaçamento para não estourar a largura */
+        font-size: 2rem; 
+        letter-spacing: 1px; /* Espaçamento menor no mobile */
+    }
+    
+    .btn-seja-patrocinador {
+        width: 100%;
+        max-width: 300px;
+        padding: 1rem;
+    }
 }

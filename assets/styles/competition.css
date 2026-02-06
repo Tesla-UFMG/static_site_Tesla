@@ -22,6 +22,10 @@
     overflow: hidden; /* Impede rolagem na página principal */
     z-index: 2;
     position: relative;
+    
+    /* Garante que a largura nunca exceda a tela */
+    width: 100%;
+    max-width: 100vw;
 }
 
 /* --- TÍTULO --- */
@@ -32,12 +36,20 @@
     color: var(--white-collor);
     font-family: "Conthrax", sans-serif;
     font-weight: 700;
-    font-size: clamp(1.5rem, 3.5rem, 4.5rem); 
+    
+    /* CORREÇÃO: O valor do meio agora é fluido (6vw) */
+    font-size: clamp(2rem, 6vw, 4.5rem); 
+    
     text-transform: uppercase;
     letter-spacing: 4px;
     text-align: center;
     text-shadow: 0 0 15px rgba(55, 211, 102, 0.6);
     flex-shrink: 0; 
+    
+    /* CORREÇÃO MOBILE: Impede estouro lateral */
+    width: 95%;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 .titulo-competicao::after {
@@ -76,9 +88,6 @@
 .dashboard-item {
     /* PERFORMANCE: Fundo mais sólido para evitar recálculo constante de pixels */
     background-color: rgba(13, 13, 13, 0.95);
-    
-    /* PERFORMANCE: Blur removido para evitar travamentos */
-    /* backdrop-filter: blur(10px); */
     
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
@@ -296,7 +305,6 @@
     gap: 12px; 
     animation: scrollVertical 30s linear infinite;
     
-    /* PERFORMANCE: Avisa o navegador que vai mover e força aceleração de hardware */
     will-change: transform;
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
@@ -320,8 +328,7 @@
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     
-    /* REMOVIDO FILTROS PESADOS PARA PERFORMANCE */
-    transition: transform 0.3s ease; /* Anima apenas o transform */
+    transition: transform 0.3s ease; 
     cursor: pointer;
 }
 
@@ -334,7 +341,6 @@
 .gallery-group img:hover {
     border-color: var(--primary-collor);
     transform: scale(1.05);
-    /* Removido box-shadow pesado no hover para evitar engasgos */
     z-index: 2;
 }
 
@@ -368,11 +374,19 @@
         display: block; 
     }
 
+    /* AJUSTE DO TÍTULO NO MOBILE */
+    .titulo-competicao {
+        font-size: 2.2rem;
+        letter-spacing: 2px; /* Reduz espaço entre letras */
+        margin-bottom: 2rem;
+    }
+
     .competicao-dashboard {
         display: flex; 
         flex-direction: column; 
         height: auto;
         gap: 1.5rem;
+        padding: 0 1rem; /* Reduz padding lateral para ganhar espaço */
     }
 
     .item-texto, .item-menu, .item-mapa, .item-detalhes, .item-galeria {
