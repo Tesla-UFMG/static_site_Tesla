@@ -1,5 +1,5 @@
 /* =========================================
-   SEÇÃO RESULTADOS (JANELA ANCORADA NA DIREITA)
+   SEÇÃO RESULTADOS (TEXTO NO TOPO MOBILE)
    ========================================= */
 
 /* --- ESTRUTURA GERAL --- */
@@ -40,15 +40,18 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    /* Ajuste fino para garantir que o carro apareça bem */
+    object-position: center bottom; 
 }
 
+/* Máscara suave geral */
 .carousel .list .item::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle, transparent 40%, rgba(13,13,13,0.95) 100%);
+    background: radial-gradient(circle, transparent 30%, rgba(13,13,13,0.4) 100%);
     pointer-events: none;
-    z-index: 2;
+    z-index: 1;
 }
 
 /* Animação Zoom */
@@ -62,29 +65,26 @@
     to { transform: scale(1); }
 }
 
-/* --- CONTEÚDO (JANELA ANCORADA) --- */
+/* --- CONTEÚDO (JANELA FLUTUANTE - DESKTOP) --- */
 .carousel .list .item .content {
     position: absolute;
-    top: 20%; 
+    /* DESKTOP: Ancorado à direita e centralizado */
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5%; 
     
-    /* --- CORREÇÃO DO ESPAÇO --- */
-    right: 0; /* Cola na borda direita */
-    width: fit-content; 
-    min-width: 300px;   
-    max-width: 500px;
+    width: fit-content;
+    min-width: 350px;
+    max-width: 450px;
     
-    /* Arredonda só a esquerda (Top-Left, Top-Right, Bottom-Right, Bottom-Left) */
-    border-radius: 10px 0 0 10px; 
-    /* -------------------------- */
-
     background-color: rgba(13, 13, 13, 0.85);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(10px);
     
-    /* Borda Neon na Direita (destaque visual) */
-    border-right: 5px solid var(--primary-collor); 
+    border-right: 4px solid var(--primary-collor);
+    border-radius: 8px 0 0 8px;
     
-    padding: 2.5rem 3rem 2.5rem 2.5rem; /* Um pouco mais de padding na direita */
-    box-shadow: -10px 10px 40px rgba(0, 0, 0, 0.7);
+    padding: 2rem 2.5rem 2rem 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     
     text-align: right;
     color: var(--white-collor);
@@ -105,16 +105,16 @@
 .carousel .list .item.active .content .topic,
 .carousel .list .item.active .content .des,
 .carousel .list .item.active .content .buttons {
-    transform: translateY(30px);
-    filter: blur(10px);
+    transform: translateY(20px);
+    filter: blur(5px);
     opacity: 0;
     animation: textReveal 0.6s ease-out forwards;
 }
 
-.carousel .list .item.active .content .author { animation-delay: 0.4s; }
-.carousel .list .item.active .content .topic  { animation-delay: 0.5s; }
-.carousel .list .item.active .content .des    { animation-delay: 0.7s; }
-.carousel .list .item.active .content .buttons { animation-delay: 0.9s; }
+.carousel .list .item.active .content .author { animation-delay: 0.3s; }
+.carousel .list .item.active .content .topic  { animation-delay: 0.4s; }
+.carousel .list .item.active .content .des    { animation-delay: 0.5s; }
+.carousel .list .item.active .content .buttons { animation-delay: 0.6s; }
 
 @keyframes textReveal {
     to { transform: translateY(0); filter: blur(0); opacity: 1; }
@@ -123,25 +123,24 @@
 /* --- TIPOGRAFIA --- */
 .carousel .list .item .author {
     font-family: "Conthrax", sans-serif;
-    font-size: 1.2rem;
-    color: #aaa; 
+    font-size: 1.5rem;
+    color: var(--primary-collor); 
     margin-bottom: 0.2rem;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .carousel .list .item .topic {
     font-family: "Conthrax", sans-serif;
-    font-size: 3.5rem; 
+    font-size: 3rem; 
     font-weight: 700;
-    line-height: 1em;
-    color: var(--primary-collor);
+    line-height: 1.1em;
+    color: var(--white-collor);
     text-transform: uppercase;
-    text-shadow: 0 0 20px rgba(55, 211, 102, 0.5);
-    margin-bottom: 1.5rem;
-    white-space: nowrap; 
+    margin-bottom: 1rem;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
-/* --- ESTILO DO RESULTADO (OVERALL) --- */
+/* --- LISTA DE CONQUISTAS --- */
 .carousel .list .item .des ul {
     list-style: none;
     padding: 0;
@@ -154,42 +153,26 @@
 
 .carousel .list .item .des li {
     font-family: "Conthrax", sans-serif;
-    font-size: 1.1rem;
-    color: var(--white-collor);
-    
-    width: 100%; 
-    padding: 0.8rem 1rem;
-    
-    /* Visual Tech */
-    background: linear-gradient(90deg, transparent 0%, rgba(55, 211, 102, 0.1) 100%);
-    border-right: 3px solid var(--primary-collor);
-    /* Arredonda só a esquerda interna do item */
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-right: 2px solid var(--primary-collor);
     border-radius: 4px 0 0 4px;
-    
     text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(55, 211, 102, 0.4);
-    
     display: flex;
     align-items: center;
     justify-content: flex-end; 
     gap: 10px;
-    
-    transition: all 0.3s ease;
 }
 
-/* Ícone de Troféu Automático */
 .carousel .list .item .des li::before {
     content: '\f091'; /* FontAwesome Trophy */
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     font-size: 1rem;
     color: var(--primary-collor);
-}
-
-.carousel .list .item .des li:hover {
-    background: linear-gradient(90deg, transparent 0%, rgba(55, 211, 102, 0.25) 100%);
-    padding-right: 1.5rem;
-    text-shadow: 0 0 15px var(--primary-collor);
 }
 
 /* --- BOTÕES --- */
@@ -201,7 +184,7 @@
 
 .carousel .list .item .buttons button {
     background-color: transparent;
-    color: var(--white-collor);
+    color: var(--primary-collor);
     border: 1px solid var(--primary-collor);
     padding: 0.6rem 1.5rem;
     border-radius: 4px;
@@ -216,41 +199,31 @@
 .carousel .list .item .buttons button:hover {
     background-color: var(--primary-collor);
     color: var(--black-collor);
-    box-shadow: 0 0 20px rgba(55, 211, 102, 0.4);
+    box-shadow: 0 0 15px rgba(55, 211, 102, 0.4);
 }
 
-/* --- THUMBNAILS (Menu Lateral) --- */
+/* --- THUMBNAILS --- */
 .thumbnail {
     position: absolute;
-    bottom: 50px;
-    left: 50%;
-    width: max-content;
+    top: 50%;
+    left: 2rem;
+    transform: translateY(-50%);
     z-index: 100;
     display: flex;
-    gap: 20px;
-}
-
-@media screen and (min-width: 1024px) {
-    .thumbnail {
-        bottom: auto;
-        top: 50%;
-        left: 2rem;
-        transform: translateY(-50%);
-        flex-direction: column;
-    }
+    flex-direction: column;
+    gap: 15px;
 }
 
 .thumbnail .item {
-    width: 120px;
-    height: 80px;
+    width: 100px;
+    height: 70px;
     flex-shrink: 0;
     position: relative;
-    border-radius: 10px;
+    border-radius: 6px;
     overflow: hidden;
     cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
-    transition: all 0.4s ease;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
 }
 
 .thumbnail .item.active {
@@ -259,64 +232,92 @@
 
 .thumbnail .item img {
     width: 100%; height: 100%; object-fit: cover;
-    filter: brightness(0.5) grayscale(100%); transition: 0.3s;
+    filter: brightness(0.6); transition: 0.3s;
 }
 
-.thumbnail .item:hover { transform: scale(1.1); border-color: var(--primary-collor); }
-.thumbnail .item:hover img { filter: brightness(1) grayscale(0%); }
+.thumbnail .item:hover { transform: scale(1.05); border-color: var(--primary-collor); }
+.thumbnail .item:hover img { filter: brightness(1); }
 
 .thumbnail .item .content {
     position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 5px; background: rgba(0, 0, 0, 0.8); text-align: center;
+    padding: 3px; background: rgba(0, 0, 0, 0.7); text-align: center;
 }
 .thumbnail .item .content .title { display: none; }
 .thumbnail .item .content .description {
-    font-family: "Conthrax", sans-serif; font-size: 0.8rem; color: var(--white-collor);
+    font-family: "Conthrax", sans-serif; font-size: 0.7rem; color: var(--white-collor);
 }
 
-/* --- RESPONSIVIDADE --- */
+/* =========================================
+   RESPONSIVIDADE (MOBILE: TEXTO NO TOPO)
+   ========================================= */
 @media screen and (max-width: 900px) {
+    
+    /* 1. Mover Texto para o TOPO */
     .carousel .list .item .content {
-        top: auto;
-        bottom: 160px; 
-        right: 0;
+        top: 0; /* Cola no topo */
+        bottom: auto; /* Solta o fundo */
         left: 0;
+        right: 0;
+        transform: none;
         
-        /* Mobile: Largura total */
-        width: 100%; 
-        min-width: 0;
+        width: 100%;
         max-width: 100%;
         
+        /* Remove estilos de desktop */
         border-right: none;
-        border-top: 3px solid var(--primary-collor);
         border-radius: 0;
         
-        padding: 1.5rem;
-        background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.7));
+        /* Adiciona estilo Mobile (Degradê descendo) */
+        background: linear-gradient(to bottom, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0.8) 60%, transparent 100%);
+        border-top: 3px solid var(--primary-collor); /* Linha neon no topo */
+        
+        /* Padding extra no topo para não ficar atrás da Header */
+        padding: 6rem 1.5rem 3rem 1.5rem; 
+        
         text-align: left;
+    }
+    
+    /* 2. Ajuste de Fontes */
+    .carousel .list .item .topic { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    .carousel .list .item .author { font-size: 1rem; }
+    
+    /* 3. Lista alinhada à esquerda */
+    .carousel .list .item .des ul {
         align-items: flex-start;
     }
     
-    .carousel .list .item .des ul { align-items: flex-start; }
-    
     .carousel .list .item .des li {
+        justify-content: flex-start;
         border-right: none;
-        border-left: 3px solid var(--primary-collor);
+        border-left: 3px solid var(--primary-collor); /* Inverte borda */
         border-radius: 0 4px 4px 0;
-        background: linear-gradient(270deg, transparent 0%, rgba(55, 211, 102, 0.1) 100%);
-        justify-content: flex-start; 
-        flex-direction: row-reverse; 
+        background: linear-gradient(90deg, rgba(55, 211, 102, 0.1) 0%, transparent 100%);
+        width: fit-content;
     }
 
-    .carousel .list .item .buttons { justify-content: flex-start; }
+    /* 4. Botão alinhado à esquerda */
+    .carousel .list .item .buttons { justify-content: flex-start; margin-top: 1rem; }
     
+    /* 5. Thumbnails embaixo (horizontal) */
     .thumbnail {
+        top: auto;
         bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 10px;
+        transform: none;
+        
+        width: calc(100% - 20px);
         flex-direction: row;
-        width: 95%;
-        justify-content: flex-start;
         overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 5px;
     }
+    
+    .thumbnail .item {
+        width: 80px;
+        height: 60px;
+        flex-shrink: 0;
+    }
+    
+    /* Esconde barra de rolagem dos thumbs */
+    .thumbnail::-webkit-scrollbar { height: 0; width: 0; }
 }

@@ -1,8 +1,7 @@
 /* =========================================
-   SEÇÃO EQUIPE (FINAL - HÍBRIDO HOVER/CLICK)
+   SEÇÃO EQUIPE (FINAL - CORREÇÃO STICKY HOVER)
    ========================================= */
 
-/* Variáveis locais para garantir funcionamento isolado */
 :root {
     --primary-collor: rgb(54, 211, 102);
     --second-collor: rgba(0, 102, 94, 1);
@@ -13,11 +12,8 @@
 .section-equipe {
     scroll-margin-top: 4rem;
     min-height: 100vh; 
-    padding: 3rem 1rem 4rem 1rem;
-    
-    /* Fundo Dark Radial */
+    padding: 3rem 1rem 6rem 1rem;
     background: radial-gradient(circle at center, #1a1a1a 0%, var(--black-collor) 80%);
-    
     text-align: center;
     display: flex;
     justify-content: center;
@@ -51,10 +47,9 @@
     border-radius: 2px;
 }
 
-/* --- CONTAINER CARDS (GRID) --- */
+/* --- CONTAINER CARDS --- */
 .container-cards {
     display: grid;
-    /* Desktop: 4 colunas */
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     width: 100%;
@@ -62,42 +57,47 @@
     perspective: 1000px;
 }
 
-/* --- ESTRUTURA DO CARD --- */
 .card-container {
     background-color: transparent;
     width: 100%;
-    height: 28rem; /* Altura Desktop */
+    height: 22rem; 
     perspective: 1000px;
 }
 
 .card {
     width: 100%;
-    height: 80%;
+    height: 100%;
     position: relative;
     transform-style: preserve-3d; 
     transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
     border-radius: 15px;
     
-    /* Remove highlight azul de toque no mobile */
+    /* Previne destaque azul no toque */
     -webkit-tap-highlight-color: transparent; 
 }
 
-/* --- LÓGICA DE GIRO (CRUCIAL) --- */
+/* --- LÓGICA DE GIRO (CORRIGIDA) --- */
 
-/* 1. Mobile/JS: Gira quando a classe .flipped é adicionada pelo clique */
+/* 1. Mobile/Clique: Gira quando o JS adiciona a classe .flipped */
 .card.flipped {
     transform: rotateY(180deg);
 }
 
-/* 2. Desktop: Gira ao passar o mouse (Só ativa se o dispositivo tiver mouse) */
-@media (hover: hover) {
+/* 2. Desktop/Mouse: Gira ao passar o mouse APENAS se for um dispositivo com ponteiro preciso */
+/* A regra 'and (pointer: fine)' impede que o celular ative isso ao tocar, resolvendo o bug */
+@media (hover: hover) and (pointer: fine) {
     .card-container:hover .card {
         transform: rotateY(180deg);
     }
+    
+    /* Zoom no ícone apenas no Desktop */
+    .card-container:hover .card-icon-front {
+        transform: scale(1.1);
+    }
 }
 
-/* --- ESTILOS COMUNS (Frente e Verso) --- */
+/* --- ESTILOS COMUNS --- */
 .card-front, .card-back {
     padding: 1.5rem;
     position: absolute;
@@ -105,12 +105,10 @@
     height: 100%;
     backface-visibility: hidden;
     border-radius: 15px;
-    
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     color: var(--white-collor);
@@ -131,18 +129,11 @@
     transition: transform 0.3s ease;
 }
 
-/* Efeito Zoom Ícone (Apenas Desktop) */
-@media (hover: hover) {
-    .card-container:hover .card-icon-front {
-        transform: scale(1.1);
-    }
-}
-
 .titulo-card-front {
     font-family: "Conthrax", sans-serif;
     font-size: 1.3rem;
     color: var(--white-collor); 
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     text-transform: uppercase;
     text-align: center;
 }
@@ -153,16 +144,27 @@
     line-height: 1.5;
     color: #ccc;
     text-align: center;
+    margin-bottom: 1rem;
 }
 
-.span-card {
-    display: block;
+/* Contador de Membros */
+.status-membros {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: auto; 
+    border-top: 1px solid rgba(255, 255, 255, 0.1); 
+    padding-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.status-membros strong {
     font-family: "Conthrax", sans-serif;
-    font-size: 2.5rem;
-    color: var(--white-collor);
-    margin-top: 0.5rem;
-    font-weight: 700;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    color: var(--primary-collor);
+    font-size: 1.2rem;
+    margin-left: 4px;
+    text-shadow: 0 0 5px rgba(54, 211, 102, 0.3);
 }
 
 /* --- VERSO --- */
@@ -219,34 +221,32 @@
 
 /* --- BOTÃO --- */
 .btn-saiba-equipe {
-    margin-top: 3rem;
-    background-color: transparent;
-    border: 2px solid var(--primary-collor);
-    color: var(--white-collor);
-    padding: 0.8rem 2.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: "Conthrax", sans-serif;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    margin-top: 2rem;
     text-decoration: none;
+    font-family: "Conthrax", sans-serif;
+    font-size: 1.2rem;
+    color: var(--white-collor);
+    padding: 1rem 3rem;
+    border: 2px solid var(--primary-collor);
+    border-radius: 5px;
+    background: transparent;
     transition: all 0.3s ease;
+    text-align: center;
+    display: inline-block;
 }
 
 .btn-saiba-equipe:hover {
-    background-color: var(--primary-collor);
+    background: var(--primary-collor);
     color: var(--black-collor);
-    box-shadow: 0 0 20px rgba(55, 211, 102, 0.4);
-    font-weight: bold;
+    box-shadow: 0 0 20px rgba(55, 211, 102, 0.5);
+    font-weight: 700;
 }
 
 /* =========================================
-   RESPONSIVIDADE (MOBILE AJUSTADO)
+   RESPONSIVIDADE (MOBILE)
    ========================================= */
 
 @media screen and (max-width: 1024px) {
-    /* Tablet: 2 colunas */
     .container-cards {
         grid-template-columns: repeat(2, 1fr);
         max-width: 700px;
@@ -254,57 +254,52 @@
 }
 
 @media screen and (max-width: 650px) {
-    .section-equipe {
-        padding: 3rem 1rem;
-    }
-
-    .container-cards {
-        /* Grid 2 colunas no celular (economiza altura) */
-        grid-template-columns: 1fr 1fr; 
-        gap: 10px;
-    }
-
-    .card-container {
-        /* Altura calculada para caber Texto + Hint */
-        height: 320px; 
-    }
-
-    /* Ajustes FRENTE */
+    .section-equipe { padding: 3rem 1rem; }
+    .container-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
+    
+    .card-container { height: 330px; }
+    
     .card-front { padding: 1rem 0.5rem; }
-    
     .card-icon-front { font-size: 2rem; margin-bottom: 0.5rem; }
-    
     .titulo-card-front { font-size: 0.85rem; margin-bottom: 0.3rem; }
     
-    /* Texto Visível (Fonte menor) */
     .card-front p { 
         display: block; 
         font-size: 0.65rem; 
-        line-height: 1.3;
+        line-height: 1.3; 
         margin-bottom: 0.5rem; 
     }
     
-    .span-card { 
-        font-size: 1.5rem; 
-        margin-top: 0.2rem; 
+    .status-membros { 
+        font-size: 0.65rem; 
+        padding-top: 5px; 
+        margin-bottom: 15px; 
     }
+    .status-membros strong { font-size: 0.9rem; }
 
-    /* AVISO DE TOQUE (Rodapé do card) */
     .card-front::after {
         content: 'Toque para detalhes';
         font-family: 'Poppins', sans-serif;
         font-size: 0.6rem;
         color: var(--primary-collor); 
-        margin-top: auto; 
+        position: absolute; 
+        bottom: 10px;
         opacity: 0.8;
         font-style: italic;
     }
 
-    /* Ajustes VERSO */
     .card-back { padding: 0.8rem; }
     .titulo-card-back { font-size: 0.85rem; margin-bottom: 0.5rem; }
     .card-back ul { gap: 0.2rem; }
     .card-back li { font-size: 0.65rem; padding-bottom: 2px; }
     .card-back li i { font-size: 0.7rem; width: 15px; margin-right: 3px; }
     .sub-tag { font-size: 0.5rem; }
+    
+    .btn-saiba-equipe {
+        width: 100%;
+        max-width: 300px;
+        padding: 1rem;
+        font-size: 1rem;
+        margin-top: 3rem;
+    }
 }
