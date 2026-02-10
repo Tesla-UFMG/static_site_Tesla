@@ -23,7 +23,7 @@
     background-image: 
         /* Camada escura para facilitar leitura */
         linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-        url('../images/equipe2025-2.jpg');
+        url('../images/equipe/equipe2025-2.jpg');
     
     background-size: cover;
     background-position: center;
