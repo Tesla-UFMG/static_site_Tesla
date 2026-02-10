@@ -1,34 +1,30 @@
 /* =========================================
-   SEÇÃO PATROCÍNIOS (CORRIGIDO MOBILE & DIVISÃO)
+   SEÇÃO PATROCÍNIOS (CORRIGIDO E OTIMIZADO)
    ========================================= */
 
 .section-patrocinios {
     scroll-margin-top: 4rem;
-    min-height: 100vh;
-    padding: 3rem 2rem 6rem 2rem;
     
-    /* Fundo Dark Tech */
-    background: radial-gradient(circle at center, #1f1f1f 0%, var(--black-collor) 90%);
+    /* REMOVIDO: min-height: 100vh */
+    min-height: auto; 
+    
+    /* Padding generoso para não ficar apertado */
+    padding: 8rem 2rem 8rem 2rem;
+    
+    /* Fundo sutilmente diferente para criar contraste */
+    background: linear-gradient(to bottom, #111, #0b0b0b);
     
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    
-    /* Garante que nada vaze lateralmente */
     width: 100%;
     overflow: hidden; 
+    z-index: 21; /* Acima da equipe */
     
-    /* --- CORREÇÃO DA LINHA DIVISÓRIA --- */
-    
-    /* 1. Puxa a seção 2px para cima para fechar qualquer fresta de pixel */
-    margin-top: -2px; 
-    
-    /* 2. Cria uma sombra preta apontando para cima para misturar os fundos */
-    box-shadow: 0 -20px 50px var(--black-collor); 
-    
-    /* 3. Garante que essa sombra fique por cima da seção anterior */
-    z-index: 5; 
+    /* Sombra superior para blending */
+    box-shadow: 0 -30px 50px rgba(0,0,0,0.8);
+    border-top: 1px solid rgba(255,255,255,0.05);
 }
 
 /* --- TÍTULO --- */
@@ -36,20 +32,14 @@
     color: var(--white-collor);
     font-family: "Conthrax", sans-serif;
     font-weight: 700;
-    
-    /* CORREÇÃO DE LARGURA */
     font-size: clamp(1.8rem, 5vw, 3.5rem);
-    
     text-transform: uppercase;
     letter-spacing: 4px;
     margin-bottom: 4rem;
     position: relative;
     text-shadow: 0 0 15px rgba(55, 211, 102, 0.6);
     text-align: center;
-    
-    /* SEGURANÇA MOBILE */
     max-width: 95%; 
-    word-wrap: break-word;
 }
 
 .titulo-patrocinios::after {
@@ -60,6 +50,7 @@
     background-color: var(--primary-collor);
     margin: 10px auto 0 auto;
     border-radius: 2px;
+    box-shadow: 0 0 15px var(--primary-collor);
 }
 
 /* --- GRID RESPONSIVO --- */
@@ -72,58 +63,44 @@
     max-width: 1300px;
 }
 
-/* --- O CARD (Display Branco Tech) --- */
+/* --- O CARD --- */
 .logo-item {
     width: 220px;
     height: 130px;
-    
-    /* Fundo Branco */
     background: #ffffff; 
-    
-    border: 1px solid #ccc;
+    border: 1px solid #333; /* Borda escura para contraste se fundo mudar */
     border-radius: 8px;
-    
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
-    
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
     position: relative;
     overflow: hidden;
 }
 
-/* Hover: Glow Verde */
 .logo-item:hover {
     border-color: var(--primary-collor); 
     transform: translateY(-5px); 
-    
     box-shadow: 
         0 10px 25px rgba(0, 0, 0, 0.5),
         0 0 15px rgba(55, 211, 102, 0.4); 
 }
 
-/* --- A LOGO --- */
 .logo-item img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    
     filter: none; 
-    
     mix-blend-mode: multiply; 
-    
     transition: transform 0.3s ease;
 }
 
-.logo-item:hover img {
-    transform: scale(1.1);
-}
+.logo-item:hover img { transform: scale(1.1); }
 
-/* --- BOTÃO (Seja um parceiro) --- */
+/* --- BOTÃO --- */
 .btn-seja-patrocinador {
     margin-top: 5rem;
     text-decoration: none;
@@ -142,18 +119,13 @@
     background: var(--primary-collor);
     color: var(--black-collor);
     box-shadow: 0 0 20px rgba(55, 211, 102, 0.5);
+    font-weight: bold;
 }
 
 /* --- RESPONSIVIDADE --- */
 @media screen and (max-width: 768px) {
-    .section-patrocinios { 
-        padding: 6rem 1rem; 
-    }
-    
-    .logos-grid { 
-        gap: 1rem; 
-    }
-    
+    .section-patrocinios { padding: 5rem 1rem; }
+    .logos-grid { gap: 1rem; }
     .logo-item {
         width: 45%; 
         min-width: 140px; 
@@ -161,15 +133,6 @@
         height: 100px;
         padding: 0.8rem;
     }
-    
-    .titulo-patrocinios { 
-        font-size: 2rem; 
-        letter-spacing: 1px; 
-    }
-    
-    .btn-seja-patrocinador {
-        width: 100%;
-        max-width: 300px;
-        padding: 1rem;
-    }
+    .titulo-patrocinios { font-size: 2rem; letter-spacing: 1px; }
+    .btn-seja-patrocinador { width: 100%; max-width: 300px; padding: 1rem; }
 }

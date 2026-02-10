@@ -1,5 +1,5 @@
 /* =========================================
-   SEÇÃO EQUIPE (FINAL - CORREÇÃO STICKY HOVER)
+   SEÇÃO EQUIPE (FINAL - LIMPA)
    ========================================= */
 
 :root {
@@ -11,9 +11,16 @@
 
 .section-equipe {
     scroll-margin-top: 4rem;
-    min-height: 100vh; 
-    padding: 3rem 1rem 6rem 1rem;
-    background: radial-gradient(circle at center, #1a1a1a 0%, var(--black-collor) 80%);
+    
+    /* Altura automática para evitar buracos */
+    min-height: auto; 
+    
+    /* Padding ajustado */
+    padding: 6rem 1rem 6rem 1rem;
+    
+    /* Fundo ajustado */
+    background: radial-gradient(circle at center, #1a1a1a 0%, var(--black-collor) 100%);
+    
     text-align: center;
     display: flex;
     justify-content: center;
@@ -22,7 +29,14 @@
     position: relative;
     overflow: hidden;
     width: 100%;
+    z-index: 20; 
+    
+    /* Mantive apenas a sombra suave, removi a linha vertical */
+    box-shadow: 0 -20px 60px rgba(0,0,0, 0.9);
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Borda muito sutil, quase invisível */
 }
+
+/* REMOVIDO O BLOCO .section-equipe::before QUE CAUSAVA A "PONTA" */
 
 /* --- TÍTULO --- */
 .titulo-equipe {
@@ -33,7 +47,7 @@
     text-transform: uppercase;
     letter-spacing: 4px;
     position: relative;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem; 
     text-shadow: 0 0 15px rgba(55, 211, 102, 0.6);
 }
 
@@ -45,6 +59,7 @@
     background-color: var(--primary-collor);
     margin: 10px auto 0 auto;
     border-radius: 2px;
+    box-shadow: 0 0 10px var(--primary-collor);
 }
 
 /* --- CONTAINER CARDS --- */
@@ -72,32 +87,18 @@
     transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
     border-radius: 15px;
-    
-    /* Previne destaque azul no toque */
     -webkit-tap-highlight-color: transparent; 
 }
 
-/* --- LÓGICA DE GIRO (CORRIGIDA) --- */
+/* Lógica de Giro */
+.card.flipped { transform: rotateY(180deg); }
 
-/* 1. Mobile/Clique: Gira quando o JS adiciona a classe .flipped */
-.card.flipped {
-    transform: rotateY(180deg);
-}
-
-/* 2. Desktop/Mouse: Gira ao passar o mouse APENAS se for um dispositivo com ponteiro preciso */
-/* A regra 'and (pointer: fine)' impede que o celular ative isso ao tocar, resolvendo o bug */
 @media (hover: hover) and (pointer: fine) {
-    .card-container:hover .card {
-        transform: rotateY(180deg);
-    }
-    
-    /* Zoom no ícone apenas no Desktop */
-    .card-container:hover .card-icon-front {
-        transform: scale(1.1);
-    }
+    .card-container:hover .card { transform: rotateY(180deg); }
+    .card-container:hover .card-icon-front { transform: scale(1.1); }
 }
 
-/* --- ESTILOS COMUNS --- */
+/* Estilos Comuns */
 .card-front, .card-back {
     padding: 1.5rem;
     position: absolute;
@@ -115,7 +116,7 @@
     box-sizing: border-box;
 }
 
-/* --- FRENTE --- */
+/* FRENTE */
 .card-front {
     background: rgba(20, 20, 20, 0.95);
     border-top: 3px solid var(--primary-collor);
@@ -147,7 +148,6 @@
     margin-bottom: 1rem;
 }
 
-/* Contador de Membros */
 .status-membros {
     font-family: 'Poppins', sans-serif;
     font-size: 0.85rem;
@@ -167,7 +167,7 @@
     text-shadow: 0 0 5px rgba(54, 211, 102, 0.3);
 }
 
-/* --- VERSO --- */
+/* VERSO */
 .card-back {
     background: linear-gradient(135deg, rgba(20, 20, 20, 0.98), #0d0d0d);
     transform: rotateY(180deg); 
@@ -213,15 +213,11 @@
     font-size: 0.9rem;
 }
 
-.sub-tag {
-    font-size: 0.7rem;
-    color: #888;
-    margin-left: auto;
-}
+.sub-tag { font-size: 0.7rem; color: #888; margin-left: auto; }
 
-/* --- BOTÃO --- */
+/* BOTÃO */
 .btn-saiba-equipe {
-    margin-top: 2rem;
+    margin-top: 3rem;
     text-decoration: none;
     font-family: "Conthrax", sans-serif;
     font-size: 1.2rem;
@@ -242,10 +238,7 @@
     font-weight: 700;
 }
 
-/* =========================================
-   RESPONSIVIDADE (MOBILE)
-   ========================================= */
-
+/* RESPONSIVIDADE */
 @media screen and (max-width: 1024px) {
     .container-cards {
         grid-template-columns: repeat(2, 1fr);
@@ -254,38 +247,22 @@
 }
 
 @media screen and (max-width: 650px) {
-    .section-equipe { padding: 3rem 1rem; }
+    .section-equipe { padding: 4rem 1rem; }
     .container-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
-    
     .card-container { height: 330px; }
-    
     .card-front { padding: 1rem 0.5rem; }
     .card-icon-front { font-size: 2rem; margin-bottom: 0.5rem; }
     .titulo-card-front { font-size: 0.85rem; margin-bottom: 0.3rem; }
-    
-    .card-front p { 
-        display: block; 
-        font-size: 0.65rem; 
-        line-height: 1.3; 
-        margin-bottom: 0.5rem; 
-    }
-    
-    .status-membros { 
-        font-size: 0.65rem; 
-        padding-top: 5px; 
-        margin-bottom: 15px; 
-    }
+    .card-front p { font-size: 0.65rem; line-height: 1.3; margin-bottom: 0.5rem; }
+    .status-membros { font-size: 0.65rem; padding-top: 5px; margin-bottom: 15px; }
     .status-membros strong { font-size: 0.9rem; }
-
+    
     .card-front::after {
         content: 'Toque para detalhes';
         font-family: 'Poppins', sans-serif;
         font-size: 0.6rem;
         color: var(--primary-collor); 
-        position: absolute; 
-        bottom: 10px;
-        opacity: 0.8;
-        font-style: italic;
+        position: absolute; bottom: 10px; opacity: 0.8; font-style: italic;
     }
 
     .card-back { padding: 0.8rem; }
@@ -295,11 +272,5 @@
     .card-back li i { font-size: 0.7rem; width: 15px; margin-right: 3px; }
     .sub-tag { font-size: 0.5rem; }
     
-    .btn-saiba-equipe {
-        width: 100%;
-        max-width: 300px;
-        padding: 1rem;
-        font-size: 1rem;
-        margin-top: 3rem;
-    }
+    .btn-saiba-equipe { width: 100%; max-width: 300px; padding: 1rem; font-size: 1rem; margin-top: 2rem; }
 }
