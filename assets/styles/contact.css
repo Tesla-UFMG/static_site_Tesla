@@ -1,3 +1,7 @@
+/* =========================================
+   SEÇÃO CONTATO
+   ========================================= */
+
 .section-contato {
     min-height: 100vh;
     scroll-margin-top: 4rem;
@@ -70,8 +74,7 @@
     box-sizing: border-box; /* Garante que padding não afete largura */
 }
 
-/* --- A CORREÇÃO DE ALINHAMENTO (Flexbox na tag Form) --- */
-/* Isso força todos os inputs a terem exatamente a mesma largura do pai */
+/* --- FLEXBOX DO FORMULÁRIO --- */
 .form-contato-google {
     display: flex;
     flex-direction: column;
