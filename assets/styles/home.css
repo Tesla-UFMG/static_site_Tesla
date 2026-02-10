@@ -3,7 +3,6 @@
    ========================================= */
 
 .section-home {
-    /* Mantém a altura de 2 telas para o efeito de scroll */
     height: 200vh; 
     position: relative;
     width: 100%;
@@ -188,6 +187,49 @@
 }
 
 /* --- 5. BLOCO DE TEXTO --- */
+/* =========================================
+   LOGO HOME (Estilo Adicional)
+   ========================================= */
+
+.logo-home {
+    /* Tamanho para Desktop */
+    height: 140px; 
+    width: auto;
+    
+    /* Espaçamento para o título abaixo */
+    margin-bottom: 1.5rem;
+    
+    /* Centralização (caso o flexbox pai não garanta) */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* Sombra suave para destacar do fundo escuro */
+    filter: drop-shadow(0 0 20px rgba(55, 211, 102, 0.4));
+    
+    /* Animação suave de entrada (opcional) */
+    animation: fadeDown 1.5s ease-out forwards;
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajuste Responsivo (Mobile) */
+@media screen and (max-width: 992px) {
+    .logo-home {
+        height: 100px; /* Menor no celular */
+        margin-bottom: 1rem;
+    }
+}
+
 .div-texto-home {
     position: absolute;
     z-index: 10;
