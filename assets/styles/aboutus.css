@@ -5,48 +5,76 @@
 /* Variáveis (caso não estejam globais) */
 :root {
     --primary-collor: rgb(54, 211, 102, 1);
-    --black-collor: rgba(13, 13, 13, 1);
+    --black-collor: #0b0b0b; /* Preto exato da fusão */
     --white-collor: rgba(255, 255, 255, 1);
 }
 
 .section-sobre {
-    scroll-margin-top: 3rem;
+    position: relative; 
+    min-height: 100vh;
     
-    /* Fundo com imagem escurecida */
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, var(--black-collor) 100%), 
-                      url('../images/equipe2025-2.jpg');
+    /* Compensação para o menu fixo não cobrir o título */
+    scroll-margin-top: 4rem;
+    
+    /* Padding bottom grande para garantir espaço para o fade */
+    padding: 5rem 2rem 10rem 2rem; 
+    
+    /* BACKGROUND DA IMAGEM */
+    background-image: 
+        /* Camada escura para facilitar leitura */
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+        url('../images/equipe2025-2.jpg');
+    
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     
-    min-height: 100vh;
-    padding: 5rem 2rem; 
+    /* DESKTOP: Efeito Parallax (Imagem parada) */
+    background-attachment: fixed; 
     
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    z-index: 2; /* Garante que fique acima da Home Fixa */
+    
+    /* Z-index menor que a Timeline (que é 10) */
+    z-index: 5; 
     background-color: var(--black-collor); 
+}
+
+/* --- O CORRETOR DE LINHA (Pseudo-elemento) --- */
+/* Cria uma barra sólida de segurança no final da seção */
+.section-sobre::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 300px; 
+    
+    /* O TRUQUE: O gradiente atinge preto puro (90%) ANTES do final */
+    /* Isso garante que os últimos pixels sejam 100% sólidos, matando a linha clara */
+    background: linear-gradient(to bottom, transparent 0%, #0b0b0b 90%, #0b0b0b 100%);
+    
+    z-index: 1; 
+    pointer-events: none;
 }
 
 /* --- TÍTULO (Padrão Neon Tech) --- */
 .titulo-sobre {
+    position: relative;
+    z-index: 2; /* Fica acima do gradiente de fundo */
+    
     color: var(--white-collor);
     font-family: "Conthrax", sans-serif;
     font-weight: 700;
     font-size: clamp(2rem, 5vw, 3.5rem);
     text-transform: uppercase;
     letter-spacing: 4px;
-    
-    position: relative;
     margin-bottom: 2rem;
     text-align: center;
-    
     text-shadow: 0 0 15px rgba(55, 211, 102, 0.6);
 }
 
-/* Linha decorativa abaixo do título */
 .titulo-sobre::after {
     content: '';
     display: block;
@@ -60,6 +88,9 @@
 
 /* --- CONTAINER DO CONTEÚDO --- */
 .conteudo-sobre {
+    position: relative;
+    z-index: 2; 
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,7 +100,7 @@
     flex-wrap: wrap;
 }
 
-/* --- BLOCO DE TEXTO (Painel Técnico) --- */
+/* --- BLOCO DE TEXTO --- */
 .texto-sobre {
     width: 35rem;
     flex: 1;
@@ -102,52 +133,35 @@
     margin: 0;
 }
 
-/* --- DESTAQUES NO TEXTO (HIGHLIGHTS) --- */
+/* --- DESTAQUES NO TEXTO --- */
 .tech-highlight {
     color: var(--primary-collor);
     font-weight: 600;
     letter-spacing: 0.5px;
     text-shadow: 0 0 8px rgba(54, 211, 102, 0.25);
+    border-bottom: 1px dotted rgba(54, 211, 102, 0.3);
     transition: all 0.3s ease;
     cursor: default;
-    
-    /* Sublinhado sutil */
-    border-bottom: 1px dotted rgba(54, 211, 102, 0.3);
 }
 
-/* Efeito Hover no texto destacado */
 .tech-highlight:hover {
     text-shadow: 0 0 15px var(--primary-collor);
     background-color: rgba(54, 211, 102, 0.1);
+    color: #fff;
     border-radius: 4px;
     padding: 0 4px;
-    margin: 0 -4px; 
-    color: #fff;
+    margin: 0 -4px;
 }
 
-/* Destaque Especial (Rank / Conquista) */
-.tech-highlight.rank {
-    font-family: "Conthrax", sans-serif;
-    font-size: 1.1em;
-    color: var(--white-collor);
-    background: linear-gradient(90deg, transparent, rgba(54, 211, 102, 0.2), transparent);
-    border-bottom: none;
-    padding: 2px 8px;
-    border-radius: 4px;
-    border: 1px solid rgba(54, 211, 102, 0.3);
-}
-
-/* --- BOTÃO (Outline Tech) --- */
+/* --- BOTÃO --- */
 .btn-texto-sobre {
     align-self: flex-start;
     background-color: transparent;
     border: 2px solid var(--primary-collor);
     color: var(--white-collor);
-    
     padding: 0.8rem 2rem;
     border-radius: 5px;
     cursor: pointer;
-    
     font-family: "Conthrax", sans-serif;
     font-size: 1rem;
     font-weight: 500;
@@ -163,17 +177,14 @@
     font-weight: 700;
 }
 
-/* --- CARROSSEL (Moldura Tech) --- */
+/* --- CARROSSEL --- */
 .carrossel-sobre {
     width: 30rem;
     height: 20rem;
     max-width: 100%;
-    
     overflow: hidden;
     border-radius: 10px;
     position: relative;
-    
-    /* Moldura Neon Sutil */
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
 }
@@ -182,7 +193,6 @@
     display: flex;
     width: 100%;
     height: 100%;
-    /* Animação contínua */
     animation: slide 15s infinite cubic-bezier(0.45, 0, 0.55, 1);
 }
 
@@ -192,7 +202,6 @@
     position: relative;
 }
 
-/* Overlay sutil nas imagens para uniformizar tons */
 .carrossel-item::before {
     content: "";
     position: absolute;
@@ -208,7 +217,6 @@
     display: block;
 }
 
-/* --- ANIMAÇÃO SLIDE --- */
 @keyframes slide {
     0%, 20% { transform: translateX(0); }
     25%, 45% { transform: translateX(-100%); }
@@ -220,18 +228,22 @@
 /* --- RESPONSIVIDADE --- */
 @media screen and (max-width: 900px) {
     .section-sobre {
-        padding: 4rem 1rem;
+        padding: 4rem 1rem 8rem 1rem;
+        
+        /* CORREÇÃO DO FLICK NO MOBILE: Remove o fixed */
+        background-attachment: scroll !important; 
+        background-position: center top;
     }
 
     .conteudo-sobre {
-        flex-direction: column-reverse; /* Foto em cima, texto embaixo */
+        flex-direction: column-reverse; 
         gap: 2rem;
     }
     
     .texto-sobre {
         width: 100%;
         border-left: none;
-        border-top: 5px solid var(--primary-collor); /* Borda muda para cima */
+        border-top: 5px solid var(--primary-collor);
         border-radius: 0 0 10px 10px;
         padding: 2rem;
     }
@@ -242,6 +254,6 @@
     
     .carrossel-sobre {
         width: 100%;
-        height: 15rem; /* Menor no mobile */
+        height: 15rem;
     }
 }

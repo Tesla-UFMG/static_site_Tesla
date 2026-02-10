@@ -5,7 +5,7 @@
 .timer-competicao {
     padding: 4rem 0; 
     background-color: var(--black-collor);
-    
+    scroll-margin-top: 6rem;
     /* Padrão de fundo Grid Tech Sutil */
     background-image: 
         linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),

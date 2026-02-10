@@ -1,304 +1,218 @@
 /* =========================================
-   SEÇÃO LEGADO (FINAL - ALINHAMENTO PERFEITO)
+   SEÇÃO TIMELINE (LEGADO) - FINAL
    ========================================= */
 
-/* --- 1. ESTRUTURA E FUNDO --- */
 .timeline-section {
     background-color: #0b0b0b; 
     
-    /* Grid Técnico */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    
     background-image: 
         linear-gradient(rgba(55, 211, 102, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(55, 211, 102, 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
     
-    position: relative;
-    padding: 120px 0;
-    overflow: hidden;
+    /* Padding inferior grande para o menu não vazar */
+    padding: 120px 0 300px 0;
+    
+    overflow: visible; 
     z-index: 10;
-    box-shadow: inset 0 50px 50px -20px #000;
+    
+    margin-top: -5px; 
+    box-shadow: 0 -50px 50px 10px #0b0b0b, inset 0 50px 50px -20px #000;
 }
 
-.timeline-section .container {
-    max-width: 1200px;
-    margin: 0 auto;
+/* =========================================
+   TIMELINE NAVIGATION (STICKY)
+   ========================================= */
+
+.timeline-nav {
+    position: sticky;
+    top: 50vh; 
+    align-self: flex-end; 
+    margin-right: 40px;   
+    height: 0; 
+    margin-bottom: 0;
+    z-index: 100;
+    transform: translateY(-50%);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: none;
+}
+
+.timeline-nav ul {
+    pointer-events: all;
+    list-style: none;
+    padding: 0;
+    margin: 0;
     position: relative;
-    padding: 0 20px; /* Padding padrão do container */
+    background: rgba(11, 11, 11, 0.6); 
+    padding: 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* --- 2. CABEÇALHO --- */
-.section-header {
-    text-align: center;
-    margin-bottom: 120px;
-    position: relative;
-    z-index: 2;
-}
-
-.section-header .title {
-    font-family: "Conthrax", sans-serif;
-    font-size: 3.5rem;
-    color: var(--white-collor);
-    text-shadow: 0 0 20px rgba(55, 211, 102, 0.4);
-    margin-bottom: 10px;
-}
-
-.section-header .subtitle {
-    font-family: "Conthrax", sans-serif;
-    color: var(--primary-collor);
-    font-size: 1.1rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    opacity: 0.8;
-}
-
-/* --- 3. LINHA CONECTORA (Desktop) --- */
-.timeline-line {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 0; 
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(
-        to bottom, 
-        transparent 0%, 
-        var(--primary-collor) 15%, 
-        var(--primary-collor) 85%, 
-        transparent 100%
-    );
-    box-shadow: 0 0 20px var(--primary-collor);
-    z-index: 0; 
-}
-
-/* --- 4. ITEM DA TIMELINE --- */
-.timeline-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 150px;
-    position: relative;
-    z-index: 1;
-}
-
-/* Ponto Central (Desktop) */
-.timeline-item::after {
+.timeline-nav ul::before {
     content: '';
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    background-color: #0b0b0b;
-    border: 3px solid var(--primary-collor);
+    right: 23px;
+    top: 15px;
+    bottom: 15px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: -1;
+}
+
+.timeline-nav li { text-align: right; margin-bottom: 20px; }
+.timeline-nav li:last-child { margin-bottom: 0; }
+
+.timeline-nav a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: "Conthrax", sans-serif;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.timeline-nav a::after {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
-    box-shadow: 0 0 15px var(--primary-collor), inset 0 0 10px var(--primary-collor);
-    z-index: 2;
-    transition: all 0.6s ease;
+    margin-left: 15px;
+    transition: all 0.3s ease;
 }
 
-/* Hover no Item -> Ponto Brilha */
-.timeline-item:hover::after {
-    background-color: var(--primary-collor);
-    box-shadow: 0 0 40px var(--primary-collor);
-    transform: translate(-50%, -50%) scale(1.3);
+.timeline-nav a:hover, .timeline-nav a.active { color: var(--primary-collor); transform: scale(1.1); }
+.timeline-nav a:hover::after, .timeline-nav a.active::after { background-color: var(--primary-collor); border-color: var(--primary-collor); box-shadow: 0 0 15px var(--primary-collor); }
+.timeline-nav a span { opacity: 0; transform: translateX(-10px); transition: all 0.3s ease; }
+.timeline-nav a:hover span, .timeline-nav a.active span { opacity: 1; transform: translateX(0); }
+
+/* =========================================
+   ESTRUTURA DA TIMELINE
+   ========================================= */
+
+.timeline-section .container { max-width: 1200px; margin: 0 auto; position: relative; padding: 0 20px; width: 100%; }
+.section-header { text-align: center; margin-bottom: 120px; position: relative; z-index: 2; }
+.section-header .title { font-family: "Conthrax", sans-serif; font-size: 3.5rem; color: var(--white-collor); text-shadow: 0 0 20px rgba(55, 211, 102, 0.4); margin-bottom: 10px; }
+.section-header .subtitle { font-family: "Conthrax", sans-serif; color: var(--primary-collor); font-size: 1.1rem; letter-spacing: 4px; text-transform: uppercase; opacity: 0.8; }
+.timeline-line { position: absolute; left: 50%; transform: translateX(-50%); top: 0; bottom: 0; width: 4px; background: linear-gradient(to bottom, transparent 0%, var(--primary-collor) 15%, var(--primary-collor) 85%, transparent 100%); box-shadow: 0 0 20px var(--primary-collor); z-index: 0; }
+.timeline-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 150px; position: relative; z-index: 1; }
+.timeline-item::after { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background-color: #0b0b0b; border: 3px solid var(--primary-collor); border-radius: 50%; box-shadow: 0 0 15px var(--primary-collor), inset 0 0 10px var(--primary-collor); z-index: 2; transition: all 0.6s ease; }
+.timeline-item:hover::after { background-color: var(--primary-collor); box-shadow: 0 0 40px var(--primary-collor); transform: translate(-50%, -50%) scale(1.3); }
+
+/* --- CARD DE TEXTO (Ajustado) --- */
+.timeline-item .content-box { 
+    background: rgba(20, 20, 20, 0.6); 
+    backdrop-filter: blur(10px); 
+    
+    /* CORREÇÃO 1: Reduzi o padding de 2.5rem para 2rem para dar mais espaço ao texto */
+    padding: 2rem; 
+    
+    border-radius: 12px; 
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+    transition: transform 0.6s ease, background 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease; 
 }
 
-/* Larguras Desktop */
-.timeline-item .content-box,
-.timeline-item .image-wrapper {
-    width: 45%;
-}
-
-/* --- 5. CARD DE TEXTO --- */
-.timeline-item .content-box {
-    background: rgba(20, 20, 20, 0.6);
-    backdrop-filter: blur(10px);
-    padding: 2.5rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: transform 0.6s ease, background 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
-}
-
-/* Bordas Laterais Desktop */
+.timeline-item .content-box, .timeline-item .image-wrapper { width: 45%; }
 .timeline-item.left .content-box { border-right: 4px solid var(--primary-collor); text-align: right; }
 .timeline-item.right .content-box { border-left: 4px solid var(--primary-collor); text-align: left; }
+.timeline-item:hover .content-box { transform: translateY(-5px); background: rgba(30, 30, 30, 0.9); box-shadow: 0 15px 40px rgba(0,0,0,0.6); border-color: rgba(55, 211, 102, 0.6); }
+.year-badge { display: inline-block; font-family: "Conthrax", sans-serif; color: var(--black-collor); background-color: var(--primary-collor); padding: 5px 15px; border-radius: 4px; font-weight: bold; margin-bottom: 20px; box-shadow: 0 0 15px rgba(55, 211, 102, 0.3); }
 
-/* Hover no Item -> Texto Sobe */
-.timeline-item:hover .content-box {
-    transform: translateY(-5px);
-    background: rgba(30, 30, 30, 0.9);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-    border-color: rgba(55, 211, 102, 0.6);
-}
-
-/* Tipografia */
-.year-badge {
-    display: inline-block;
-    font-family: "Conthrax", sans-serif;
-    color: var(--black-collor);
-    background-color: var(--primary-collor);
-    padding: 5px 15px;
-    border-radius: 4px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    box-shadow: 0 0 15px rgba(55, 211, 102, 0.3);
-}
-
+/* --- CORREÇÃO DO TÍTULO "REESTRUTURAÇÃO" --- */
 .car-name {
     font-family: "Conthrax", sans-serif;
-    font-size: 2.5rem;
     color: var(--white-collor);
     margin-bottom: 20px;
-    /* Garante que palavras longas não quebrem o layout */
+    
+    /* CORREÇÃO 2: Fonte fluida mais conservadora */
+    /* Diminui automaticamente se a tela for estreita */
+    font-size: clamp(1.2rem, 1.8vw, 2.0rem);
+    
+    /* CORREÇÃO 3: Aperta as letras para caber mais texto na linha */
+    letter-spacing: -1px;
+    
+    /* CORREÇÃO 4: Segurança contra estouro */
+    /* Permite quebrar a palavra se não couber de jeito nenhum, evitando o vazamento */
+    white-space: normal; 
     word-break: break-word; 
-    hyphens: auto;
+    line-height: 1.1;
 }
 
 .specs { padding: 0; margin: 0; list-style: none; }
-.specs li {
-    color: #ccc;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.1rem;
-}
+.specs li { color: #ccc; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
 .timeline-item.left .specs li { justify-content: flex-end; }
 .timeline-item.right .specs li { justify-content: flex-start; }
 .specs li i { color: var(--primary-collor); }
-
-
-/* --- 6. IMAGEM DO CARRO --- */
-.timeline-item .image-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    height: 350px;
-    perspective: 1000px;
-}
-
-.timeline-item .image-wrapper img {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    object-fit: contain;
-    
-    /* Estado Standby */
-    filter: 
-        drop-shadow(0 15px 10px rgba(0, 0, 0, 0.9))
-        grayscale(100%) 
-        contrast(1.2) 
-        brightness(0.7) 
-        sepia(20%) 
-        hue-rotate(90deg);
-    
-    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    mix-blend-mode: normal; 
-    animation: pulseGlow 4s infinite alternate;
-}
-
-@keyframes pulseGlow {
-    0% { opacity: 0.9; }
-    100% { opacity: 1; }
-}
-
-/* Hover (Power Up) */
-.timeline-item:hover .image-wrapper img {
-    filter: 
-        drop-shadow(0 0 25px rgba(55, 211, 102, 0.6)) 
-        grayscale(0%) 
-        contrast(1.1) 
-        brightness(1.1) 
-        sepia(0%) 
-        hue-rotate(0deg);
-
-    transform: scale(1.08); 
-}
-
-/* Remove a sombra antiga */
+.timeline-item .image-wrapper { position: relative; display: flex; justify-content: center; align-items: center; height: 350px; perspective: 1000px; }
+.timeline-item .image-wrapper img { width: 100%; max-width: 600px; height: auto; object-fit: contain; filter: drop-shadow(0 15px 10px rgba(0, 0, 0, 0.9)) grayscale(100%) contrast(1.2) brightness(0.7) sepia(20%) hue-rotate(90deg); transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); mix-blend-mode: normal; animation: pulseGlow 4s infinite alternate; }
+@keyframes pulseGlow { 0% { opacity: 0.9; } 100% { opacity: 1; } }
+.timeline-item:hover .image-wrapper img { filter: drop-shadow(0 0 25px rgba(55, 211, 102, 0.6)) grayscale(0%) contrast(1.1) brightness(1.1) sepia(0%) hue-rotate(0deg); transform: scale(1.08); }
 .floor-shadow { display: none !important; }
-
-/* Ícone de Fundação */
 .timeline-item.foundation-item .image-wrapper { height: auto; padding: 20px; }
 .foundation-icon { font-size: 4rem; color: #444; filter: drop-shadow(0 0 0 transparent); transition: all 0.6s ease; }
 .timeline-item:hover .foundation-icon { color: var(--primary-collor); transform: scale(1.2); filter: drop-shadow(0 0 30px var(--primary-collor)); }
 
-
-/* --- 7. RESPONSIVIDADE CORRIGIDA (MOBILE) --- */
+/* --- RESPONSIVIDADE (MOBILE) --- */
 @media screen and (max-width: 992px) {
     
-    /* 1. LINHA FIXA NA ESQUERDA */
-    /* Absolute relative to Container Padding Box */
-    .timeline-line {
-        left: 20px; /* 20px da borda do container */
-        transform: translateX(-50%); /* Centraliza a espessura */
+    /* NAV MOBILE */
+    .timeline-nav {
+        position: fixed; 
+        top: auto; bottom: 30px; left: 50%; right: auto;
+        transform: translateX(-50%);
+        align-self: auto; margin-right: 0; height: auto;
+        flex-direction: row;
+        background: rgba(11, 11, 11, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 10px 25px;
+        border-radius: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        width: auto; max-width: 90%;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        opacity: 0; visibility: hidden;
+        transition: opacity 0.3s;
+        pointer-events: auto;
+    }
+    .timeline-nav.visible { opacity: 1; visibility: visible; }
+    .timeline-nav ul { background: transparent; padding: 0; border: none; display: flex; align-items: center; gap: 20px; }
+    .timeline-nav ul::before { display: none; } 
+    .timeline-nav li { margin: 0; }
+    .timeline-nav a { font-size: 0.8rem; flex-direction: column-reverse; color: rgba(255,255,255,0.7); }
+    .timeline-nav a::after { margin-left: 0; margin-bottom: 5px; width: 6px; height: 6px; }
+    .timeline-nav a span { opacity: 1; transform: none; }
+
+    /* TIMELINE MOBILE */
+    .timeline-line { left: 20px; transform: translateX(-50%); top: 220px; background: linear-gradient(to bottom, transparent 0%, var(--primary-collor) 5%, var(--primary-collor) 90%, transparent 100%); }
+    .timeline-item { flex-direction: column !important; align-items: flex-start; padding-left: 60px; margin-bottom: 80px; }
+    .timeline-item::after { left: 0; top: 50%; transform: translate(-50%, -50%); }
+    .timeline-item .image-wrapper { order: 1; width: 100%; justify-content: flex-start; margin-bottom: 25px; height: auto; }
+    
+    .timeline-item .content-box { 
+        order: 2; width: 100%; text-align: left !important; 
+        border: none !important; border-left: 3px solid var(--primary-collor) !important; 
+        padding: 1.5rem; 
     }
 
-    /* 2. ITEM VIRA COLUNA */
-    .timeline-item {
-        flex-direction: column !important;
-        align-items: flex-start;
-        /* Padding extra para afastar o texto da linha */
-        padding-left: 50px; 
-        margin-bottom: 80px;
-    }
-
-    /* 3. PONTO ALINHADO (A CORREÇÃO MÁGICA) */
-    .timeline-item::after {
-        /* Como o item começa APÓS o padding do container (20px), 
-           left: 0 coloca o ponto exatamente em cima da borda visual de 20px do container. */
-        left: 0; 
-        top: 50%; 
-        transform: translate(-50%, -50%);
-    }
-
-    /* 4. ORDEM VISUAL PADRONIZADA */
-    .timeline-item .image-wrapper {
-        order: 1;
-        width: 100%;
-        justify-content: flex-start;
-        margin-bottom: 25px;
-        height: auto;
-    }
-
-    .timeline-item .content-box {
-        order: 2;
-        width: 100%;
-        text-align: left !important;
-        border: none !important;
-        border-left: 3px solid var(--primary-collor) !important;
-        padding: 1.5rem;
-    }
-
-    /* 5. AJUSTE DE FONTE (FUNDAÇÃO) */
-    .car-name {
-        font-size: 1.5rem; /* Menor para caber na tela */
+    .car-name { 
+        font-size: clamp(1rem, 5vw, 1.3rem);
+        letter-spacing: 0px; 
     }
     
-    .year-badge {
-        font-size: 0.9rem; /* Levemente menor */
-    }
-
-    /* 6. ESCONDER ÍCONE NO MOBILE */
-    .timeline-item.foundation-item .image-wrapper {
-        display: none;
-    }
-    
-    /* Remove margem extra da fundação */
-    .timeline-item.foundation-item .content-box {
-        margin-top: 0;
-    }
-
-    /* 7. IMAGEM SEMPRE VISÍVEL */
-    .timeline-item .image-wrapper img {
-        filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5)) grayscale(0%) contrast(1.1) brightness(1.0);
-        max-width: 100%;
-        transform: none !important;
-    }
-    
-    .timeline-item .specs li {
-        justify-content: flex-start !important;
-    }
+    .year-badge { font-size: 0.9rem; }
+    .timeline-item.foundation-item .image-wrapper { display: none; }
+    .timeline-item.foundation-item .content-box { margin-top: 0; }
+    .timeline-item .image-wrapper img { filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5)) grayscale(0%) contrast(1.1) brightness(1.0); max-width: 100%; transform: none !important; }
+    .timeline-item .specs li { justify-content: flex-start !important; }
 }
