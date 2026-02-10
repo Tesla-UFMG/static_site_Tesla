@@ -1,5 +1,5 @@
 /* =========================================
-   SEÇÃO HOME (PARALLAX 200VH - MOBILE FIX)
+   SEÇÃO HOME (AJUSTE FINO - TOPO DA TELA)
    ========================================= */
 
 .section-home {
@@ -7,7 +7,6 @@
     position: relative;
     width: 100%;
     overflow: hidden; 
-    /* Z-index baixo para que as próximas seções passem por cima */
     z-index: 1; 
 }
 
@@ -16,29 +15,17 @@
     position: fixed;
     top: 0;
     left: 0;
-    
-    /* CORREÇÃO DA LARGURA/FAIXA:
-       Trocar 100% por 100vw força a imagem a ter exatamente 
-       a largura da janela do dispositivo, sem depender do elemento pai. */
     width: 100vw; 
     max-width: 100vw;
-    
-    /* CORREÇÃO DA ALTURA/BARRA PRETA:
-       Usa 100lvh para ocupar a tela inteira por trás da barra de endereços. */
     height: 100vh;
     height: 100lvh; 
-    
     z-index: 0;
-    
     background-image: url('../images/NK\ Mineirao\ desfocado.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
     will-change: transform; 
     pointer-events: none; 
-    
-    /* Garante que não haja margens acidentais */
     margin: 0;
     padding: 0;
 }
@@ -48,17 +35,11 @@
     position: fixed;
     top: 0;
     left: 0;
-    
-    /* Aplica a mesma correção de largura da imagem */
     width: 100vw;
     max-width: 100vw;
-    
-    /* Mesma altura da imagem */
     height: 100vh;
     height: 100lvh;
-    
     z-index: 1;
-    
     background-image: 
         linear-gradient(to bottom, 
             var(--black-collor) 0%,
@@ -76,7 +57,6 @@
             color-mix(in srgb, var(--black-collor), transparent 50%) 45%, 
             var(--black-collor) 100% 
         );
-
     opacity: 0; 
     pointer-events: none;
     transition: opacity 0.1s linear;
@@ -130,12 +110,10 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
-    
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    
     opacity: 1;
     visibility: visible;
     transition: opacity 0.5s ease;
@@ -186,63 +164,50 @@
     100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
 }
 
-/* --- 5. BLOCO DE TEXTO --- */
 /* =========================================
-   LOGO HOME (Estilo Adicional)
+   5. BLOCO DE TEXTO E LOGO (POSICIONAMENTO SUPERIOR)
    ========================================= */
 
 .logo-home {
-    /* Tamanho para Desktop */
-    height: 140px; 
+    height: 130px; 
     width: auto;
     
-    /* Espaçamento para o título abaixo */
-    margin-bottom: 1.5rem;
+    /* Remove margens para controlar via container */
+    margin: 0; 
+    margin-bottom: 1rem;
     
-    /* Centralização (caso o flexbox pai não garanta) */
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    
-    /* Sombra suave para destacar do fundo escuro */
     filter: drop-shadow(0 0 20px rgba(55, 211, 102, 0.4));
-    
-    /* Animação suave de entrada (opcional) */
     animation: fadeDown 1.5s ease-out forwards;
 }
 
 @keyframes fadeDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Ajuste Responsivo (Mobile) */
-@media screen and (max-width: 992px) {
-    .logo-home {
-        height: 100px; /* Menor no celular */
-        margin-bottom: 1rem;
-    }
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .div-texto-home {
     position: absolute;
     z-index: 10;
     
+    /* Fixa no topo da segunda dobra (se for parallax) ou no topo normal */
     top: 100vh; 
-    top: 100lvh; /* Compatibilidade mobile */
+    top: 100lvh; 
     
     left: 0;
     width: 100%;
+    height: 100vh; /* Ocupa a altura da tela para permitir alinhamento */
+    
     display: flex;
     flex-direction: column;
+    
+    /* ALTERAÇÃO CHAVE: Alinha tudo no TOPO em vez do Centro */
+    justify-content: flex-start; 
     align-items: center; 
-    padding: 2rem 1rem;
+    
+    padding-top: 1rem; 
+    padding-left: 1rem;
+    padding-right: 1rem;
     
     text-align: center; 
     
@@ -256,7 +221,7 @@
     transform: translateY(0);
 }
 
-/* --- 6. TIPOGRAFIA --- */
+/* --- 6. TIPOGRAFIA COMPACTA --- */
 .titulo-texto-home {
     color: var(--primary-collor);
     white-space: normal;
@@ -264,7 +229,7 @@
     font-family: "Conthrax", sans-serif;
     font-weight: 800;
     margin: 0;
-    line-height: 1.1;
+    line-height: 1; 
     text-transform: uppercase;
     width: 100%;
     text-shadow: 0 2px 4px color-mix(in srgb, var(--black-collor), transparent 20%);
@@ -273,6 +238,7 @@
 .subtitulo-texto-home {
     color: var(--white-collor);
     margin: 0;
+    margin-top: 0.5rem;
     text-shadow: 0 2px 4px color-mix(in srgb, var(--black-collor), transparent 20%);
 }
 
@@ -290,6 +256,7 @@
     font-size: clamp(0.8rem, 1.5vw, 1.2rem);
     letter-spacing: 5px;
     margin-top: 0.5rem;
+    margin-bottom: 0;
     text-transform: uppercase;
     font-weight: 300;
     text-shadow: 0 2px 4px color-mix(in srgb, var(--black-collor), transparent 20%);
@@ -357,6 +324,19 @@
 
 /* --- 9. RESPONSIVIDADE ESPECÍFICA --- */
 @media screen and (max-width: 768px) {
+    /* Logo menor e ajustada para não bater no menu hamburguer */
+    .logo-home {
+        height: 100px; 
+        margin-bottom: 0.5rem;
+    }
+
+    /* Padding superior um pouco menor no mobile para aproveitar espaço */
+    .div-texto-home {
+        padding-top: 120px; 
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
     .subtitulo-texto-home-2 {
         letter-spacing: 2px;
         line-height: 1.4;
@@ -364,9 +344,5 @@
     
     .titulo-texto-home {
         font-size: 2.5rem;
-    }
-    
-    .div-texto-home {
-        padding: 0 1.5rem;
     }
 }
