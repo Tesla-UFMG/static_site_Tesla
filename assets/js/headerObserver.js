@@ -33,20 +33,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 2. CLIQUE NO BOTÃO "INÍCIO" (SCROLL PARA O TEXTO) ---
-    const homeLink = document.querySelector('a[href="#home"]');
+    // Seleciona TODOS os links que apontam para #home (Logo + Texto do Menu)
+const homeLinks = document.querySelectorAll('a[href="#home"]');
+
+// Verifica se encontrou algum link para evitar erros
+if (homeLinks.length > 0) {
     
-    if (homeLink) {
-        homeLink.addEventListener('click', (e) => {
-            e.preventDefault(); // Impede o pulo padrão para o topo (0px)
+    // O SEGREDO: Usar forEach para percorrer a lista item por item
+    homeLinks.forEach(link => {
+        
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // Impede o pulo seco padrão
             
-            // Rola exatamente para a altura de 1 tela (100vh)
-            // É lá que o texto começa na nossa configuração de Parallax
+            // Ir para onde o texto começa (100vh)
             window.scrollTo({
-                top: window.innerHeight, 
+                top: window.innerHeight,
                 behavior: 'smooth'
             });
+
+            // Se estiver no mobile, garante que o menu feche
+            if (typeof toggleMenu === 'function') {
+                const nav = document.getElementById('nav');
+                if (nav.classList.contains('active')) {
+                    toggleMenu();
+                }
+            }
         });
-    }
+    });
+}
 
     // --- 3. ANIMAÇÃO DE ENTRADA DO TEXTO (MANTIDA) ---
     const textContainer = document.querySelector('.div-texto-home');
