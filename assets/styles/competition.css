@@ -37,7 +37,7 @@
     font-family: "Conthrax", sans-serif;
     font-weight: 700;
     
-    /* CORREÇÃO: O valor do meio agora é fluido (6vw) */
+    /* Tamanho fluido (6vw) */
     font-size: clamp(2rem, 6vw, 4.5rem); 
     
     text-transform: uppercase;
@@ -371,14 +371,24 @@
         min-height: 100vh;
         overflow-y: visible; 
         padding-top: 6rem;
-        display: block; 
+        
+        /* CORREÇÃO: Voltamos para flex para permitir centralização */
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
     }
 
     /* AJUSTE DO TÍTULO NO MOBILE */
     .titulo-competicao {
         font-size: 2.2rem;
-        letter-spacing: 2px; /* Reduz espaço entre letras */
+        letter-spacing: 2px; 
         margin-bottom: 2rem;
+        
+        /* Garantia extra de centralização */
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        width: 100%;
     }
 
     .competicao-dashboard {
@@ -386,7 +396,8 @@
         flex-direction: column; 
         height: auto;
         gap: 1.5rem;
-        padding: 0 1rem; /* Reduz padding lateral para ganhar espaço */
+        padding: 0 1rem; 
+        width: 100%; /* Ocupa a largura disponível */
     }
 
     .item-texto, .item-menu, .item-mapa, .item-detalhes, .item-galeria {
@@ -395,12 +406,12 @@
         grid-row: auto;
     }
 
-    .item-texto    { order: 1; }
-    .item-mapa     { order: 2; height: 300px; }
-    .item-menu     { order: 3; }
-    .item-detalhes { order: 4; }
+    .item-texto     { order: 1; }
+    .item-mapa      { order: 2; height: 300px; }
+    .item-menu      { order: 3; }
+    .item-detalhes  { order: 4; }
     
-    .item-galeria  { 
+    .item-galeria   { 
         order: 5; 
         height: 450px; 
     }

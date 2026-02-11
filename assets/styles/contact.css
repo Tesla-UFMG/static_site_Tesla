@@ -1,37 +1,39 @@
 /* =========================================
-   SEÇÃO CONTATO (FINAL)
+   SEÇÃO CONTATO (FINAL - TÍTULO CORRIGIDO)
    ========================================= */
 
 .section-contato {
     scroll-margin-top: 4rem;
     
-    /* REMOVIDO: min-height: 100vh */
+    /* Altura automática */
     min-height: auto; 
     
-    /* Padding superior maior para afastar dos logos */
+    /* Padding generoso */
     padding: 8rem 2rem 6rem 2rem;
     
-    /* Fundo Dark Tech com Grid (Consistência com a Home) */
+    /* Fundo Dark Tech com Grid */
     background-color: var(--black-collor);
     background-image: 
         linear-gradient(rgba(55, 211, 102, 0.05) 1px, transparent 1px),
         linear-gradient(90deg, rgba(55, 211, 102, 0.05) 1px, transparent 1px);
     background-size: 40px 40px;
     
+    /* ALINHAMENTO CENTRAL TOTAL */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
     justify-content: center;
+    
     color: var(--white-collor);
     position: relative;
-    z-index: 22; /* No topo da pilha */
+    z-index: 22; 
     
-    /* Borda superior brilhante para finalizar */
+    /* Borda superior de finalização */
     border-top: 1px solid var(--primary-collor);
     box-shadow: 0 -10px 40px rgba(55, 211, 102, 0.1);
 }
 
-/* --- TÍTULO --- */
+/* --- TÍTULO (CORRIGIDO) --- */
 .titulo-contato {
     font-family: "Conthrax", sans-serif;
     font-size: 3.5rem;
@@ -42,6 +44,12 @@
     letter-spacing: 2px;
     position: relative;
     text-shadow: 0 0 15px rgba(55, 211, 102, 0.6);
+    
+    /* GARANTIA DE CENTRALIZAÇÃO */
+    text-align: center;
+    width: 100%; /* Garante que o bloco ocupe a largura para centralizar o texto dentro */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .titulo-contato::after {
@@ -50,7 +58,10 @@
     width: 100px;
     height: 4px;
     background-color: var(--primary-collor);
+    
+    /* Centraliza a barra decorativa */
     margin: 10px auto 0 auto;
+    
     border-radius: 2px;
 }
 
@@ -67,7 +78,7 @@
 
 /* --- MOLDURA DO FORMULÁRIO --- */
 .formulario-contato {
-    background-color: rgba(10, 10, 10, 0.95); /* Mais escuro para contraste no grid */
+    background-color: rgba(10, 10, 10, 0.95); 
     backdrop-filter: blur(10px);
     border: 1px solid rgba(55, 211, 102, 0.3);
     border-left: 4px solid var(--primary-collor);
@@ -219,9 +230,33 @@
 
 /* RESPONSIVIDADE */
 @media screen and (max-width: 900px) {
-    .section-contato { padding: 5rem 1rem 4rem 1rem; }
-    .container-contato { flex-direction: column; align-items: center; gap: 3rem; }
-    .formulario-contato, .outras-formas-contato { width: 100%; min-width: 0; }
-    .outras-formas-contato h3 { text-align: center; }
-    .titulo-contato { font-size: 2.5rem; }
+    .section-contato { 
+        padding: 5rem 1rem 4rem 1rem; 
+        
+        /* Reforço de alinhamento no mobile */
+        align-items: center; 
+    }
+    
+    .container-contato { 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 3rem; 
+    }
+    
+    .formulario-contato, .outras-formas-contato { 
+        width: 100%; 
+        min-width: 0; 
+    }
+    
+    /* Centraliza título secundário no mobile */
+    .outras-formas-contato h3 { 
+        text-align: center; 
+    }
+    
+    /* Ajuste de tamanho e alinhamento do título principal */
+    .titulo-contato { 
+        font-size: 2.5rem; 
+        text-align: center;
+        width: 100%;
+    }
 }

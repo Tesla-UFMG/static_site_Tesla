@@ -323,26 +323,50 @@
 }
 
 /* --- 9. RESPONSIVIDADE ESPECÍFICA --- */
+/* --- RESPONSIVIDADE ESPECÍFICA (MOBILE) --- */
 @media screen and (max-width: 768px) {
-    /* Logo menor e ajustada para não bater no menu hamburguer */
-    .logo-home {
-        height: 100px; 
-        margin-bottom: 0.5rem;
-    }
-
-    /* Padding superior um pouco menor no mobile para aproveitar espaço */
+    
     .div-texto-home {
-        padding-top: 120px; 
+        /* CRUCIAL: Força o alinhamento para o topo */
+        justify-content: flex-start !important;
+        
+        margin-top: -1rem;
+        padding-top: 1rem; 
+        
         padding-left: 1rem;
         padding-right: 1rem;
     }
 
+    /* Logo menor e ajustada */
+    .logo-home {
+        height: 90px; 
+        
+        /* Removemos a margem extra aqui pois já usamos padding no pai */
+        margin-top: 0; 
+        margin-bottom: 0.5rem;
+    }
+
+    /* Ajuste de fontes para mobile */
+    .titulo-texto-home {
+        font-size: 2.2rem;
+    }
+
+    .subtitulo-texto-home {
+        font-size: 1rem;
+    }
+
+    .texto-home-strong {
+        font-size: 1.2rem;
+    }
+
     .subtitulo-texto-home-2 {
+        font-size: 0.7rem;
         letter-spacing: 2px;
         line-height: 1.4;
+        margin-top: 0.5rem;
     }
     
-    .titulo-texto-home {
-        font-size: 2.5rem;
+    .link-instagram {
+        margin-top: 1.5rem;
     }
 }
