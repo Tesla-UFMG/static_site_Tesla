@@ -1,76 +1,94 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. LÓGICA DE DESTAQUE NO MENU (SCROLL SPY) ---
+    // --- 1. LÓGICA DE DESTAQUE NO MENU (REFATORADA) ---
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.items-navegacao');
-    const headerHeight = document.querySelector('.header').offsetHeight;
+    const headerElement = document.querySelector('.header');
 
-    window.addEventListener('scroll', () => {
+    // Criamos uma função nomeada para poder chamar ela a qualquer momento
+    function highlightMenu() {
+        // Recalcula altura do header (importante no mobile se a barra de endereço sumir/aparecer)
+        const headerOffset = headerElement ? headerElement.offsetHeight : 100;
         let current = '';
         
+        // A. Descobre qual seção está na tela
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
             
-            // O "- headerHeight - 100" serve para trocar a cor um pouco antes da seção bater no topo
-            if (scrollY >= (sectionTop - headerHeight - 150)) {
+            // Verifica se o scroll passou do topo da seção (com folga de 150px)
+            if (window.scrollY >= (sectionTop - headerOffset - 150)) {
                 current = section.getAttribute('id');
             }
         });
 
-        // Correção específica para a Home:
-        // Se estivermos na primeira tela (antes de descer tudo), mantém Home ativo
-        if (scrollY < window.innerHeight) {
+        // B. Correção para o TOPO absoluto (Home)
+        if (window.scrollY < 100) { 
             current = 'home';
         }
+        
+        // C. Correção para o FIM da página (Contato/Footer)
+        // Garante que o último item acenda se chegar no final da página
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+            if(sections.length > 0) {
+                 current = sections[sections.length - 1].getAttribute('id');
+            }
+        }
 
+        // D. Aplica a classe active
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
+            
+            const href = link.getAttribute('href');
+            // Comparação exata para evitar bugs
+            if (current && href === `#${current}`) {
                 link.classList.add('active');
             }
         });
-    });
+    }
 
-    // --- 2. CLIQUE NO BOTÃO "INÍCIO" (SCROLL PARA O TEXTO) ---
-    // Seleciona TODOS os links que apontam para #home (Logo + Texto do Menu)
-const homeLinks = document.querySelectorAll('a[href="#home"]');
-
-// Verifica se encontrou algum link para evitar erros
-if (homeLinks.length > 0) {
+    // --- A CORREÇÃO ESTÁ AQUI ---
     
-    // O SEGREDO: Usar forEach para percorrer a lista item por item
-    homeLinks.forEach(link => {
-        
-        link.addEventListener('click', (e) => {
-            e.preventDefault(); // Impede o pulo seco padrão
-            
-            // Ir para onde o texto começa (100vh)
-            window.scrollTo({
-                top: window.innerHeight,
-                behavior: 'smooth'
-            });
+    // 1. Executa IMEDIATAMENTE ao carregar (Resolve o problema do refresh)
+    highlightMenu();
 
-            // Se estiver no mobile, garante que o menu feche
-            if (typeof toggleMenu === 'function') {
-                const nav = document.getElementById('nav');
-                if (nav.classList.contains('active')) {
-                    toggleMenu();
+    // 2. Executa sempre que houver SCROLL
+    window.addEventListener('scroll', highlightMenu);
+
+
+    // --- 2. CLIQUE NO BOTÃO "INÍCIO" (MANTIDO) ---
+    const homeLinks = document.querySelectorAll('a[href="#home"]');
+
+    if (homeLinks.length > 0) {
+        homeLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                window.scrollTo({
+                    top: window.innerHeight, 
+                    behavior: 'smooth'
+                });
+
+                if (typeof toggleMenu === 'function') {
+                    const nav = document.getElementById('nav');
+                    if (nav && nav.classList.contains('active')) {
+                        toggleMenu();
+                    }
                 }
-            }
+            });
         });
-    });
-}
+    }
 
-    // --- 3. ANIMAÇÃO DE ENTRADA DO TEXTO (MANTIDA) ---
+    // --- 3. ANIMAÇÃO DE ENTRADA DO TEXTO (MANTIDO) ---
     const textContainer = document.querySelector('.div-texto-home');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                textContainer.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 }); // Sensibilidade alta para detectar logo
+    if(textContainer) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    textContainer.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 }); 
 
-    if(textContainer) observer.observe(textContainer);
+        observer.observe(textContainer);
+    }
 });
