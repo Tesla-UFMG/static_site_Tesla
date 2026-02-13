@@ -1,11 +1,11 @@
 /* =========================================
-   SEÇÃO SOBRE NÓS (FINAL)
+   SEÇÃO SOBRE NÓS (PREPARADA PARA JS)
    ========================================= */
 
-/* Variáveis (caso não estejam globais) */
+/* Variáveis (Garantindo que existam) */
 :root {
     --primary-collor: rgb(54, 211, 102, 1);
-    --black-collor: #0b0b0b; /* Preto exato da fusão */
+    --black-collor: #0b0b0b;
     --white-collor: rgba(255, 255, 255, 1);
 }
 
@@ -13,57 +13,45 @@
     position: relative; 
     min-height: 100vh;
     
-    /* Compensação para o menu fixo não cobrir o título */
+    /* Compensação para o menu fixo */
     scroll-margin-top: 4rem;
     
-    /* Padding bottom grande para garantir espaço para o fade */
+    /* Espaçamento interno */
     padding: 5rem 2rem 10rem 2rem; 
     
-    /* BACKGROUND DA IMAGEM */
+    /* BACKGROUND */
     background-image: 
-        /* Camada escura para facilitar leitura */
         linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
         url('../images/equipe/equipe2025-2.jpg');
-    
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
-    /* DESKTOP: Efeito Parallax (Imagem parada) */
-    background-attachment: fixed; 
+    background-attachment: fixed; /* Parallax Desktop */
     
     display: flex;
     flex-direction: column;
     align-items: center;
     
-    /* Z-index menor que a Timeline (que é 10) */
     z-index: 5; 
     background-color: var(--black-collor); 
 }
 
-/* --- O CORRETOR DE LINHA (Pseudo-elemento) --- */
-/* Cria uma barra sólida de segurança no final da seção */
+/* Efeito de fusão com a seção de baixo */
 .section-sobre::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 0; left: 0;
     width: 100%;
     height: 300px; 
-    
-    /* O TRUQUE: O gradiente atinge preto puro (90%) ANTES do final */
-    /* Isso garante que os últimos pixels sejam 100% sólidos, matando a linha clara */
     background: linear-gradient(to bottom, transparent 0%, #0b0b0b 90%, #0b0b0b 100%);
-    
     z-index: 1; 
     pointer-events: none;
 }
 
-/* --- TÍTULO (Padrão Neon Tech) --- */
+/* --- TÍTULO --- */
 .titulo-sobre {
     position: relative;
-    z-index: 2; /* Fica acima do gradiente de fundo */
-    
+    z-index: 2;
     color: var(--white-collor);
     font-family: "Conthrax", sans-serif;
     font-weight: 700;
@@ -78,8 +66,7 @@
 .titulo-sobre::after {
     content: '';
     display: block;
-    width: 100px;
-    height: 4px;
+    width: 100px; height: 4px;
     background-color: var(--primary-collor);
     margin: 10px auto 0 auto;
     border-radius: 2px;
@@ -90,7 +77,6 @@
 .conteudo-sobre {
     position: relative;
     z-index: 2; 
-    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -106,11 +92,8 @@
     flex: 1;
     min-width: 300px;
     
-    /* Visual Glass Dark */
     background-color: rgba(13, 13, 13, 0.85);
     backdrop-filter: blur(10px);
-    
-    /* Borda lateral Neon */
     border-left: 5px solid var(--primary-collor);
     border-radius: 0 10px 10px 0;
     
@@ -133,7 +116,7 @@
     margin: 0;
 }
 
-/* --- DESTAQUES NO TEXTO --- */
+/* Destaques no Texto */
 .tech-highlight {
     color: var(--primary-collor);
     font-weight: 600;
@@ -153,7 +136,7 @@
     margin: 0 -4px;
 }
 
-/* --- BOTÃO --- */
+/* Botão */
 .btn-texto-sobre {
     align-self: flex-start;
     background-color: transparent;
@@ -177,12 +160,15 @@
     font-weight: 700;
 }
 
-/* --- CARROSSEL --- */
+/* --- CARROSSEL (ESTRUTURA PARA JS) --- */
 .carrossel-sobre {
     width: 30rem;
     height: 20rem;
     max-width: 100%;
-    overflow: hidden;
+    
+    /* Essencial: Esconde as imagens que estão "na fila" */
+    overflow: hidden; 
+    
     border-radius: 10px;
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -190,18 +176,23 @@
 }
 
 .carrossel-imagens {
-    display: flex;
+    display: flex; /* Coloca as imagens lado a lado */
     width: 100%;
     height: 100%;
-    animation: slide 15s infinite cubic-bezier(0.45, 0, 0.55, 1);
+    
+    /* O JS vai manipular o 'transform' aqui */
+    /* Não colocamos transition aqui para poder controlar o "reset" pelo JS */
 }
 
 .carrossel-item {
-    flex: 0 0 100%;
+    /* OBRIGATÓRIO: Garante que cada imagem ocupe 100% da largura do container */
+    flex: 0 0 100%; 
+    min-width: 100%; 
     height: 100%;
     position: relative;
 }
 
+/* Gradiente sobre a foto para estilo */
 .carrossel-item::before {
     content: "";
     position: absolute;
@@ -213,30 +204,20 @@
 .carrossel-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Garante que a imagem preencha sem distorcer */
     display: block;
-}
-
-@keyframes slide {
-    0%, 20% { transform: translateX(0); }
-    25%, 45% { transform: translateX(-100%); }
-    50%, 70% { transform: translateX(-200%); }
-    75%, 95% { transform: translateX(-300%); }
-    100% { transform: translateX(-400%); }
 }
 
 /* --- RESPONSIVIDADE --- */
 @media screen and (max-width: 900px) {
     .section-sobre {
         padding: 4rem 1rem 8rem 1rem;
-        
-        /* CORREÇÃO DO FLICK NO MOBILE: Remove o fixed */
-        background-attachment: scroll !important; 
+        background-attachment: scroll !important; /* Desativa parallax no mobile */
         background-position: center top;
     }
 
     .conteudo-sobre {
-        flex-direction: column-reverse; 
+        flex-direction: column-reverse; /* Imagem em cima, texto em baixo */
         gap: 2rem;
     }
     
