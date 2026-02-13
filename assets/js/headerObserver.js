@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. LÓGICA DE DESTAQUE NO MENU (REFATORADA) ---
+    // =================================================================
+    // 1. LÓGICA DE DESTAQUE NO MENU (SCROLL SPY)
+    // =================================================================
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.items-navegacao');
     const headerElement = document.querySelector('.header');
 
-    // Criamos uma função nomeada para poder chamar ela a qualquer momento
     function highlightMenu() {
-        // Recalcula altura do header (importante no mobile se a barra de endereço sumir/aparecer)
+        // Recalcula altura do header (importante no mobile)
         const headerOffset = headerElement ? headerElement.offsetHeight : 100;
         let current = '';
         
@@ -27,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // C. Correção para o FIM da página (Contato/Footer)
-        // Garante que o último item acenda se chegar no final da página
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
             if(sections.length > 0) {
                  current = sections[sections.length - 1].getAttribute('id');
@@ -37,25 +37,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // D. Aplica a classe active
         navLinks.forEach(link => {
             link.classList.remove('active');
-            
             const href = link.getAttribute('href');
-            // Comparação exata para evitar bugs
             if (current && href === `#${current}`) {
                 link.classList.add('active');
             }
         });
     }
 
-    // --- A CORREÇÃO ESTÁ AQUI ---
-    
-    // 1. Executa IMEDIATAMENTE ao carregar (Resolve o problema do refresh)
     highlightMenu();
-
-    // 2. Executa sempre que houver SCROLL
     window.addEventListener('scroll', highlightMenu);
 
 
-    // --- 2. CLIQUE NO BOTÃO "INÍCIO" (MANTIDO) ---
+    // =================================================================
+    // 2. CLIQUE NO BOTÃO "INÍCIO" E LOGO
+    // =================================================================
     const homeLinks = document.querySelectorAll('a[href="#home"]');
 
     if (homeLinks.length > 0) {
@@ -78,7 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 3. ANIMAÇÃO DE ENTRADA DO TEXTO (MANTIDO) ---
+
+    // =================================================================
+    // 3. ANIMAÇÃO DE ENTRADA DO TEXTO (OBSERVER)
+    // =================================================================
     const textContainer = document.querySelector('.div-texto-home');
     if(textContainer) {
         const observer = new IntersectionObserver((entries) => {
@@ -91,4 +89,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
         observer.observe(textContainer);
     }
+
+
+    // =================================================================
+    // 4. SCROLL SNAP INTELIGENTE (HERO SECTION - ALTA SENSIBILIDADE)
+    // =================================================================
+    let lastScrollTop = 0;
+    let isAnimating = false; // Trava para não encavalar animações
+
+    // Variável para armazenar o timeout e poder limpar se necessário
+    let animationTimeout; 
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+        const heroHeight = window.innerHeight;
+        
+        // A. Detecta direção
+        // Proteção contra valores negativos (iOS bounce effect)
+        const safeCurrentScroll = Math.max(0, currentScroll);
+        const direction = safeCurrentScroll > lastScrollTop ? 'down' : 'up';
+        
+        // Atualiza lastScrollTop apenas se não estivermos na zona de bounce negativo
+        if (safeCurrentScroll >= 0) {
+            lastScrollTop = safeCurrentScroll;
+        }
+
+        // B. Se a animação estiver rodando, IGNORA input
+        if (isAnimating) return;
+
+        // C. Lógica do SNAP (Apenas na área da Home: 0 até 100vh)
+        if (currentScroll < heroHeight) {
+
+            // --- CENÁRIO 1: Descendo (Snap Down) ---
+            // Alterado: Reduzido o limiar de 10px para 5px (mais sensível)
+            if (direction === 'down' && currentScroll > 5 && currentScroll < (heroHeight - 5)) {
+                
+                isAnimating = true;
+                
+                window.scrollTo({
+                    top: heroHeight, 
+                    behavior: 'smooth'
+                });
+
+                // Limpa timeout anterior se existir
+                clearTimeout(animationTimeout);
+                animationTimeout = setTimeout(() => { isAnimating = false; }, 800);
+            } 
+            
+            // --- CENÁRIO 2: Subindo (Snap Up) ---
+            // Alterado: Reduzido a margem de retorno. 
+            // Antes precisava subir 20px, agora basta subir 5px (heroHeight - 5)
+            else if (direction === 'up' && currentScroll < (heroHeight - 5) && currentScroll > 5) {
+                
+                isAnimating = true;
+                
+                window.scrollTo({
+                    top: 0, 
+                    behavior: 'smooth'
+                });
+
+                // Limpa timeout anterior se existir
+                clearTimeout(animationTimeout);
+                animationTimeout = setTimeout(() => { isAnimating = false; }, 800);
+            }
+        }
+    }, { passive: true });
 });
