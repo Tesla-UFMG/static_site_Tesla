@@ -14,13 +14,21 @@ O site foi desenvolvido para apresentar a equipe, nossos projetos, resultados em
 
 O site foi construído focado em performance e interatividade, sem o uso de frameworks pesados, garantindo um carregamento rápido, uma experiência fluida e facilidade de atualização futura.
 
+* **Scroll Snap Customizado:** Lógica de *scroll* altamente sensível feita em JavaScript puro que detecta a direção do rolamento e realiza um ajuste suave (*snap*) para o texto inicial ou para o topo da página, mantendo a experiência fluida sem travar o usuário.
+* **Scroll Spy no Menu:** Sistema de navegação inteligente que detecta a posição da tela e destaca automaticamente a seção atual no menu superior.
+* **Animações Baseadas em Observação:** Uso da API nativa `IntersectionObserver` para detectar quando o bloco de texto da Home entra na tela, disparando animações de *fade* e transição apenas no momento ideal.
+* **Grid Uniforme de Patrocinadores:** Estrutura em CSS responsiva que exibe todos os patrocinadores de forma igualitária, otimizando o espaço tanto em monitores ultrawide quanto em dispositivos móveis.
+* **Carrossel Nativo:** Seção "Sobre Nós" com carrossel contínuo de imagens construído sem bibliotecas externas, garantindo o mínimo de requisições de script.
+
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **HTML5:** Estruturação semântica.
-* **CSS3:** Variáveis nativas (`:root`), Flexbox, animações customizadas (`@keyframes`), e design responsivo (`media queries`).
-* **JavaScript (ES6+):** Manipulação de DOM, event listeners avançados (controle de *passive events*) e lógica de interatividade.
+Este projeto é **100% Vanilla** (livre de dependências), focado no domínio das bases do Front-end:
+
+* **HTML5:** Estruturação semântica e acessível.
+* **CSS3:** Variáveis nativas (`:root`), Flexbox/Grid, animações customizadas (`@keyframes`) e design responsivo (`media queries`).
+* **JavaScript (Vanilla JS - ES6+):** Manipulação de DOM, lógica de eventos de scroll (com controle de timeouts/trava de animação) e uso de APIs modernas do navegador (`IntersectionObserver`, `scrollTo`).
 
 ---
 
