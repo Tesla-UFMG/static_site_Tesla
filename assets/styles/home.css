@@ -212,6 +212,10 @@
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+body[data-ps-aberto="sim"] .div-texto-home{
+    padding-top: calc(1rem + 40px); 
+}
+
 .div-texto-home.visible {
     opacity: 1;
     transform: translateY(0);

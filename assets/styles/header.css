@@ -28,6 +28,7 @@
 .Navegacao-header {
     display: flex;
     justify-content: center;
+    align-items: center; /* <-- CORREÇÃO: Alinha todos os links e botões verticalmente ao centro */
     flex: 1;
     gap: 4rem;
 }
@@ -169,5 +170,143 @@
     .Navegacao-header.active ~ #btn-mobile #hamburguer::after {
         transform: rotate(-135deg);
         top: -8px; 
+    }
+}
+
+/* =========================================
+   SISTEMA DE PROCESSO SELETIVO (TOGGLE)
+   ========================================= */
+
+/* 1. LÓGICA DO INTERRUPTOR (Oculta por padrão) */
+.ps-banner-global, 
+.ps-menu-btn {
+    display: none; 
+}
+
+/* Quando data-ps-aberto="sim", os elementos aparecem */
+body[data-ps-aberto="sim"] .ps-banner-global {
+    display: flex;
+}
+
+body[data-ps-aberto="sim"] .ps-menu-btn {
+    display: flex;
+    align-items: center; /* <-- CORREÇÃO: Garante o texto do botão centralizado */
+    justify-content: center;
+}
+
+/* Desloca o Header para baixo para dar espaço ao Banner no Desktop */
+body[data-ps-aberto="sim"] .header {
+    top: 40px; 
+}
+
+/* =========================================
+   ESTILIZAÇÃO DO BANNER (SYSTEM OVERRIDE)
+   ========================================= */
+.ps-banner-global {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: var(--primary-collor); /* Fundo verde neon */
+    z-index: 1000; /* Fica acima de TUDO */
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(55, 211, 102, 0.4);
+}
+
+.ps-banner-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--black-collor); /* Texto escuro para dar contraste no neon */
+    font-family: "Conthrax", sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ps-banner-content p {
+    margin: 0;
+}
+
+/* Ponto pulsante simulando gravação/sistema ativo */
+.ps-pulse-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ff0000;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #ff0000;
+    animation: pulseRed 1.5s infinite;
+}
+
+/* Botão dentro do banner */
+.ps-btn-banner {
+    background-color: var(--black-collor);
+    color: var(--primary-collor);
+    padding: 4px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.75rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.ps-btn-banner:hover {
+    background-color: var(--white-collor);
+    color: var(--black-collor);
+    transform: scale(1.05);
+}
+
+/* =========================================
+   ESTILIZAÇÃO DO BOTÃO NO HEADER
+   ========================================= */
+.ps-menu-btn {
+    color: var(--primary-collor) !important;
+    border: 1px solid var(--primary-collor);
+    border-radius: 5px;
+    padding: 0.5rem 1rem !important;
+    margin-left: 1rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(55, 211, 102, 0.4);
+    box-shadow: inset 0 0 0 rgba(55, 211, 102, 0);
+    transition: all 0.3s ease;
+}
+
+.ps-menu-btn:hover {
+    background-color: var(--primary-collor);
+    color: var(--black-collor) !important;
+    box-shadow: 0 0 15px rgba(55, 211, 102, 0.6);
+    text-shadow: none;
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes pulseRed {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 15px #ff0000; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* --- RESPONSIVIDADE PARA O BANNER --- */
+@media screen and (max-width: 768px) {
+    .ps-banner-content {
+        font-size: 0.7rem;
+        gap: 8px;
+    }
+    .ps-banner-content p {
+        display: none; /* No mobile, escondemos o texto longo e deixamos só o botão e o ponto vermelho */
+    }
+    .ps-btn-banner {
+        font-size: 0.8rem;
+        padding: 6px 15px;
+    }
+    .ps-menu-btn {
+        margin-left: 0;
+        margin-top: 1rem;
+        text-align: center;
+        justify-content: center;
     }
 }
