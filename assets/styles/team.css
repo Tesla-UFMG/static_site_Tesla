@@ -36,6 +36,10 @@
     border-top: 1px solid rgba(255, 255, 255, 0.05); /* Borda muito sutil, quase invisível */
 }
 
+body[data-ps-aberto="sim"] .section-equipe {
+    scroll-margin-top: calc(4rem + 40px);
+}
+
 /* REMOVIDO O BLOCO .section-equipe::before QUE CAUSAVA A "PONTA" */
 
 /* --- TÍTULO --- */
@@ -248,6 +252,10 @@
 
 @media screen and (max-width: 650px) {
     .section-equipe { padding: 4rem 1rem; }
+    
+    body[data-ps-aberto="sim"] .section-equipe {
+        scroll-margin-top: calc(4rem + 60px);
+    }
     .container-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
     .card-container { height: 330px; }
     .card-front { padding: 1rem 0.5rem; }

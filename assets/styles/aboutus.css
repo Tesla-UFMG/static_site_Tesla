@@ -36,6 +36,10 @@
     background-color: var(--black-collor); 
 }
 
+body[data-ps-aberto="sim"] .section-sobre {
+    scroll-margin-top: calc(4rem + 40px);
+}
+
 /* Efeito de fusão com a seção de baixo */
 .section-sobre::after {
     content: '';
@@ -215,6 +219,10 @@
         background-attachment: scroll !important; /* Desativa parallax no mobile */
         background-position: center top;
     }
+
+    body[data-ps-aberto="sim"] .section-sobre {
+        scroll-margin-top: calc(4rem + 60px);
+    }   
 
     .conteudo-sobre {
         flex-direction: column-reverse; /* Imagem em cima, texto em baixo */

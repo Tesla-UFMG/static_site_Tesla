@@ -16,12 +16,16 @@
     
     /* Topo: 7.5rem (120px) | Fundo: 7.5rem (120px) */
     padding: 7.5rem 0 7.5rem 0;
-    
+    scroll-margin-top: 4rem;
     overflow: visible; 
     z-index: 10;
     
     margin-top: -0.3125rem; /* -5px */
     box-shadow: 0 -3.125rem 3.125rem 0.625rem #0b0b0b, inset 0 3.125rem 3.125rem -1.25rem #000;
+}
+
+body[data-ps-aberto="sim"] .timeline-section {
+    scroll-margin-top: calc(4rem + 40px);
 }
 
 /* =========================================
@@ -286,6 +290,10 @@
         /* Garante que o flexbox controle a ordem */
         display: flex;
         flex-direction: column;
+    }
+
+    body[data-ps-aberto="sim"] .timeline-section {
+        scroll-margin-top: calc(1rem + 60px);
     }
 
     /* 2. CONTEÚDO (CARROS) VEM PRIMEIRO */

@@ -28,6 +28,10 @@
     max-width: 100vw;
 }
 
+body[data-ps-aberto="sim"] .section-competicao {
+    scroll-margin-top: calc(40px);
+}
+
 /* --- TÍTULO --- */
 .titulo-competicao {
     margin-top: 0.5rem;
@@ -376,6 +380,9 @@
         display: flex;
         flex-direction: column;
         align-items: center; 
+    }
+    body[data-ps-aberto="sim"] .section-competicao {
+        scroll-margin-top: calc(60px);
     }
 
     /* AJUSTE DO TÍTULO NO MOBILE */

@@ -33,6 +33,10 @@
     box-shadow: 0 -10px 40px rgba(55, 211, 102, 0.1);
 }
 
+body[data-ps-aberto="sim"] .section-contato {
+    scroll-margin-top: calc(1rem + 40px);
+}
+
 /* --- TÍTULO (CORRIGIDO) --- */
 .titulo-contato {
     font-family: "Conthrax", sans-serif;
@@ -289,6 +293,10 @@
         
         /* Reforço de alinhamento no mobile */
         align-items: center; 
+    }
+
+    body[data-ps-aberto="sim"] .section-contato {
+        scroll-margin-top: calc(1rem + 60px);
     }
     
     .container-contato { 

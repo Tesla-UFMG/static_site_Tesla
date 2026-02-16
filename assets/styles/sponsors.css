@@ -27,6 +27,10 @@
     border-top: 1px solid rgba(255,255,255,0.05);
 }
 
+body[data-ps-aberto="sim"] .section-patrocinios {
+    scroll-margin-top: calc(4rem + 40px);
+}
+
 /* --- TÍTULO --- */
 .titulo-patrocinios {
     color: var(--white-collor);
@@ -125,6 +129,9 @@
 /* --- RESPONSIVIDADE --- */
 @media screen and (max-width: 768px) {
     .section-patrocinios { padding: 5rem 1rem; }
+    body[data-ps-aberto="sim"] .section-patrocinios {
+        scroll-margin-top: calc(4rem + 60px);
+    }
     .logos-grid { gap: 1rem; }
     .logo-item {
         width: 45%; 

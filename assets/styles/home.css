@@ -1,5 +1,5 @@
 /* =========================================
-   SEÇÃO HOME (CORRIGIDO FINAL - MOBILE SVH)
+   SEÇÃO HOME (CORRIGIDO FINAL - BOTOES SIMETRICOS)
    ========================================= */
 
 .section-home {
@@ -85,16 +85,16 @@
     text-shadow: 0 0 10px var(--primary-collor);
 }
 
-.round:nth-child(1)  { left: 5%;   animation-duration: 9s;  animation-delay: 0s; }
-.round:nth-child(2)  { left: 15%;  animation-duration: 7s;  animation-delay: 4s; }
-.round:nth-child(3)  { left: 25%;  animation-duration: 10s; animation-delay: 2s; }
-.round:nth-child(4)  { left: 35%;  animation-duration: 8s;  animation-delay: 6s; }
-.round:nth-child(5)  { left: 45%;  animation-duration: 11s; animation-delay: 1s; }
-.round:nth-child(6)  { left: 55%;  animation-duration: 6s;  animation-delay: 3s; }
-.round:nth-child(7)  { left: 65%;  animation-duration: 9s;  animation-delay: 7s; }
-.round:nth-child(8)  { left: 75%;  animation-duration: 12s; animation-delay: 5s; }
-.round:nth-child(9)  { left: 85%;  animation-duration: 8s;  animation-delay: 2s; }
-.round:nth-child(10) { left: 95%;  animation-duration: 10s; animation-delay: 0s; }
+.round:nth-child(1)  { left: 5%;  animation-duration: 9s;  animation-delay: 0s; }
+.round:nth-child(2)  { left: 15%; animation-duration: 7s;  animation-delay: 4s; }
+.round:nth-child(3)  { left: 25%; animation-duration: 10s; animation-delay: 2s; }
+.round:nth-child(4)  { left: 35%; animation-duration: 8s;  animation-delay: 6s; }
+.round:nth-child(5)  { left: 45%; animation-duration: 11s; animation-delay: 1s; }
+.round:nth-child(6)  { left: 55%; animation-duration: 6s;  animation-delay: 3s; }
+.round:nth-child(7)  { left: 65%; animation-duration: 9s;  animation-delay: 7s; }
+.round:nth-child(8)  { left: 75%; animation-duration: 12s; animation-delay: 5s; }
+.round:nth-child(9)  { left: 85%; animation-duration: 8s;  animation-delay: 2s; }
+.round:nth-child(10) { left: 95%; animation-duration: 10s; animation-delay: 0s; }
 
 @keyframes animateDrop {
     0% { top: -10%; opacity: 0; transform: rotate(0deg); }
@@ -106,19 +106,14 @@
 /* --- 4. INDICADOR DE SCROLL (DEFAULT DESKTOP) --- */
 .scroll-indicator {
     position: absolute;
-    /* Posição Desktop (Calculado do TOPO) */
     top: calc(100lvh - 14rem); 
     left: 50%;
     transform: translateX(-50%);
-    
-    /* Z-Index aumentado para garantir visibilidade */
     z-index: 15; 
-    
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    
     opacity: 1;
     visibility: visible;
     transition: opacity 0.5s ease;
@@ -161,7 +156,6 @@
 .arrow-scroll span:nth-child(2) { animation-delay: -0.2s; }
 .arrow-scroll span:nth-child(3) { animation-delay: -0.4s; }
 
-/* Animações */
 @keyframes scrollWheel {
     0% { top: 8px; opacity: 1; height: 8px; }
     100% { top: 30px; opacity: 0; height: 4px; }
@@ -212,7 +206,7 @@
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-body[data-ps-aberto="sim"] .div-texto-home{
+body[data-ps-aberto="sim"] .div-texto-home {
     padding-top: calc(1rem + 40px); 
 }
 
@@ -263,24 +257,39 @@ body[data-ps-aberto="sim"] .div-texto-home{
     width: 100%;
 }
 
-/* --- 7. BOTÃO INSTAGRAM --- */
-.link-instagram {
-    text-decoration: none;
-    margin-top: 2rem;
-    display: inline-block;
+/* --- 7. BOTÕES SOCIAIS NA HOME (CORREÇÃO DEFINITIVA) --- */
+.redes-sociais-home {
+    display: flex !important;
+    flex-direction: row !important; /* Força ficar lado a lado */
+    flex-wrap: nowrap !important;
+    gap: 20px !important; /* Espaçamento forçado entre eles */
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.5rem;
+    width: 100%;
 }
 
+/* Os links que envolvem os botões */
+.redes-sociais-home a {
+    text-decoration: none;
+    display: block;
+    width: 200px !important; /* LARGURA FIXA E IDÊNTICA PARA OS DOIS */
+}
+
+/* A caixa visual do botão */
 .contatos-home {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    background-color: transparent;
+    width: 100%; 
+    box-sizing: border-box; /* Garante que padding não estique o botão */
     border: 2px solid var(--primary-collor);
     border-radius: 5px;
-    padding: 0.8rem 2.5rem;
+    padding: 0.8rem 1rem;
     color: var(--white-collor);
-    cursor: pointer;
+    background-color: rgba(13, 13, 13, 0.6);
+    backdrop-filter: blur(5px);
     transition: all 0.3s ease;
     box-shadow: 0 0 10px color-mix(in srgb, var(--primary-collor), transparent 90%);
 }
@@ -294,16 +303,30 @@ body[data-ps-aberto="sim"] .div-texto-home{
     transition: color 0.3s ease;
 }
 
-.contatos-home i { font-size: 1.2rem; transition: color 0.3s ease; }
+.contatos-home i { 
+    font-size: 1.3rem; 
+    transition: color 0.3s ease; 
+}
 
-.contatos-home:hover {
-    background-color: var(--primary-collor);
-    box-shadow: 0 0 30px color-mix(in srgb, var(--primary-collor), transparent 40%);
+/* HOVER: Instagram (Atua no PRIMEIRO botão independente da classe) */
+.redes-sociais-home a:first-child:hover .contatos-home {
+    background-color: #E1306C !important;
+    border-color: #E1306C !important;
+    box-shadow: 0 0 30px rgba(225, 48, 108, 0.5) !important;
     transform: translateY(-4px);
 }
 
-.contatos-home:hover p, .contatos-home:hover i {
-    color: var(--black-collor) !important;
+/* HOVER: LinkedIn (Atua no SEGUNDO botão independente da classe) */
+.redes-sociais-home a:last-child:hover .contatos-home {
+    background-color: #0077B5 !important;
+    border-color: #0077B5 !important;
+    box-shadow: 0 0 30px rgba(0, 119, 181, 0.5) !important;
+    transform: translateY(-4px);
+}
+
+.redes-sociais-home a:hover .contatos-home p, 
+.redes-sociais-home a:hover .contatos-home i {
+    color: var(--white-collor) !important;
     font-weight: 700;
 }
 
@@ -326,7 +349,6 @@ body[data-ps-aberto="sim"] .div-texto-home{
    9. ANIMAÇÃO DO GESTO (DEFINIÇÃO)
    ========================================= */
 
-/* Estilo Base da Mão */
 .hand-gesture {
     display: none; 
     width: 24px;
@@ -337,28 +359,11 @@ body[data-ps-aberto="sim"] .div-texto-home{
     opacity: 0;
 }
 
-/* Keyframes: Mão se movendo verticalmente */
 @keyframes handDragUpFlow {
-    0% {
-        transform: translateY(15px) scale(0.8);
-        opacity: 0;
-        background-color: transparent;
-    }
-    30% {
-        transform: translateY(15px) scale(1);
-        opacity: 1;
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-    70% {
-        transform: translateY(-5px) scale(1);
-        opacity: 1;
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-    100% {
-        transform: translateY(-10px) scale(0.8);
-        opacity: 0;
-        background-color: transparent;
-    }
+    0% { transform: translateY(15px) scale(0.8); opacity: 0; background-color: transparent; }
+    30% { transform: translateY(15px) scale(1); opacity: 1; background-color: rgba(255, 255, 255, 0.2); }
+    70% { transform: translateY(-5px) scale(1); opacity: 1; background-color: rgba(255, 255, 255, 0.2); }
+    100% { transform: translateY(-10px) scale(0.8); opacity: 0; background-color: transparent; }
 }
 
 /* =========================================
@@ -366,9 +371,9 @@ body[data-ps-aberto="sim"] .div-texto-home{
    ========================================= */
 
 @media screen and (max-width: 992px) {
-    /* Ajustes Gerais Mobile */
+    /* Ajustes Gerais Mobile/Tablet */
     .home-background {
-    background-image: url('../images/mobile_NK\ Mineirao\ desfocado.jpg');
+        background-image: url('../images/mobile_NK\ Mineirao\ desfocado.jpg');
     }
 
     .div-texto-home {
@@ -379,49 +384,33 @@ body[data-ps-aberto="sim"] .div-texto-home{
         padding-right: 1rem;
     }
 
-    .logo-home {
-        height: 90px; 
-        margin-top: 0; 
-        margin-bottom: 0.5rem;
-    }
-
+    .logo-home { height: 90px; margin-top: 0; margin-bottom: 0.5rem; }
     .titulo-texto-home { font-size: 2.2rem; }
     .subtitulo-texto-home { font-size: 1rem; }
     .texto-home-strong { font-size: 1.2rem; }
-
+    
     .subtitulo-texto-home-2 {
         font-size: 0.7rem;
         letter-spacing: 2px;
         line-height: 1.4;
         margin-top: 0.5rem;
     }
-    
-    .link-instagram { margin-top: 1.5rem; }
 
-    /* --- SCROLL INDICATOR MOBILE (SOLUÇÃO ROBUSTA) --- */
+    /* SCROLL INDICATOR MOBILE */
     .scroll-indicator {
-        /* USAMOS SVH (Small Viewport Height) */
-        /* Isso garante que 100svh seja a tela visível descontando barras */
-        /* Subtraímos 120px para dar margem do fundo da tela */
         top: calc(90svh - 120px); 
         bottom: auto; 
-        
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        
         opacity: 1;
         visibility: visible;
-        
-        /* Garante que não ultrapasse a largura da tela */
         max-width: 100vw;
     }
 
-    /* Esconde o Mouse */
     .scroll-indicator .mouse { display: none; }
-
-    /* Ativa a Mão */
+    
     .hand-gesture {
         display: block;
         margin-bottom: 12px; 
@@ -429,7 +418,23 @@ body[data-ps-aberto="sim"] .div-texto-home{
         opacity: 1;
     }
     
-    .scroll-indicator .arrow-scroll {
-        margin-top: 0;
+    .scroll-indicator .arrow-scroll { margin-top: 0; }
+}
+
+/* =========================================
+   11. EMPILHAMENTO DE BOTÕES SOMENTE NO CELULAR
+   ========================================= */
+@media screen and (max-width: 768px) {
+    body[data-ps-aberto="sim"] .div-texto-home {
+    padding-top: calc(1rem - 60px); 
+    }
+
+    .redes-sociais-home {
+        flex-direction: column !important; /* Aqui sim os botões vão um para baixo do outro */
+        gap: 15px !important;
+    }
+
+    .redes-sociais-home a {
+        width: 250px !important; /* Ficam um pouco mais largos para facilitar o clique no dedo */
     }
 }

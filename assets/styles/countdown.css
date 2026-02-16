@@ -19,6 +19,10 @@
     gap: 3rem; /* Espaço geral entre os blocos principais */
 }
 
+body[data-ps-aberto="sim"] .timer-competicao {
+    scroll-margin-top: calc(6rem + 40px);
+}
+
 /* --- 1. BLOCO DE CONQUISTAS & INOVAÇÕES --- */
 .conquistas-container {
     width: 90%;
@@ -367,6 +371,9 @@
 }
 
 @media screen and (max-width: 400px) {
+    body[data-ps-aberto="sim"] .timer-competicao {
+        scroll-margin-top: calc(6rem + 60px);
+    }
     #timer div {
         width: 40%;
         height: auto;

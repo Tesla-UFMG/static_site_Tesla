@@ -28,7 +28,7 @@
 .Navegacao-header {
     display: flex;
     justify-content: center;
-    align-items: center; /* <-- CORREÇÃO: Alinha todos os links e botões verticalmente ao centro */
+    align-items: center; 
     flex: 1;
     gap: 4rem;
 }
@@ -138,16 +138,18 @@
         height: calc(100vh - 90px); /* Ocupa a tela toda menos o header */
         visibility: visible;
         overflow-y: auto;
+        padding-top: 1rem; /* Dá um leve respiro no topo */
+        padding-bottom: 2rem; /* Garante que o último item não cole no fim da tela */
     }
 
-    /* Links no Mobile */
+    /* Links no Mobile (CORREÇÃO DE ESPAÇAMENTO) */
     .items-navegacao {
-        padding: 1.5rem 0;
-        margin: 0 2rem;
+        padding: 0.8rem 0; /* Reduzido de 1.5rem para encurtar a altura do menu */
+        margin: 0 1.5rem; /* Margem lateral ligeiramente menor */
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         display: block;
         text-align: center;
-        font-size: 1.2rem;
+        font-size: 1.05rem; /* Fonte levemente menor para caber melhor */
         font-family: "Conthrax", sans-serif;
     }
 
@@ -190,7 +192,7 @@ body[data-ps-aberto="sim"] .ps-banner-global {
 
 body[data-ps-aberto="sim"] .ps-menu-btn {
     display: flex;
-    align-items: center; /* <-- CORREÇÃO: Garante o texto do botão centralizado */
+    align-items: center; 
     justify-content: center;
 }
 
@@ -290,22 +292,44 @@ body[data-ps-aberto="sim"] .header {
     100% { transform: scale(0.95); opacity: 0.8; }
 }
 
-/* --- RESPONSIVIDADE PARA O BANNER --- */
+/* --- RESPONSIVIDADE PARA O BANNER E MENU --- */
 @media screen and (max-width: 768px) {
+    
+    /* Aumenta o distanciamento do Header para caber as duas linhas do banner */
+    body[data-ps-aberto="sim"] .header {
+        top: 60px; 
+    }
+
+    /* O banner dobra de altura e permite quebra de linha */
+    .ps-banner-global {
+        height: 60px;
+        padding: 5px;
+    }
+
     .ps-banner-content {
-        font-size: 0.7rem;
-        gap: 8px;
+        flex-wrap: wrap; /* CORREÇÃO: Permite que texto e botão formem 2 linhas */
+        justify-content: center;
+        gap: 2px 8px; /* Distância entre as linhas */
     }
+
     .ps-banner-content p {
-        display: none; /* No mobile, escondemos o texto longo e deixamos só o botão e o ponto vermelho */
+        display: block; /* CORREÇÃO: Volta a exibir o texto */
+        font-size: 0.65rem;
+        text-align: center;
     }
+
     .ps-btn-banner {
-        font-size: 0.8rem;
-        padding: 6px 15px;
+        font-size: 0.7rem;
+        padding: 4px 15px;
+        margin-top: 2px;
     }
+    
+    /* Melhoria no botão dentro do menu hambúrguer */
     .ps-menu-btn {
-        margin-left: 0;
+        margin-left: auto;
+        margin-right: auto;
         margin-top: 1rem;
+        width: 80%; /* O botão do PS ganha largura para se destacar como a ação principal */
         text-align: center;
         justify-content: center;
     }
