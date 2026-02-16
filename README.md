@@ -1,4 +1,4 @@
-# 🏎️ Fórmula Tesla UFMG - Website Oficial
+# 🏎️⚡🐍💚 Fórmula Tesla UFMG - Website Oficial
 
 ![Status](https://img.shields.io/badge/Status-Ativo-success)
 ![Versão](https://img.shields.io/badge/Vers%C3%A3o-1.0-blue)
