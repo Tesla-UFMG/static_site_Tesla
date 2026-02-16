@@ -1,5 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+    // --- VARIÁVEL DE CORREÇÃO DE NAVEGAÇÃO ---
+    // Trava para impedir o Snap de funcionar enquanto a tela rola até uma seção
+    let isNavigating = false;
+    let navTimeout;
+
+    // Adiciona o evento de clique a todos os links internos (que começam com #)
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', () => {
+            isNavigating = true; // Ativa a trava
+            clearTimeout(navTimeout);
+            
+            // Libera o Snap após 1.5 segundos (tempo suficiente do scroll suave do CSS)
+            navTimeout = setTimeout(() => { 
+                isNavigating = false; 
+            }, 1500);
+        });
+    });
+
     // =================================================================
     // 1. LÓGICA DE DESTAQUE NO MENU (SCROLL SPY)
     // =================================================================
@@ -8,33 +26,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerElement = document.querySelector('.header');
 
     function highlightMenu() {
-        // Recalcula altura do header (importante no mobile)
         const headerOffset = headerElement ? headerElement.offsetHeight : 100;
         let current = '';
         
-        // A. Descobre qual seção está na tela
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            
-            // Verifica se o scroll passou do topo da seção (com folga de 150px)
             if (window.scrollY >= (sectionTop - headerOffset - 150)) {
                 current = section.getAttribute('id');
             }
         });
 
-        // B. Correção para o TOPO absoluto (Home)
         if (window.scrollY < 100) { 
             current = 'home';
         }
         
-        // C. Correção para o FIM da página (Contato/Footer)
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
             if(sections.length > 0) {
                  current = sections[sections.length - 1].getAttribute('id');
             }
         }
 
-        // D. Aplica a classe active
         navLinks.forEach(link => {
             link.classList.remove('active');
             const href = link.getAttribute('href');
@@ -95,33 +106,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. SCROLL SNAP INTELIGENTE (HERO SECTION - ALTA SENSIBILIDADE)
     // =================================================================
     let lastScrollTop = 0;
-    let isAnimating = false; // Trava para não encavalar animações
-
-    // Variável para armazenar o timeout e poder limpar se necessário
+    let isAnimating = false; 
     let animationTimeout; 
 
     window.addEventListener('scroll', () => {
         const currentScroll = window.scrollY;
         const heroHeight = window.innerHeight;
         
-        // A. Detecta direção
-        // Proteção contra valores negativos (iOS bounce effect)
         const safeCurrentScroll = Math.max(0, currentScroll);
         const direction = safeCurrentScroll > lastScrollTop ? 'down' : 'up';
         
-        // Atualiza lastScrollTop apenas se não estivermos na zona de bounce negativo
         if (safeCurrentScroll >= 0) {
             lastScrollTop = safeCurrentScroll;
         }
 
-        // B. Se a animação estiver rodando, IGNORA input
-        if (isAnimating) return;
+        // ===========================================================
+        // A SOLUÇÃO: Se estiver animando OU o usuário tiver clicado 
+        // em um link do menu (isNavigating), o Snap é ignorado.
+        // ===========================================================
+        if (isAnimating || isNavigating) return;
 
-        // C. Lógica do SNAP (Apenas na área da Home: 0 até 100vh)
         if (currentScroll < heroHeight) {
 
             // --- CENÁRIO 1: Descendo (Snap Down) ---
-            // Alterado: Reduzido o limiar de 10px para 5px (mais sensível)
             if (direction === 'down' && currentScroll > 5 && currentScroll < (heroHeight - 5)) {
                 
                 isAnimating = true;
@@ -131,14 +138,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     behavior: 'smooth'
                 });
 
-                // Limpa timeout anterior se existir
                 clearTimeout(animationTimeout);
                 animationTimeout = setTimeout(() => { isAnimating = false; }, 800);
             } 
             
             // --- CENÁRIO 2: Subindo (Snap Up) ---
-            // Alterado: Reduzido a margem de retorno. 
-            // Antes precisava subir 20px, agora basta subir 5px (heroHeight - 5)
             else if (direction === 'up' && currentScroll < (heroHeight - 5) && currentScroll > 5) {
                 
                 isAnimating = true;
@@ -148,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     behavior: 'smooth'
                 });
 
-                // Limpa timeout anterior se existir
                 clearTimeout(animationTimeout);
                 animationTimeout = setTimeout(() => { isAnimating = false; }, 800);
             }
