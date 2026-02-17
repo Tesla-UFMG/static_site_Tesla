@@ -41,8 +41,10 @@
 
 .items-navegacao {
     color: var(--white-collor);
-    font-size: 1.2rem;
+    font-size: 1rem; /* Ajustado para compensar o uppercase */
     text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
     transition: all 0.2s;
 }
 
@@ -105,7 +107,6 @@
    SISTEMA DE PROCESSO SELETIVO (BANNER)
    ========================================= */
 
-/* Visibilidade condicionada ao data-attribute 'data-ps-aberto' no body */
 .ps-banner-global, 
 .ps-menu-btn {
     display: none; 
@@ -180,7 +181,6 @@ body[data-ps-aberto="sim"] .header {
     transform: scale(1.05);
 }
 
-/* Botão de destaque integrado à navegação */
 .ps-menu-btn {
     color: var(--primary-collor) !important;
     border: 1px solid var(--primary-collor);
@@ -226,7 +226,6 @@ body[data-ps-aberto="sim"] .header {
         z-index: 2000;
     }
 
-    /* Interface de Menu Overlay Mobile */
     .Navegacao-header {
         display: block;
         position: absolute;
@@ -266,7 +265,6 @@ body[data-ps-aberto="sim"] .header {
         padding-left: 10px;
     }
 
-    /* Transformação do ícone hambúrguer em 'X' no estado ativo */
     .Navegacao-header.active ~ #btn-mobile #hamburguer {
         border-top-color: transparent;
     }
