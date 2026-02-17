@@ -23,11 +23,12 @@
 
 /* --- ELEMENTOS DE IDENTIDADE --- */
 .logo {
-    flex: 1; 
+    flex: 0 0 auto;
 }
 
 .logo-image {
     width: 4rem;
+    display: block;
 }
 
 /* --- NAVEGAÇÃO PRINCIPAL (DESKTOP) --- */
@@ -37,19 +38,23 @@
     align-items: center; 
     flex: 1;
     gap: 4rem;
+    transition: gap 0.3s ease;
 }
 
+/* Ajuste dinâmico quando o Processo Seletivo está ativo */
 body[data-ps-aberto="sim"] .Navegacao-header {
-    gap: 2rem; 
+    gap: clamp(1rem, 2vw, 2.5rem); 
+    transition: gap 0.3s ease;
 }
 
 .items-navegacao {
     color: var(--white-collor);
-    font-size: 1rem; /* Ajustado para compensar o uppercase */
+    font-size: 1rem;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     transition: all 0.2s;
+    white-space: nowrap; /* Segurança contra quebra de linha */
 }
 
 .items-navegacao:hover {
@@ -81,14 +86,13 @@ body[data-ps-aberto="sim"] .Navegacao-header {
 }
 
 /* =========================================
-   SISTEMA DE MENU MÓVEL (HAMPBURGUER)
+   SISTEMA DE MENU MÓVEL (HAMBURGUER)
    ========================================= */
 
 #btn-mobile {
     display: none;
 }
 
-/* Desenho técnico das linhas do componente hambúrguer */
 #hamburguer {
     display: block;
     border-top: 2px solid var(--primary-collor);
@@ -124,9 +128,9 @@ body[data-ps-aberto="sim"] .ps-menu-btn {
     display: flex;
     align-items: center; 
     justify-content: center;
+    white-space: nowrap; /* Impede quebra de linha no botão */
 }
 
-/* Deslocamento do Header para acomodação do banner superior */
 body[data-ps-aberto="sim"] .header {
     top: 40px; 
 }
@@ -155,7 +159,6 @@ body[data-ps-aberto="sim"] .header {
     letter-spacing: 1px;
 }
 
-/* Ponto pulsante de status ativo */
 .ps-pulse-dot {
     width: 10px;
     height: 10px;
@@ -213,7 +216,8 @@ body[data-ps-aberto="sim"] .header {
    REGRAS DE RESPONSIVIDADE (MEDIA QUERIES)
    ========================================= */
 
-@media (max-width: 900px) {
+/* Breakpoint ajustado para 1080px para evitar conflito visual em laptops */
+@media (max-width: 1080px) {
     .header {
         padding: 0 1.5rem;
     }
@@ -234,7 +238,7 @@ body[data-ps-aberto="sim"] .header {
         display: block;
         position: absolute;
         width: 100%;
-        top: 90px;
+        top: 6rem;
         right: 0;
         background: rgba(13, 13, 13, 0.98);
         backdrop-filter: blur(10px);
@@ -247,7 +251,7 @@ body[data-ps-aberto="sim"] .header {
     }
 
     .Navegacao-header.active {
-        height: calc(100vh - 90px);
+        height: calc(100vh - 6rem);
         visibility: visible;
         overflow-y: auto;
         padding-top: 1rem;
@@ -262,11 +266,6 @@ body[data-ps-aberto="sim"] .header {
         text-align: center;
         font-size: 1.05rem;
         font-family: "Conthrax", sans-serif;
-    }
-
-    .items-navegacao:hover {
-        background: rgba(55, 211, 102, 0.1);
-        padding-left: 10px;
     }
 
     .Navegacao-header.active ~ #btn-mobile #hamburguer {
