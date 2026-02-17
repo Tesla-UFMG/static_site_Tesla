@@ -1,5 +1,5 @@
 /* =========================================
-   SEÇÃO EQUIPE (FINAL - LIMPA)
+   SEÇÃO EQUIPE (FINAL - COM TRAVA "EM BREVE")
    ========================================= */
 
 :root {
@@ -11,16 +11,9 @@
 
 .section-equipe {
     scroll-margin-top: 4rem;
-    
-    /* Altura automática para evitar buracos */
     min-height: auto; 
-    
-    /* Padding ajustado */
     padding: 6rem 1rem 6rem 1rem;
-    
-    /* Fundo ajustado */
     background: radial-gradient(circle at center, #1a1a1a 0%, var(--black-collor) 100%);
-    
     text-align: center;
     display: flex;
     justify-content: center;
@@ -30,17 +23,13 @@
     overflow: hidden;
     width: 100%;
     z-index: 20; 
-    
-    /* Mantive apenas a sombra suave, removi a linha vertical */
     box-shadow: 0 -20px 60px rgba(0,0,0, 0.9);
-    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Borda muito sutil, quase invisível */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 body[data-ps-aberto="sim"] .section-equipe {
     scroll-margin-top: calc(4rem + 40px);
 }
-
-/* REMOVIDO O BLOCO .section-equipe::before QUE CAUSAVA A "PONTA" */
 
 /* --- TÍTULO --- */
 .titulo-equipe {
@@ -94,7 +83,6 @@ body[data-ps-aberto="sim"] .section-equipe {
     -webkit-tap-highlight-color: transparent; 
 }
 
-/* Lógica de Giro */
 .card.flipped { transform: rotateY(180deg); }
 
 @media (hover: hover) and (pointer: fine) {
@@ -102,7 +90,6 @@ body[data-ps-aberto="sim"] .section-equipe {
     .card-container:hover .card-icon-front { transform: scale(1.1); }
 }
 
-/* Estilos Comuns */
 .card-front, .card-back {
     padding: 1.5rem;
     position: absolute;
@@ -120,7 +107,6 @@ body[data-ps-aberto="sim"] .section-equipe {
     box-sizing: border-box;
 }
 
-/* FRENTE */
 .card-front {
     background: rgba(20, 20, 20, 0.95);
     border-top: 3px solid var(--primary-collor);
@@ -171,7 +157,6 @@ body[data-ps-aberto="sim"] .section-equipe {
     text-shadow: 0 0 5px rgba(54, 211, 102, 0.3);
 }
 
-/* VERSO */
 .card-back {
     background: linear-gradient(135deg, rgba(20, 20, 20, 0.98), #0d0d0d);
     transform: rotateY(180deg); 
@@ -219,8 +204,9 @@ body[data-ps-aberto="sim"] .section-equipe {
 
 .sub-tag { font-size: 0.7rem; color: #888; margin-left: auto; }
 
-/* BOTÃO */
+/* --- BOTÃO COM TRAVA "EM BREVE" --- */
 .btn-saiba-equipe {
+    position: relative;
     margin-top: 3rem;
     text-decoration: none;
     font-family: "Conthrax", sans-serif;
@@ -233,12 +219,29 @@ body[data-ps-aberto="sim"] .section-equipe {
     transition: all 0.3s ease;
     text-align: center;
     display: inline-block;
+    overflow: hidden;
+    min-width: 280px; /* Estabilidade para a troca de texto */
+    cursor: default;
 }
 
 .btn-saiba-equipe:hover {
-    background: var(--primary-collor);
-    color: var(--black-collor);
-    box-shadow: 0 0 20px rgba(55, 211, 102, 0.5);
+    background: #222;
+    border-color: #444;
+    color: transparent; /* Esconde o texto original */
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* Pseudo-elemento para o texto de substituição */
+.btn-saiba-equipe:hover::before {
+    content: attr(data-hover);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
     font-weight: 700;
 }
 
@@ -280,5 +283,12 @@ body[data-ps-aberto="sim"] .section-equipe {
     .card-back li i { font-size: 0.7rem; width: 15px; margin-right: 3px; }
     .sub-tag { font-size: 0.5rem; }
     
-    .btn-saiba-equipe { width: 100%; max-width: 300px; padding: 1rem; font-size: 1rem; margin-top: 2rem; }
+    .btn-saiba-equipe { 
+        width: 100%; 
+        max-width: 300px; 
+        padding: 1rem; 
+        font-size: 1rem; 
+        margin-top: 2rem;
+        min-width: unset; 
+    }
 }

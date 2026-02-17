@@ -1,8 +1,7 @@
 /* =========================================
-   SEÇÃO SOBRE NÓS (PREPARADA PARA JS)
+   SEÇÃO SOBRE NÓS (FINAL - COM EFEITO EM BREVE)
    ========================================= */
 
-/* Variáveis (Garantindo que existam) */
 :root {
     --primary-collor: rgb(54, 211, 102, 1);
     --black-collor: #0b0b0b;
@@ -12,35 +11,29 @@
 .section-sobre {
     position: relative; 
     min-height: 100vh;
-    
-    /* Compensação para o menu fixo */
     scroll-margin-top: 4rem;
-    
-    /* Espaçamento interno */
     padding: 5rem 2rem 10rem 2rem; 
     
-    /* BACKGROUND */
     background-image: 
         linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
         url('../images/equipe/equipe2025-2.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Parallax Desktop */
+    background-attachment: fixed;
     
     display: flex;
     flex-direction: column;
     align-items: center;
-    
     z-index: 5; 
     background-color: var(--black-collor); 
 }
 
+/* Ajuste para quando o Processo Seletivo está aberto */
 body[data-ps-aberto="sim"] .section-sobre {
     scroll-margin-top: calc(4rem + 40px);
 }
 
-/* Efeito de fusão com a seção de baixo */
 .section-sobre::after {
     content: '';
     position: absolute;
@@ -95,15 +88,12 @@ body[data-ps-aberto="sim"] .section-sobre {
     width: 35rem;
     flex: 1;
     min-width: 300px;
-    
     background-color: rgba(13, 13, 13, 0.85);
     backdrop-filter: blur(10px);
     border-left: 5px solid var(--primary-collor);
     border-radius: 0 10px 10px 0;
-    
     padding: 2.5rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -120,7 +110,6 @@ body[data-ps-aberto="sim"] .section-sobre {
     margin: 0;
 }
 
-/* Destaques no Texto */
 .tech-highlight {
     color: var(--primary-collor);
     font-weight: 600;
@@ -140,39 +129,56 @@ body[data-ps-aberto="sim"] .section-sobre {
     margin: 0 -4px;
 }
 
-/* Botão */
+/* --- BOTÃO COM EFEITO DINÂMICO "EM BREVE" --- */
 .btn-texto-sobre {
+    position: relative;
     align-self: flex-start;
     background-color: transparent;
     border: 2px solid var(--primary-collor);
     color: var(--white-collor);
     padding: 0.8rem 2rem;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: default;
     font-family: "Conthrax", sans-serif;
     font-size: 1rem;
     font-weight: 500;
     letter-spacing: 1px;
     text-decoration: none;
     transition: all 0.3s ease;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+    min-width: 220px; /* Garante estabilidade na troca de texto */
 }
 
 .btn-texto-sobre:hover {
-    background-color: var(--primary-collor);
-    color: var(--black-collor);
-    box-shadow: 0 0 20px rgba(55, 211, 102, 0.4);
+    background-color: #222; /* Fundo escuro neutro */
+    border-color: #444; /* Borda apagada */
+    color: transparent; /* Esconde o texto original para o pseudo-elemento aparecer */
+    cursor: not-allowed;
+    box-shadow: none;
+
+}
+
+/* Substituição de texto via Pseudo-elemento */
+.btn-texto-sobre:hover::before {
+    content: attr(data-hover);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888; /* Cinza claro para indicar inatividade */
     font-weight: 700;
 }
 
-/* --- CARROSSEL (ESTRUTURA PARA JS) --- */
+/* --- CARROSSEL --- */
 .carrossel-sobre {
     width: 30rem;
     height: 20rem;
     max-width: 100%;
-    
-    /* Essencial: Esconde as imagens que estão "na fila" */
     overflow: hidden; 
-    
     border-radius: 10px;
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -180,23 +186,18 @@ body[data-ps-aberto="sim"] .section-sobre {
 }
 
 .carrossel-imagens {
-    display: flex; /* Coloca as imagens lado a lado */
+    display: flex;
     width: 100%;
     height: 100%;
-    
-    /* O JS vai manipular o 'transform' aqui */
-    /* Não colocamos transition aqui para poder controlar o "reset" pelo JS */
 }
 
 .carrossel-item {
-    /* OBRIGATÓRIO: Garante que cada imagem ocupe 100% da largura do container */
     flex: 0 0 100%; 
     min-width: 100%; 
     height: 100%;
     position: relative;
 }
 
-/* Gradiente sobre a foto para estilo */
 .carrossel-item::before {
     content: "";
     position: absolute;
@@ -208,7 +209,7 @@ body[data-ps-aberto="sim"] .section-sobre {
 .carrossel-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Garante que a imagem preencha sem distorcer */
+    object-fit: cover;
     display: block;
 }
 
@@ -216,7 +217,7 @@ body[data-ps-aberto="sim"] .section-sobre {
 @media screen and (max-width: 900px) {
     .section-sobre {
         padding: 4rem 1rem 8rem 1rem;
-        background-attachment: scroll !important; /* Desativa parallax no mobile */
+        background-attachment: scroll !important;
         background-position: center top;
     }
 
@@ -225,7 +226,7 @@ body[data-ps-aberto="sim"] .section-sobre {
     }   
 
     .conteudo-sobre {
-        flex-direction: column-reverse; /* Imagem em cima, texto em baixo */
+        flex-direction: column-reverse;
         gap: 2rem;
     }
     
