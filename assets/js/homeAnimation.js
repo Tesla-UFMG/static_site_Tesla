@@ -1,25 +1,33 @@
+/* =========================================
+   SISTEMA DE EFEITOS VISUAIS - SEÇÃO HOME
+   ========================================= */
+
 document.addEventListener("DOMContentLoaded", () => {
     const overlay = document.querySelector(".home-overlay");
-    const sectionHome = document.querySelector(".section-home");
 
+    /**
+     * Listener de rolagem para gerenciamento de efeitos de transição:
+     * Calcula a opacidade da camada de overlay baseada no deslocamento
+     * vertical (scrollY) dentro da primeira seção (100vh).
+     */
     window.addEventListener("scroll", () => {
-        // Pega a altura da janela (viewport)
         const windowHeight = window.innerHeight;
-        // Pega quanto o usuário já rolou
         const scrollY = window.scrollY;
 
-        // Calcula a opacidade baseada na rolagem da PRIMEIRA tela (0 a 100vh)
-        // Se rolou 0px, opacity = 0
-        // Se rolou a altura da tela inteira, opacity = 1
+        /**
+         * Cálculo de proporção:
+         * 0px de scroll = 0% de opacidade
+         * windowHeight de scroll = 100% de opacidade
+         */
         let opacity = scrollY / windowHeight;
 
-        // Limita a opacidade entre 0 e 1 para não quebrar
+        // Normalização do valor entre os limites de 0 e 1
         if (opacity > 1) opacity = 1;
         if (opacity < 0) opacity = 0;
 
-        // Aplica o efeito
+        // Aplicação dinâmica da propriedade de estilo
         if (overlay) {
             overlay.style.opacity = opacity;
         }
-    });
+    }, { passive: true }); // Otimização de performance para scroll
 });

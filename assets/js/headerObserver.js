@@ -1,30 +1,38 @@
+/* =========================================
+   GERENCIAMENTO DE INTERAÇÃO E NAVEGAÇÃO - HEADER
+   ========================================= */
+
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- VARIÁVEL DE CORREÇÃO DE NAVEGAÇÃO ---
-    // Trava para impedir o Snap de funcionar enquanto a tela rola até uma seção
+    // --- ESTADO DE CONTROLE DE NAVEGAÇÃO ---
     let isNavigating = false;
     let navTimeout;
 
-    // Adiciona o evento de clique a todos os links internos (que começam com #)
+    /**
+     * Listener para links internos:
+     * Gerencia a trava de navegação para evitar conflitos entre 
+     * o scroll suave do navegador e a lógica de Scroll Snap.
+     */
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', () => {
-            isNavigating = true; // Ativa a trava
+            isNavigating = true; 
             clearTimeout(navTimeout);
             
-            // Libera o Snap após 1.5 segundos (tempo suficiente do scroll suave do CSS)
             navTimeout = setTimeout(() => { 
                 isNavigating = false; 
             }, 1500);
         });
     });
 
-    // =================================================================
-    // 1. LÓGICA DE DESTAQUE NO MENU (SCROLL SPY)
-    // =================================================================
+    // --- 1. LÓGICA DE DESTAQUE NO MENU (SCROLL SPY) ---
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.items-navegacao');
     const headerElement = document.querySelector('.header');
 
+    /**
+     * Atualiza a classe 'active' nos links de navegação baseada 
+     * na posição vertical (scrollY) do documento.
+     */
     function highlightMenu() {
         const headerOffset = headerElement ? headerElement.offsetHeight : 100;
         let current = '';
@@ -36,10 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Caso base: topo da página
         if (window.scrollY < 100) { 
             current = 'home';
         }
         
+        // Caso base: final da página (Footer/Última Seção)
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
             if(sections.length > 0) {
                  current = sections[sections.length - 1].getAttribute('id');
@@ -59,9 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', highlightMenu);
 
 
-    // =================================================================
-    // 2. CLIQUE NO BOTÃO "INÍCIO" E LOGO
-    // =================================================================
+    // --- 2. CONTROLE DE NAVEGAÇÃO DA LOGO E BOTÃO INÍCIO ---
     const homeLinks = document.querySelectorAll('a[href="#home"]');
 
     if (homeLinks.length > 0) {
@@ -74,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     behavior: 'smooth'
                 });
 
+                // Fechamento automático do menu mobile se a função existir
                 if (typeof toggleMenu === 'function') {
                     const nav = document.getElementById('nav');
                     if (nav && nav.classList.contains('active')) {
@@ -85,9 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =================================================================
-    // 3. ANIMAÇÃO DE ENTRADA DO TEXTO (OBSERVER)
-    // =================================================================
+    // --- 3. OBSERVAÇÃO DE INTERSECÇÃO (ANIMAÇÃO DE TEXTO) ---
     const textContainer = document.querySelector('.div-texto-home');
     if(textContainer) {
         const observer = new IntersectionObserver((entries) => {
@@ -102,13 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =================================================================
-    // 4. SCROLL SNAP INTELIGENTE (HERO SECTION - ALTA SENSIBILIDADE)
-    // =================================================================
+    // --- 4. LÓGICA DE SCROLL SNAP (SEÇÃO HERO) ---
     let lastScrollTop = 0;
     let isAnimating = false; 
     let animationTimeout; 
 
+    /**
+     * Monitora o scroll na Hero Section para forçar o enquadramento 
+     * (Snap) para o topo ou para o início da segunda seção.
+     */
     window.addEventListener('scroll', () => {
         const currentScroll = window.scrollY;
         const heroHeight = window.innerHeight;
@@ -120,15 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
             lastScrollTop = safeCurrentScroll;
         }
 
-        // ===========================================================
-        // A SOLUÇÃO: Se estiver animando OU o usuário tiver clicado 
-        // em um link do menu (isNavigating), o Snap é ignorado.
-        // ===========================================================
+        // Bloqueio de execução durante animações ativas ou navegação via menu
         if (isAnimating || isNavigating) return;
 
         if (currentScroll < heroHeight) {
 
-            // --- CENÁRIO 1: Descendo (Snap Down) ---
+            // Condição: Deslocamento descendente inicial
             if (direction === 'down' && currentScroll > 5 && currentScroll < (heroHeight - 5)) {
                 
                 isAnimating = true;
@@ -142,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 animationTimeout = setTimeout(() => { isAnimating = false; }, 800);
             } 
             
-            // --- CENÁRIO 2: Subindo (Snap Up) ---
+            // Condição: Retorno ascendente à Hero Section
             else if (direction === 'up' && currentScroll < (heroHeight - 5) && currentScroll > 5) {
                 
                 isAnimating = true;

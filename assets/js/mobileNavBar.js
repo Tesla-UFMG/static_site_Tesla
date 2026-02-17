@@ -1,14 +1,31 @@
+/* =========================================
+   SISTEMA DE NAVEGAÇÃO MÓVEL (MENU OVERLAY)
+   ========================================= */
+
 const btnMobile = document.getElementById('btn-mobile');
 
+/**
+ * Gerencia a visibilidade do menu de navegação em dispositivos móveis.
+ * @param {Event} event - Objeto de evento do disparador (click ou touchstart).
+ */
 function toggleMenu(event) {
-    if (event && event.type === 'touchstart') event.preventDefault();
+    /**
+     * Prevenção de 'ghost clicks' em dispositivos sensíveis ao toque:
+     * Impede a execução duplicada do evento em disparadores híbridos.
+     */
+    if (event && event.type === 'touchstart') {
+        event.preventDefault();
+    }
     
     const nav = document.getElementById('nav');
     
-    // Adiciona ou remove a classe 'active'
+    // Alternância da classe de controle de visibilidade
     nav.classList.toggle('active');
     
-    // Acessibilidade: atualiza o atributo aria-expanded
+    /**
+     * Gerenciamento de Acessibilidade (ARIA):
+     * Atualiza o estado do menu para tecnologias assistivas.
+     */
     const active = nav.classList.contains('active');
     btnMobile.setAttribute('aria-expanded', active);
     
@@ -19,5 +36,8 @@ function toggleMenu(event) {
     }
 }
 
-btnMobile.addEventListener('click', toggleMenu);
-btnMobile.addEventListener('touchstart', toggleMenu);
+// Registro de listeners para interação multiplataforma
+if (btnMobile) {
+    btnMobile.addEventListener('click', toggleMenu);
+    btnMobile.addEventListener('touchstart', toggleMenu);
+}

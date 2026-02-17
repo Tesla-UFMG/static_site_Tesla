@@ -1,10 +1,17 @@
+/* =========================================
+   SISTEMA DE NAVEGAÇÃO E SCROLL - TIMELINE
+   ========================================= */
+
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('.timeline-item');
     const navLinks = document.querySelectorAll('.timeline-nav a');
     const navList = document.querySelector('.timeline-nav ul');
     const navContainer = document.querySelector('.timeline-nav');
 
-    // 1. Função para centralizar o botão do ano na barra de navegação (Horizontal)
+    /**
+     * Centraliza horizontalmente o item ativo dentro da barra de navegação.
+     * @param {HTMLElement} activeLink - O elemento de link que recebeu a classe ativa.
+     */
     const centerActiveItem = (activeLink) => {
         if (navList.scrollWidth > navList.clientWidth) {
             const scrollLeft = activeLink.offsetLeft - (navList.clientWidth / 2) + (activeLink.offsetWidth / 2);
@@ -12,29 +19,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // 2. Lógica de CLIQUE nos links (Onde arrumamos o scroll da página)
+    /**
+     * Listener para eventos de clique nos links da timeline.
+     * Calcula o posicionamento vertical para centralizar a seção alvo na viewport.
+     */
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault(); // Impede o pulo padrão seco
+            e.preventDefault(); 
             
             const targetId = link.getAttribute('href');
             const targetSection = document.querySelector(targetId);
 
             if (targetSection) {
-                // MATEMÁTICA DA CENTRALIZAÇÃO VERTICAL
-                // Pega a altura da janela (viewport)
                 const windowHeight = window.innerHeight;
-                // Pega a altura do item (carro + texto)
                 const elementHeight = targetSection.offsetHeight;
-                // Pega a posição do topo do elemento em relação ao topo do documento
                 const elementTop = targetSection.getBoundingClientRect().top + window.pageYOffset;
 
-                // Cálculo: Topo do Elemento - (Metade da Tela) + (Metade do Elemento)
-                // Isso coloca o meio do elemento no meio da tela
+                /**
+                 * Cálculo de centralização vertical:
+                 * Posiciona o centro geométrico do elemento no centro da tela.
+                 */
                 let offsetPosition = elementTop - (windowHeight / 2) + (elementHeight / 2);
-
-                // Ajuste fino opcional (se tiver header fixo muito grande, pode subtrair mais um pouco)
-                // offsetPosition = offsetPosition - 20; 
 
                 window.scrollTo({
                     top: offsetPosition,
@@ -44,10 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Scroll Spy (Observer) - Mantém a barra sincronizada com o scroll
+    /**
+     * Configuração do IntersectionObserver para detecção da seção ativa (Scroll Spy).
+     * Define uma margem de detecção centralizada para disparar a atualização do menu.
+     */
     const observerOptions = {
         root: null,
-        rootMargin: '-45% 0px -45% 0px', // Área ativa bem no meio da tela
+        rootMargin: '-45% 0px -45% 0px', 
         threshold: 0
     };
 
@@ -61,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (activeLink) {
                     activeLink.classList.add('active');
-                    centerActiveItem(activeLink); // Centraliza o botão na barra
+                    centerActiveItem(activeLink); 
                 }
             }
         });
@@ -71,7 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
-    // 4. Mostrar/Esconder a barra inteira
+    /**
+     * Gerenciamento de visibilidade do container de navegação.
+     * Ativa a exibição apenas quando o usuário está dentro dos limites da seção de timeline.
+     */
     const timelineSection = document.querySelector('.timeline-section');
     if(timelineSection) {
         const navObserver = new IntersectionObserver((entries) => {

@@ -1,16 +1,24 @@
+/* =========================================
+   LÓGICA DE INTERAÇÃO - COMPONENTES (CARDS)
+   ========================================= */
+
 document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.card');
 
     cards.forEach(card => {
         card.addEventListener('click', function() {
-            // 1. Verifica se o card clicado JÁ ESTÁ virado
+            /**
+             * Gerenciamento de estado dos cards (Flip Effect):
+             * 1. Armazena o estado atual do elemento clicado.
+             * 2. Reseta o estado de todos os cards para a posição inicial.
+             * 3. Alterna o estado do card clicado apenas se ele não estiver ativo.
+             */
             const isCardActive = this.classList.contains('flipped');
 
-            // 2. Remove a classe 'flipped' de TODOS os cards (reseta tudo)
+            // Reset global da classe de rotação
             cards.forEach(c => c.classList.remove('flipped'));
 
-            // 3. Se o card NÃO estava virado antes, adiciona a classe.
-            // (Se ele já estava virado, o passo 2 já fechou ele, e aqui não fazemos nada, então ele continua fechado).
+            // Aplicação da rotação baseada no estado prévio
             if (!isCardActive) {
                 this.classList.add('flipped');
             }

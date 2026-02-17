@@ -1,23 +1,39 @@
+/* =========================================
+   SISTEMA DE NAVEGAÇÃO - DASHBOARD DE COMPETIÇÃO
+   ========================================= */
+
+/**
+ * Controla a alternância de abas do dashboard.
+ * @param {string} tabId - ID do elemento de conteúdo a ser exibido.
+ * @param {HTMLElement} btnElement - O elemento do botão que disparou o evento.
+ */
 function activateTab(tabId, btnElement) {
-    // 1. Remove a classe 'active' de todos os botões
+    
+    // Reset de estado dos controladores (botões)
     document.querySelectorAll('.prova-btn').forEach(btn => {
         btn.classList.remove('active');
     });
 
-    // 2. Adiciona a classe 'active' no botão clicado
+    // Ativação do controlador selecionado
     btnElement.classList.add('active');
 
-    // 3. Esconde todos os conteúdos
+    // Reset de visibilidade dos containers de conteúdo
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
-        content.style.display = 'none'; // Garante que suma
+        content.style.display = 'none'; 
     });
 
-    // 4. Mostra o conteúdo alvo
+    // Ativação e renderização do conteúdo alvo
     const target = document.getElementById(tabId);
-    target.style.display = 'flex';
-    // Pequeno delay para permitir a transição de opacidade (fade in)
-    setTimeout(() => {
-        target.classList.add('active');
-    }, 10);
+    if (target) {
+        target.style.display = 'flex';
+        
+        /**
+         * Execução assíncrona para garantir a aplicação das propriedades 
+         * de transição CSS após a alteração do display.
+         */
+        setTimeout(() => {
+            target.classList.add('active');
+        }, 10);
+    }
 }
