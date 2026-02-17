@@ -39,6 +39,10 @@
     gap: 4rem;
 }
 
+body[data-ps-aberto="sim"] .Navegacao-header {
+    gap: 2rem; 
+}
+
 .items-navegacao {
     color: var(--white-collor);
     font-size: 1rem; /* Ajustado para compensar o uppercase */
