@@ -1,17 +1,13 @@
 /* =========================================
-   SEÇÃO PATROCÍNIOS (CORRIGIDO E OTIMIZADO)
+   ESTRUTURA E LAYOUT - SEÇÃO PATROCÍNIOS
    ========================================= */
 
 .section-patrocinios {
     scroll-margin-top: 4rem;
-    
-    /* REMOVIDO: min-height: 100vh */
     min-height: auto; 
-    
-    /* Padding generoso para não ficar apertado */
     padding: 4rem 2rem 4rem 2rem;
     
-    /* Fundo sutilmente diferente para criar contraste */
+    /* Gradiente vertical para profundidade visual */
     background: linear-gradient(to bottom, #111, #0b0b0b);
     
     display: flex;
@@ -20,18 +16,19 @@
     position: relative;
     width: 100%;
     overflow: hidden; 
-    z-index: 21; /* Acima da equipe */
+    z-index: 21; 
     
-    /* Sombra superior para blending */
+    /* Efeito de sombreamento para transição entre seções */
     box-shadow: 0 -30px 50px rgba(0,0,0,0.8);
     border-top: 1px solid rgba(255,255,255,0.05);
 }
 
+/* Ajuste de scroll para interface com banner de recrutamento ativo */
 body[data-ps-aberto="sim"] .section-patrocinios {
     scroll-margin-top: calc(4rem + 40px);
 }
 
-/* --- TÍTULO --- */
+/* --- TÍTULO DA SEÇÃO --- */
 .titulo-patrocinios {
     color: var(--white-collor);
     font-family: "Conthrax", sans-serif;
@@ -57,7 +54,7 @@ body[data-ps-aberto="sim"] .section-patrocinios {
     box-shadow: 0 0 15px var(--primary-collor);
 }
 
-/* --- GRID RESPONSIVO --- */
+/* --- GRID DE EXIBIÇÃO DE LOGOTIPOS --- */
 .logos-grid {
     display: flex;
     flex-wrap: wrap;
@@ -67,12 +64,12 @@ body[data-ps-aberto="sim"] .section-patrocinios {
     max-width: 1300px;
 }
 
-/* --- O CARD --- */
+/* --- CONTAINER DE LOGOTIPO (CARD) --- */
 .logo-item {
     width: 220px;
     height: 130px;
     background: #ffffff; 
-    border: 1px solid #333; /* Borda escura para contraste se fundo mudar */
+    border: 1px solid #333;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -93,6 +90,7 @@ body[data-ps-aberto="sim"] .section-patrocinios {
         0 0 15px rgba(55, 211, 102, 0.4); 
 }
 
+/* Tratamento de mesclagem para logotipos com fundo branco */
 .logo-item img {
     max-width: 100%;
     max-height: 100%;
@@ -104,7 +102,7 @@ body[data-ps-aberto="sim"] .section-patrocinios {
 
 .logo-item:hover img { transform: scale(1.1); }
 
-/* --- BOTÃO --- */
+/* --- BOTÃO DE CONVERSÃO --- */
 .btn-seja-patrocinador {
     margin-top: 5rem;
     text-decoration: none;
@@ -126,13 +124,17 @@ body[data-ps-aberto="sim"] .section-patrocinios {
     font-weight: bold;
 }
 
-/* --- RESPONSIVIDADE --- */
+/* --- REGRAS DE RESPONSIVIDADE --- */
 @media screen and (max-width: 768px) {
     .section-patrocinios { padding: 5rem 1rem; }
+    
     body[data-ps-aberto="sim"] .section-patrocinios {
         scroll-margin-top: calc(4rem + 60px);
     }
+    
     .logos-grid { gap: 1rem; }
+    
+    /* Redimensionamento proporcional das células de logos em telas pequenas */
     .logo-item {
         width: 45%; 
         min-width: 140px; 
@@ -140,6 +142,8 @@ body[data-ps-aberto="sim"] .section-patrocinios {
         height: 100px;
         padding: 0.8rem;
     }
+    
     .titulo-patrocinios { font-size: 2rem; letter-spacing: 1px; }
+    
     .btn-seja-patrocinador { width: 100%; max-width: 300px; padding: 1rem; }
 }

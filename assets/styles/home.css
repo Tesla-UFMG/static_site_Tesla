@@ -1,5 +1,5 @@
 /* =========================================
-   SEÇÃO HOME (CORRIGIDO FINAL - BOTOES SIMETRICOS)
+   ESTRUTURA E LAYOUT - SEÇÃO HOME
    ========================================= */
 
 .section-home {
@@ -10,7 +10,7 @@
     z-index: 1; 
 }
 
-/* --- 1. CAMADA DA IMAGEM (FIXA) --- */
+/* Camada de imagem de fundo fixa para efeito de profundidade */
 .home-background {
     position: fixed;
     top: 0;
@@ -30,7 +30,7 @@
     padding: 0;
 }
 
-/* --- 2. CAMADA DE EFEITOS (OVERLAY) --- */
+/* Overlay de gradientes para legibilidade do texto e transição de seções */
 .home-overlay {
     position: fixed;
     top: 0;
@@ -62,7 +62,7 @@
     transition: opacity 0.1s linear;
 }
 
-/* --- 3. ANIMAÇÃO DE ÍCONES (WRAPPER) --- */
+/* --- ANIMAÇÃO DE ELEMENTOS FLUTUANTES --- */
 .wrapper {
     position: absolute;
     width: 100%;
@@ -85,6 +85,7 @@
     text-shadow: 0 0 10px var(--primary-collor);
 }
 
+/* Configuração de atraso e posição dos ícones flutuantes */
 .round:nth-child(1)  { left: 5%;  animation-duration: 9s;  animation-delay: 0s; }
 .round:nth-child(2)  { left: 15%; animation-duration: 7s;  animation-delay: 4s; }
 .round:nth-child(3)  { left: 25%; animation-duration: 10s; animation-delay: 2s; }
@@ -103,7 +104,7 @@
     100% { top: 110%; opacity: 0; transform: rotate(360deg); }
 }
 
-/* --- 4. INDICADOR DE SCROLL (DEFAULT DESKTOP) --- */
+/* --- INDICADORES DE NAVEGAÇÃO (SCROLL) --- */
 .scroll-indicator {
     position: absolute;
     top: calc(100lvh - 14rem); 
@@ -122,7 +123,7 @@
 
 .scroll-indicator.hidden { opacity: 0; visibility: hidden; }
 
-/* Mouse (Desktop) */
+/* Representação visual do mouse */
 .mouse {
     width: 30px; height: 50px;
     border: 2px solid var(--white-collor);
@@ -143,7 +144,6 @@
     box-shadow: 0 0 10px var(--primary-collor);
 }
 
-/* Setas */
 .arrow-scroll span {
     display: block; width: 15px; height: 15px;
     border-bottom: 3px solid var(--primary-collor);
@@ -153,6 +153,7 @@
     animation: scrollArrow 2s infinite;
     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 1));
 }
+
 .arrow-scroll span:nth-child(2) { animation-delay: -0.2s; }
 .arrow-scroll span:nth-child(3) { animation-delay: -0.4s; }
 
@@ -160,16 +161,14 @@
     0% { top: 8px; opacity: 1; height: 8px; }
     100% { top: 30px; opacity: 0; height: 4px; }
 }
+
 @keyframes scrollArrow {
     0% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
     50% { opacity: 1; }
     100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
 }
 
-/* =========================================
-   5. BLOCO DE TEXTO E LOGO
-   ========================================= */
-
+/* --- CONTEÚDO PRINCIPAL (TEXTO E LOGO) --- */
 .logo-home {
     height: 130px; 
     width: auto;
@@ -206,6 +205,7 @@
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Compensação de padding quando o banner de Processo Seletivo está ativo */
 body[data-ps-aberto="sim"] .div-texto-home {
     padding-top: calc(1rem + 40px); 
 }
@@ -215,7 +215,7 @@ body[data-ps-aberto="sim"] .div-texto-home {
     transform: translateY(0);
 }
 
-/* --- 6. TIPOGRAFIA --- */
+/* --- TIPOGRAFIA --- */
 .titulo-texto-home {
     color: var(--primary-collor);
     white-space: normal;
@@ -257,33 +257,31 @@ body[data-ps-aberto="sim"] .div-texto-home {
     width: 100%;
 }
 
-/* --- 7. BOTÕES SOCIAIS NA HOME (CORREÇÃO DEFINITIVA) --- */
+/* --- BOTÕES DE REDES SOCIAIS --- */
 .redes-sociais-home {
     display: flex !important;
-    flex-direction: row !important; /* Força ficar lado a lado */
+    flex-direction: row !important;
     flex-wrap: nowrap !important;
-    gap: 20px !important; /* Espaçamento forçado entre eles */
+    gap: 20px !important;
     justify-content: center;
     align-items: center;
     margin-top: 2.5rem;
     width: 100%;
 }
 
-/* Os links que envolvem os botões */
 .redes-sociais-home a {
     text-decoration: none;
     display: block;
-    width: 200px !important; /* LARGURA FIXA E IDÊNTICA PARA OS DOIS */
+    width: 200px !important;
 }
 
-/* A caixa visual do botão */
 .contatos-home {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
     width: 100%; 
-    box-sizing: border-box; /* Garante que padding não estique o botão */
+    box-sizing: border-box;
     border: 2px solid var(--primary-collor);
     border-radius: 5px;
     padding: 0.8rem 1rem;
@@ -308,7 +306,7 @@ body[data-ps-aberto="sim"] .div-texto-home {
     transition: color 0.3s ease; 
 }
 
-/* HOVER: Instagram (Atua no PRIMEIRO botão independente da classe) */
+/* Estados de interação para Desktop (Hover) */
 .redes-sociais-home a:first-child:hover .contatos-home {
     background-color: #E1306C !important;
     border-color: #E1306C !important;
@@ -316,7 +314,6 @@ body[data-ps-aberto="sim"] .div-texto-home {
     transform: translateY(-4px);
 }
 
-/* HOVER: LinkedIn (Atua no SEGUNDO botão independente da classe) */
 .redes-sociais-home a:last-child:hover .contatos-home {
     background-color: #0077B5 !important;
     border-color: #0077B5 !important;
@@ -330,7 +327,7 @@ body[data-ps-aberto="sim"] .div-texto-home {
     font-weight: 700;
 }
 
-/* --- 8. Z-INDEX FIX --- */
+/* --- ORDENAÇÃO DE CAMADAS (Z-INDEX) --- */
 .timer-competicao, 
 .section-sobre, 
 .section-resultados, 
@@ -345,10 +342,7 @@ body[data-ps-aberto="sim"] .div-texto-home {
     box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
 }
 
-/* =========================================
-   9. ANIMAÇÃO DO GESTO (DEFINIÇÃO)
-   ========================================= */
-
+/* --- ANIMAÇÃO DE GESTO PARA INTERAÇÃO MOBILE --- */
 .hand-gesture {
     display: none; 
     width: 24px;
@@ -367,11 +361,10 @@ body[data-ps-aberto="sim"] .div-texto-home {
 }
 
 /* =========================================
-   10. RESPONSIVIDADE (MEDIA QUERIES)
+   REGRAS DE RESPONSIVIDADE (MEDIA QUERIES)
    ========================================= */
 
 @media screen and (max-width: 992px) {
-    /* Ajustes Gerais Mobile/Tablet */
     .home-background {
         background-image: url('../images/mobile_NK\ Mineirao\ desfocado.jpg');
     }
@@ -396,7 +389,6 @@ body[data-ps-aberto="sim"] .div-texto-home {
         margin-top: 0.5rem;
     }
 
-    /* SCROLL INDICATOR MOBILE */
     .scroll-indicator {
         top: calc(90svh - 120px); 
         bottom: auto; 
@@ -421,20 +413,19 @@ body[data-ps-aberto="sim"] .div-texto-home {
     .scroll-indicator .arrow-scroll { margin-top: 0; }
 }
 
-/* =========================================
-   11. EMPILHAMENTO DE BOTÕES SOMENTE NO CELULAR
-   ========================================= */
 @media screen and (max-width: 768px) {
+    /* Ajuste de padding para compensar altura do banner de PS no mobile */
     body[data-ps-aberto="sim"] .div-texto-home {
-    padding-top: calc(1rem - 60px); 
+        padding-top: calc(1rem - 60px); 
     }
 
+    /* Empilhamento vertical dos botões em telas pequenas */
     .redes-sociais-home {
-        flex-direction: column !important; /* Aqui sim os botões vão um para baixo do outro */
+        flex-direction: column !important; 
         gap: 15px !important;
     }
 
     .redes-sociais-home a {
-        width: 250px !important; /* Ficam um pouco mais largos para facilitar o clique no dedo */
+        width: 250px !important; 
     }
 }

@@ -1,5 +1,5 @@
 /* =========================================
-   SEÇÃO COMPETIÇÃO (OTIMIZADO - LEVE)
+   ESTRUTURA E LAYOUT - SEÇÃO COMPETIÇÃO
    ========================================= */
 
 :root {
@@ -7,7 +7,7 @@
 }
 
 .section-competicao {
-    /* TRAVA DE ALTURA: Ocupa exatamente 100% da tela */
+    /* Definição de altura para ocupação total da viewport */
     height: 100vh;
     min-height: 600px;
     
@@ -19,38 +19,32 @@
     align-items: center;
     
     background-color: var(--black-collor);
-    overflow: hidden; /* Impede rolagem na página principal */
+    overflow: hidden;
     z-index: 2;
     position: relative;
     
-    /* Garante que a largura nunca exceda a tela */
     width: 100%;
     max-width: 100vw;
 }
 
+/* Compensação de scroll para interface com banner de recrutamento ativo */
 body[data-ps-aberto="sim"] .section-competicao {
     scroll-margin-top: calc(40px);
 }
 
-/* --- TÍTULO --- */
+/* --- TÍTULO DA SEÇÃO --- */
 .titulo-competicao {
     margin-top: 0.5rem;
     margin-bottom: 1rem;
-    
     color: var(--white-collor);
     font-family: "Conthrax", sans-serif;
     font-weight: 700;
-    
-    /* Tamanho fluido (6vw) */
     font-size: clamp(2rem, 6vw, 4.5rem); 
-    
     text-transform: uppercase;
     letter-spacing: 4px;
     text-align: center;
     text-shadow: 0 0 15px rgba(55, 211, 102, 0.6);
     flex-shrink: 0; 
-    
-    /* CORREÇÃO MOBILE: Impede estouro lateral */
     width: 95%;
     max-width: 100%;
     word-wrap: break-word;
@@ -67,43 +61,32 @@ body[data-ps-aberto="sim"] .section-competicao {
     box-shadow: 0 0 10px var(--primary-collor);
 }
 
-/* --- GRID PRINCIPAL (LAYOUT TETRIS) --- */
+/* --- DASHBOARD (GRID LAYOUT) --- */
 .competicao-dashboard {
     flex: 1; 
     width: 100%;
     max-width: 1600px; 
     padding: 0 2rem;
-    
     display: grid;
     
-    /* COLUNAS: Menu | Flex | Flex | Galeria Larga */
+    /* Definição de colunas e proporções do dashboard */
     grid-template-columns: 260px 1.2fr 0.8fr 380px; 
-    
-    /* LINHAS INDEPENDENTES */
     grid-template-rows: 45% 52%; 
     
     gap: 1.2rem;
     min-height: 0; 
 }
 
-/* =========================================
-   ESTILO GERAL DOS CARDS (OTIMIZADO)
-   ========================================= */
+/* --- ESTILIZAÇÃO DOS COMPONENTES DO DASHBOARD --- */
 .dashboard-item {
-    /* PERFORMANCE: Fundo mais sólido para evitar recálculo constante de pixels */
     background-color: rgba(13, 13, 13, 0.95);
-    
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 1.2rem;
-    
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-    
-    /* Ocupa 100% da célula do grid */
     height: 100%; 
-    
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
@@ -127,18 +110,13 @@ body[data-ps-aberto="sim"] .section-competicao {
     flex-shrink: 0;
 }
 
+/* --- MAPEAMENTO DE ÁREAS DO GRID --- */
 
-/* =========================================
-   POSICIONAMENTO (GRID AREAS)
-   ========================================= */
-
-/* 1. TEXTO: Linha 1 | Colunas 1 e 2 */
 .item-texto {
     grid-column: 1 / 3; 
     grid-row: 1 / 2;
 }
 
-/* 2. MAPA: Linha 1 | Coluna 3 */
 .item-mapa {
     grid-column: 3 / 4;
     grid-row: 1 / 2;
@@ -148,19 +126,16 @@ body[data-ps-aberto="sim"] .section-competicao {
     border: 1px solid rgba(54, 211, 102, 0.3);
 }
 
-/* 3. MENU: Linha 2 | Coluna 1 */
 .item-menu {
     grid-column: 1 / 2;
     grid-row: 2 / 3;
 }
 
-/* 4. DETALHES: Linha 2 | Colunas 2 e 3 */
 .item-detalhes {
     grid-column: 2 / 4; 
     grid-row: 2 / 3;
 }
 
-/* 5. GALERIA: Linhas 1 e 2 | Coluna 4 */
 .item-galeria {
     grid-column: 4 / 5;
     grid-row: 1 / 3; 
@@ -168,12 +143,8 @@ body[data-ps-aberto="sim"] .section-competicao {
     overflow: hidden; 
 }
 
+/* --- ELEMENTOS INTERNOS E INTERAÇÃO --- */
 
-/* =========================================
-   ESTILOS INTERNOS
-   ========================================= */
-
-/* --- TEXTO --- */
 .item-texto p {
     font-family: 'Poppins', sans-serif;
     font-size: 0.9rem;
@@ -200,13 +171,14 @@ body[data-ps-aberto="sim"] .section-competicao {
     margin-top: auto; 
     white-space: nowrap;
 }
+
 .btn-saiba-competicao:hover {
     background: var(--primary-collor);
     color: var(--black-collor);
     font-weight: 700;
 }
 
-/* --- MENU --- */
+/* Sistema de botões e navegação interna (Provas) */
 .menu-botoes {
     display: flex;
     flex-direction: column;
@@ -229,41 +201,43 @@ body[data-ps-aberto="sim"] .section-competicao {
     transition: all 0.3s ease;
     text-align: left;
 }
+
 .prova-btn:hover, .prova-btn.active {
     background: rgba(54, 211, 102, 0.1);
     border-color: var(--primary-collor);
 }
+
 .prova-btn.active strong, .prova-btn.active i {
     color: var(--primary-collor);
     text-shadow: 0 0 5px rgba(54, 211, 102, 0.4);
 }
+
 .prova-btn strong { font-family: "Conthrax", sans-serif; font-size: 0.8rem; color: #fff; display: block; }
 .prova-btn span { font-size: 0.65rem; font-family: 'Poppins', sans-serif; }
 
-/* --- MAPA (COLORIDO) --- */
+/* Integração de Mapa Dinâmico */
 .map-header {
     position: absolute; top: 10px; left: 10px; z-index: 10;
     background: rgba(0,0,0,0.8); padding: 4px 8px; border-radius: 4px;
     display: flex; align-items: center; gap: 8px;
     border: 1px solid rgba(255,255,255,0.1);
 }
+
 .map-header h5 { font-family: "Conthrax", sans-serif; font-size: 0.65rem; color: #fff; margin: 0; }
 .blinking-dot { width: 6px; height: 6px; background: #ff3b3b; border-radius: 50%; animation: blink 1.5s infinite; }
+
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
 .map-container { width: 100%; height: 100%; position: relative; }
-
 .map-container iframe {
     filter: brightness(0.9) contrast(1.1);
     width: 100%; height: 100%; opacity: 1; transition: all 0.5s ease;
 }
 
-.map-container:hover iframe {
-    filter: brightness(1) contrast(1);
-}
+.map-container:hover iframe { filter: brightness(1) contrast(1); }
 .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; box-shadow: inset 0 0 30px rgba(0,0,0,0.8); }
 
-/* --- DETALHES --- */
+/* Sistema de Abas/Conteúdo detalhado */
 .tab-content {
     display: none;
     flex-direction: column;
@@ -272,6 +246,7 @@ body[data-ps-aberto="sim"] .section-competicao {
     overflow-y: auto; 
     padding-right: 5px;
 }
+
 .tab-content.active { display: flex; animation: fadeIn 0.4s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -279,6 +254,7 @@ body[data-ps-aberto="sim"] .section-competicao {
     font-family: 'Poppins', sans-serif; font-size: 0.95rem; color: #ccc;
     border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px; margin-bottom: 10px;
 }
+
 .detail-list strong { color: var(--primary-collor); }
 
 .enduro-stats { display: flex; gap: 15px; margin-bottom: 10px; }
@@ -287,14 +263,11 @@ body[data-ps-aberto="sim"] .section-competicao {
     border: 1px solid var(--primary-collor); flex: 1; 
     text-align: center; border-radius: 4px; 
 }
+
 .stat-box span { font-size: 0.7rem; color: #888; display: block; }
 .stat-box strong { font-size: 1.2rem; color: #fff; font-family: "Conthrax", sans-serif; }
 
-
-/* =========================================
-   GALERIA INFINITA (OTIMIZADA)
-   ========================================= */
-
+/* --- GALERIA COM EFEITO DE SCROLL INFINITO --- */
 .gallery-mask {
     flex: 1;
     overflow: hidden;
@@ -308,19 +281,16 @@ body[data-ps-aberto="sim"] .section-competicao {
     flex-direction: column;
     gap: 12px; 
     animation: scrollVertical 30s linear infinite;
-    
     will-change: transform;
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
 }
 
-.gallery-track:hover {
-    animation-play-state: paused;
-}
+.gallery-track:hover { animation-play-state: paused; }
 
 .gallery-group {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Duas colunas */
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
 }
 
@@ -328,15 +298,13 @@ body[data-ps-aberto="sim"] .section-competicao {
     width: 100%;
     height: 160px; 
     object-fit: cover;
-    
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    
     transition: transform 0.3s ease; 
     cursor: pointer;
 }
 
-/* Correção para última imagem ímpar ocupar 2 colunas */
+/* Ajuste de proporção para imagens ímpares na galeria */
 .gallery-group img:last-child:nth-child(odd) {
     grid-column: span 2;
     object-position: center 20%;
@@ -353,21 +321,20 @@ body[data-ps-aberto="sim"] .section-competicao {
     100% { transform: translateY(-50%); } 
 }
 
-
-/* --- HIGHLIGHTS E SCROLLBARS --- */
+/* --- CUSTOMIZAÇÃO DE SCROLLBARS E HIGHLIGHTS --- */
 .tech-highlight {
     color: var(--primary-collor); font-weight: 600; cursor: default;
     border-bottom: 1px dotted rgba(54, 211, 102, 0.3); transition: all 0.3s;
 }
+
 .tech-highlight:hover { text-shadow: 0 0 10px var(--primary-collor); color: #fff; background: rgba(54, 211, 102, 0.2); }
 
 .item-texto p::-webkit-scrollbar, .menu-botoes::-webkit-scrollbar, .tab-content::-webkit-scrollbar { width: 4px; }
 .item-texto p::-webkit-scrollbar-track, .menu-botoes::-webkit-scrollbar-track, .tab-content::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
 .item-texto p::-webkit-scrollbar-thumb, .menu-botoes::-webkit-scrollbar-thumb, .tab-content::-webkit-scrollbar-thumb { background: var(--primary-collor); border-radius: 2px; }
 
-
 /* =========================================
-   RESPONSIVIDADE (MOBILE)
+   REGRAS DE RESPONSIVIDADE (MOBILE)
    ========================================= */
 @media screen and (max-width: 1150px) {
     .section-competicao {
@@ -375,36 +342,33 @@ body[data-ps-aberto="sim"] .section-competicao {
         min-height: 100vh;
         overflow-y: visible; 
         padding-top: 6rem;
-        
-        /* CORREÇÃO: Voltamos para flex para permitir centralização */
         display: flex;
         flex-direction: column;
         align-items: center; 
     }
+
     body[data-ps-aberto="sim"] .section-competicao {
         scroll-margin-top: calc(60px);
     }
 
-    /* AJUSTE DO TÍTULO NO MOBILE */
     .titulo-competicao {
         font-size: 2.2rem;
         letter-spacing: 2px; 
         margin-bottom: 2rem;
-        
-        /* Garantia extra de centralização */
         margin-left: auto;
         margin-right: auto;
         text-align: center;
         width: 100%;
     }
 
+    /* Alteração para fluxo vertical de dashboard */
     .competicao-dashboard {
         display: flex; 
         flex-direction: column; 
         height: auto;
         gap: 1.5rem;
         padding: 0 1rem; 
-        width: 100%; /* Ocupa a largura disponível */
+        width: 100%;
     }
 
     .item-texto, .item-menu, .item-mapa, .item-detalhes, .item-galeria {
@@ -413,15 +377,12 @@ body[data-ps-aberto="sim"] .section-competicao {
         grid-row: auto;
     }
 
+    /* Reordenamento semântico dos elementos no mobile */
     .item-texto     { order: 1; }
     .item-mapa      { order: 2; height: 300px; }
     .item-menu      { order: 3; }
     .item-detalhes  { order: 4; }
-    
-    .item-galeria   { 
-        order: 5; 
-        height: 450px; 
-    }
+    .item-galeria   { order: 5; height: 450px; }
     
     .menu-botoes { overflow-y: visible; }
 }

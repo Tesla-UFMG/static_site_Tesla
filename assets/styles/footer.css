@@ -1,3 +1,7 @@
+/* =========================================
+   ESTRUTURA E LAYOUT - RODAPÉ (FOOTER)
+   ========================================= */
+
 :root {
     --primary-collor: #37D366;
     --second-collor: #00665E;
@@ -5,10 +9,9 @@
     --white-collor: #FFFFFF;
 }
 
-/* --- ESTRUTURA GERAL DO FOOTER --- */
 .footer {
-    background-color: #111; /* Cinza quase preto */
-    border-top: 4px solid var(--primary-collor); /* Linha Neon no topo */
+    background-color: #111; 
+    border-top: 4px solid var(--primary-collor); 
     color: var(--white-collor);
     padding: 4rem 2rem 2rem 2rem;
     display: flex;
@@ -23,16 +26,15 @@
     width: 100%;
     max-width: 1200px;
     gap: 3rem;
-    flex-wrap: wrap; /* Permite quebrar linha no mobile */
+    flex-wrap: wrap; 
 }
 
-/* Configuração comum para todas as colunas */
+/* --- COLUNAS DO RODAPÉ --- */
 .coluna-footer {
-    flex: 1; /* Todas ocupam o mesmo espaço */
+    flex: 1; 
     min-width: 250px;
 }
 
-/* Títulos das Colunas */
 .coluna-footer h2 {
     font-family: "Conthrax", sans-serif;
     font-size: 1.5rem;
@@ -43,7 +45,7 @@
     text-shadow: 0 0 10px rgba(55, 211, 102, 0.3);
 }
 
-/* --- COLUNA 1: CONTATO --- */
+/* --- BLOCO DE CONTATOS E REDES SOCIAIS --- */
 .endereco-footer {
     font-family: 'Poppins', sans-serif;
     color: #ccc;
@@ -64,9 +66,8 @@
     justify-content: center;
     width: 45px;
     height: 45px;
-    
     border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 50%; /* Bolinha */
+    border-radius: 50%; 
     color: var(--white-collor);
     text-decoration: none;
     transition: all 0.3s ease;
@@ -76,7 +77,7 @@
     font-size: 1.2rem;
 }
 
-/* Hover nos ícones sociais */
+/* Estados de interação para ícones de redes sociais */
 .link-social-footer:hover {
     background-color: var(--primary-collor);
     color: var(--black-collor);
@@ -85,7 +86,7 @@
     transform: translateY(-3px);
 }
 
-/* --- COLUNA 2: NAVEGAÇÃO --- */
+/* --- LINKS DE NAVEGAÇÃO INTERNA --- */
 .conteudo-centro-footer {
     display: flex;
     flex-direction: column;
@@ -101,14 +102,14 @@
     width: fit-content;
 }
 
-/* Efeito Hover nos Links (Desliza para direita e fica verde) */
+/* Comportamento visual para links de navegação rápida */
 .items-navegacao-footer:hover {
     color: var(--primary-collor);
-    padding-left: 10px; /* Deslocamento */
+    padding-left: 10px; 
     text-shadow: 0 0 5px rgba(55, 211, 102, 0.4);
 }
 
-/* --- COLUNA 3: MAPA TECH --- */
+/* --- MAPEAMENTO GEOGRÁFICO (WIDGET DE MAPA) --- */
 .map-container {
     width: 100%;
     height: 200px;
@@ -123,13 +124,12 @@
     width: 100%;
     height: 100%;
     border: 0;
-    
-    /* FILTRO DE MAPA: Deixa preto e branco para combinar com o site */
+    /* Filtros para integração visual com o tema Dark Tech */
     filter: grayscale(100%) invert(90%); 
     transition: all 0.5s ease;
 }
 
-/* Ao passar o mouse, o mapa ganha cor */
+/* Remoção de filtros no estado de foco/hover do mapa */
 .map-container:hover {
     border-color: var(--primary-collor);
     box-shadow: 0 0 20px rgba(55, 211, 102, 0.2);
@@ -139,7 +139,7 @@
     filter: grayscale(0%) invert(0%);
 }
 
-/* --- COPYRIGHT --- */
+/* --- FINALIZAÇÃO E DIREITOS AUTORAIS --- */
 .copyright {
     display: flex;
     justify-content: center;
@@ -154,10 +154,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* --- RESPONSIVIDADE --- */
+/* --- REGRAS DE RESPONSIVIDADE --- */
 @media screen and (max-width: 768px) {
     .content-footer {
-        flex-direction: column; /* Um bloco embaixo do outro */
+        flex-direction: column; 
         gap: 3rem;
     }
 
@@ -166,7 +166,7 @@
         text-align: center;
     }
 
-    /* Centraliza itens no mobile */
+    /* Centralização de componentes em dispositivos móveis */
     .icone-footer, 
     .conteudo-centro-footer {
         justify-content: center;
@@ -174,7 +174,7 @@
     }
 
     .items-navegacao-footer:hover {
-        padding-left: 0; /* Remove deslocamento no mobile */
+        padding-left: 0; 
         transform: scale(1.1);
     }
 }

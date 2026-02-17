@@ -1,12 +1,13 @@
 /* =========================================
-   SEÇÃO COMPETIÇÃO (FINAL: CONQUISTAS + INOVAÇÕES + TIMER GRANDE)
+   ESTRUTURA E LAYOUT - SEÇÃO COMPETIÇÃO (TIMER & CONQUISTAS)
    ========================================= */
 
 .timer-competicao {
     padding: 4rem 0; 
     background-color: var(--black-collor);
     scroll-margin-top: 6rem;
-    /* Padrão de fundo Grid Tech Sutil */
+    
+    /* Fundo com padrão de grade técnica sutil */
     background-image: 
         linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
@@ -16,14 +17,15 @@
     flex-direction: column; 
     align-items: center;
     position: relative;
-    gap: 3rem; /* Espaço geral entre os blocos principais */
+    gap: 3rem;
 }
 
+/* Compensação de scroll para banner de Processo Seletivo ativo */
 body[data-ps-aberto="sim"] .timer-competicao {
     scroll-margin-top: calc(6rem + 40px);
 }
 
-/* --- 1. BLOCO DE CONQUISTAS & INOVAÇÕES --- */
+/* --- BLOCO DE CONQUISTAS E INOVAÇÕES --- */
 .conquistas-container {
     width: 90%;
     max-width: 1200px;
@@ -33,7 +35,6 @@ body[data-ps-aberto="sim"] .timer-competicao {
     gap: 2.5rem;
 }
 
-/* Texto de Impacto */
 .conquistas-intro {
     text-align: center;
 }
@@ -61,7 +62,7 @@ body[data-ps-aberto="sim"] .timer-competicao {
     text-shadow: 0 0 15px rgba(55, 211, 102, 0.3);
 }
 
-/* --- GRID DE TROFÉUS (Cards Grandes) --- */
+/* --- GRID DE TROFÉUS --- */
 .trophies-grid {
     display: flex;
     justify-content: center;
@@ -75,16 +76,12 @@ body[data-ps-aberto="sim"] .timer-competicao {
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    
     padding: 1.5rem 2rem;
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    
     min-width: 280px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
-    /* Borda lateral esquerda para destaque de cor */
     border-left: 4px solid transparent; 
 }
 
@@ -93,7 +90,7 @@ body[data-ps-aberto="sim"] .timer-competicao {
     background-color: rgba(13, 13, 13, 0.9);
 }
 
-/* Cores Específicas dos Troféus */
+/* Estilização por categoria de conquista */
 .trophy-card.silver {
     border-left-color: #C0C0C0;
     box-shadow: 0 5px 15px rgba(192, 192, 192, 0.1);
@@ -112,10 +109,8 @@ body[data-ps-aberto="sim"] .timer-competicao {
     text-shadow: 0 0 10px rgba(205, 127, 50, 0.5);
 }
 
-/* Ícone do Troféu */
 .icon-box i { font-size: 2.5rem; }
 
-/* Informações do Card */
 .trophy-info { display: flex; flex-direction: column; }
 
 .trophy-info .position {
@@ -139,7 +134,7 @@ body[data-ps-aberto="sim"] .timer-competicao {
     margin-top: 0.2rem;
 }
 
-/* --- CABEÇALHO DAS INOVAÇÕES (NOVO) --- */
+/* --- SEÇÃO DE INOVAÇÕES TÉCNICAS --- */
 .inovacoes-header {
     display: flex;
     align-items: center;
@@ -160,14 +155,12 @@ body[data-ps-aberto="sim"] .timer-competicao {
     text-shadow: 0 0 10px rgba(55, 211, 102, 0.4);
 }
 
-/* Linhas Decorativas */
 .inovacoes-header .line {
     height: 1px;
     width: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
 }
 
-/* --- GRID DE INOVAÇÕES (Tech List) --- */
 .inovacoes-grid {
     display: flex;
     justify-content: space-between;
@@ -179,11 +172,8 @@ body[data-ps-aberto="sim"] .timer-competicao {
 .inovacao-item {
     flex: 1; 
     min-width: 250px; 
-    
-    /* Fundo Tech Gradiente */
     background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, transparent 100%);
     border-left: 3px solid var(--primary-collor); 
-    
     padding: 1rem 1.5rem;
     display: flex;
     align-items: center; 
@@ -226,8 +216,6 @@ body[data-ps-aberto="sim"] .timer-competicao {
     font-weight: 600;
 }
 
-
-/* --- DIVISOR DA SEÇÃO --- */
 .section-divider {
     width: 60%;
     height: 1px;
@@ -235,8 +223,7 @@ body[data-ps-aberto="sim"] .timer-competicao {
     opacity: 0.3;
 }
 
-
-/* --- 2. COUNTDOWN (TAMANHO GRANDE) --- */
+/* --- BLOCO DO TIMER (COUNTDOWN) --- */
 #countdown {
     display: flex;
     justify-content: center;
@@ -258,20 +245,17 @@ body[data-ps-aberto="sim"] .timer-competicao {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-#countdown h2:last-child {
-    text-decoration: none;
-    color: var(--white-collor);
-}
 #countdown h2:last-child a {
     text-decoration: none;
     color: var(--primary-collor);
     transition: all 0.3s ease;
 }
+
 #countdown h2:last-child a:hover {
     text-shadow: 0 0 15px var(--primary-collor);
 }
 
-/* Container dos Números */
+/* Container e Blocos das Unidades de Tempo */
 #timer {
     display: flex;
     justify-content: center;
@@ -279,15 +263,11 @@ body[data-ps-aberto="sim"] .timer-competicao {
     flex-wrap: wrap;
 }
 
-/* Blocos de Tempo */
 #timer div {
     background-color: rgba(13, 13, 13, 0.8);
     backdrop-filter: blur(5px);
-    
-    /* Tamanho GRANDE */
     width: 10rem; 
     height: 10rem;
-    
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-bottom: 4px solid var(--primary-collor);
     border-radius: 8px;
@@ -307,10 +287,7 @@ body[data-ps-aberto="sim"] .timer-competicao {
 
 #timer span:first-child {
     font-family: "Conthrax", sans-serif;
-    
-    /* Fonte GRANDE */
     font-size: 4rem; 
-    
     font-weight: 700;
     color: var(--primary-collor);
     line-height: 1;
@@ -327,13 +304,12 @@ body[data-ps-aberto="sim"] .timer-competicao {
     font-weight: 500;
 }
 
-/* --- RESPONSIVIDADE --- */
+/* --- REGRAS DE RESPONSIVIDADE --- */
 @media screen and (max-width: 768px) {
     .timer-competicao {
         padding: 3rem 1rem;
     }
     
-    /* Ajustes Gerais */
     .conquistas-destaque { font-size: 1.3rem; }
     
     .trophy-card {
@@ -341,7 +317,6 @@ body[data-ps-aberto="sim"] .timer-competicao {
         justify-content: center;
     }
     
-    /* Inovações Mobile */
     .inovacoes-header { margin-top: 1.5rem; }
     .inovacoes-header p { font-size: 0.8rem; }
     
@@ -349,24 +324,22 @@ body[data-ps-aberto="sim"] .timer-competicao {
         flex-direction: column;
         gap: 1rem;
     }
+
     .inovacao-item {
         width: 100%;
         border-left-width: 4px;
     }
 
-    /* Timer Mobile */
     #countdown h2 { font-size: 1.5rem; }
 
     #timer { gap: 1rem; }
 
     #timer div {
-        /* Mobile ajustado */
         width: 8rem;
         height: 8rem;
     }
 
     #timer span:first-child { font-size: 2.5rem; }
-    
     #timer span:last-child { font-size: 0.75rem; }
 }
 
@@ -374,6 +347,7 @@ body[data-ps-aberto="sim"] .timer-competicao {
     body[data-ps-aberto="sim"] .timer-competicao {
         scroll-margin-top: calc(6rem + 60px);
     }
+    
     #timer div {
         width: 40%;
         height: auto;

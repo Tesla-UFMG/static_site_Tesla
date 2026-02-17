@@ -1,5 +1,5 @@
 /* =========================================
-   SEÇÃO EQUIPE (FINAL - COM TRAVA "EM BREVE")
+   ESTRUTURA E LAYOUT - SEÇÃO EQUIPE
    ========================================= */
 
 :root {
@@ -13,7 +13,10 @@
     scroll-margin-top: 4rem;
     min-height: auto; 
     padding: 6rem 1rem 6rem 1rem;
+    
+    /* Fundo com gradiente radial para destaque central */
     background: radial-gradient(circle at center, #1a1a1a 0%, var(--black-collor) 100%);
+    
     text-align: center;
     display: flex;
     justify-content: center;
@@ -27,11 +30,12 @@
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* Ajuste de scroll para interface com banner de recrutamento ativo */
 body[data-ps-aberto="sim"] .section-equipe {
     scroll-margin-top: calc(4rem + 40px);
 }
 
-/* --- TÍTULO --- */
+/* --- TÍTULO DA SEÇÃO --- */
 .titulo-equipe {
     color: var(--white-collor);
     font-family: "Conthrax", sans-serif;
@@ -55,7 +59,7 @@ body[data-ps-aberto="sim"] .section-equipe {
     box-shadow: 0 0 10px var(--primary-collor);
 }
 
-/* --- CONTAINER CARDS --- */
+/* --- GRID DE CARTÕES (MEMBROS) --- */
 .container-cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -83,6 +87,7 @@ body[data-ps-aberto="sim"] .section-equipe {
     -webkit-tap-highlight-color: transparent; 
 }
 
+/* Lógica de inversão do cartão (Flip effect) */
 .card.flipped { transform: rotateY(180deg); }
 
 @media (hover: hover) and (pointer: fine) {
@@ -90,6 +95,7 @@ body[data-ps-aberto="sim"] .section-equipe {
     .card-container:hover .card-icon-front { transform: scale(1.1); }
 }
 
+/* --- ESTILIZAÇÃO DAS FACES DO CARTÃO --- */
 .card-front, .card-back {
     padding: 1.5rem;
     position: absolute;
@@ -107,6 +113,7 @@ body[data-ps-aberto="sim"] .section-equipe {
     box-sizing: border-box;
 }
 
+/* Face frontal: Identificação da subequipe */
 .card-front {
     background: rgba(20, 20, 20, 0.95);
     border-top: 3px solid var(--primary-collor);
@@ -157,6 +164,7 @@ body[data-ps-aberto="sim"] .section-equipe {
     text-shadow: 0 0 5px rgba(54, 211, 102, 0.3);
 }
 
+/* Face posterior: Detalhamento técnico */
 .card-back {
     background: linear-gradient(135deg, rgba(20, 20, 20, 0.98), #0d0d0d);
     transform: rotateY(180deg); 
@@ -204,7 +212,7 @@ body[data-ps-aberto="sim"] .section-equipe {
 
 .sub-tag { font-size: 0.7rem; color: #888; margin-left: auto; }
 
-/* --- BOTÃO COM TRAVA "EM BREVE" --- */
+/* --- BOTÃO DE AÇÃO DESATIVADO (ESTADO TEMPORÁRIO) --- */
 .btn-saiba-equipe {
     position: relative;
     margin-top: 3rem;
@@ -220,19 +228,20 @@ body[data-ps-aberto="sim"] .section-equipe {
     text-align: center;
     display: inline-block;
     overflow: hidden;
-    min-width: 280px; /* Estabilidade para a troca de texto */
+    min-width: 280px; 
     cursor: default;
 }
 
+/* Comportamento visual para indicar indisponibilidade de página */
 .btn-saiba-equipe:hover {
     background: #222;
     border-color: #444;
-    color: transparent; /* Esconde o texto original */
+    color: transparent; 
     box-shadow: none;
     cursor: not-allowed;
 }
 
-/* Pseudo-elemento para o texto de substituição */
+/* Pseudo-elemento para exibição de texto alternativo via data-attribute */
 .btn-saiba-equipe:hover::before {
     content: attr(data-hover);
     position: absolute;
@@ -245,7 +254,8 @@ body[data-ps-aberto="sim"] .section-equipe {
     font-weight: 700;
 }
 
-/* RESPONSIVIDADE */
+/* --- REGRAS DE RESPONSIVIDADE --- */
+
 @media screen and (max-width: 1024px) {
     .container-cards {
         grid-template-columns: repeat(2, 1fr);
@@ -259,6 +269,8 @@ body[data-ps-aberto="sim"] .section-equipe {
     body[data-ps-aberto="sim"] .section-equipe {
         scroll-margin-top: calc(4rem + 60px);
     }
+    
+    /* Ajuste de grid para visualização mobile */
     .container-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
     .card-container { height: 330px; }
     .card-front { padding: 1rem 0.5rem; }
@@ -268,6 +280,7 @@ body[data-ps-aberto="sim"] .section-equipe {
     .status-membros { font-size: 0.65rem; padding-top: 5px; margin-bottom: 15px; }
     .status-membros strong { font-size: 0.9rem; }
     
+    /* Indicador visual de interação para telas sensíveis ao toque */
     .card-front::after {
         content: 'Toque para detalhes';
         font-family: 'Poppins', sans-serif;

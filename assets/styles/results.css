@@ -1,47 +1,40 @@
 /* =========================================
-   SEÇÃO TIMELINE (LEGADO) - FINAL
+   ESTRUTURA E LAYOUT - SEÇÃO LEGADO (TIMELINE)
    ========================================= */
 
 .timeline-section {
     background-color: #0b0b0b; 
-    
     display: flex;
     flex-direction: column;
     position: relative;
     
+    /* Fundo com grade técnica sutil */
     background-image: 
         linear-gradient(rgba(55, 211, 102, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(55, 211, 102, 0.03) 1px, transparent 1px);
-    background-size: 3.125rem 3.125rem; /* 50px */
+    background-size: 3.125rem 3.125rem; 
     
-    /* Topo: 7.5rem (120px) | Fundo: 7.5rem (120px) */
     padding: 7.5rem 0 7.5rem 0;
     scroll-margin-top: 4rem;
     overflow: visible; 
     z-index: 10;
-    
-    margin-top: -0.3125rem; /* -5px */
+    margin-top: -0.3125rem; 
     box-shadow: 0 -3.125rem 3.125rem 0.625rem #0b0b0b, inset 0 3.125rem 3.125rem -1.25rem #000;
 }
 
+/* Ajuste de scroll para interface com banner de recrutamento ativo */
 body[data-ps-aberto="sim"] .timeline-section {
     scroll-margin-top: calc(4rem + 40px);
 }
 
-/* =========================================
-   TIMELINE NAVIGATION (DESKTOP STICKY)
-   ========================================= */
-
+/* --- NAVEGAÇÃO LATERAL (DESKTOP STICKY) --- */
 .timeline-nav {
     position: sticky;
     top: 50vh; 
     align-self: flex-end; 
-    margin-right: 2.5rem; /* 40px */
+    margin-right: 2.5rem; 
     height: 0; 
-    
-    /* Margem inferior para zona de pouso */
-    margin-bottom: 22rem;
-    
+    margin-bottom: 22rem; /* Zona de pouso para evitar sobreposição no rodapé */
     z-index: 100;
     transform: translateY(-50%);
     opacity: 1;
@@ -52,20 +45,20 @@ body[data-ps-aberto="sim"] .timeline-section {
 .timeline-nav ul {
     pointer-events: all;
     list-style: none;
-    padding: 0;
+    padding: 0.9375rem;
     margin: 0;
     position: relative;
     background: rgba(11, 11, 11, 0.6); 
-    padding: 0.9375rem; /* 15px */
-    border-radius: 1.25rem; /* 20px */
+    border-radius: 1.25rem;
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* Linha vertical de conexão da navegação */
 .timeline-nav ul::before {
     content: '';
     position: absolute;
-    right: 1.4375rem; /* 23px */
+    right: 1.4375rem; 
     top: 0.9375rem;
     bottom: 0.9375rem;
     width: 2px;
@@ -88,15 +81,16 @@ body[data-ps-aberto="sim"] .timeline-section {
     position: relative;
 }
 
+/* Indicadores circulares da navegação */
 .timeline-nav a::after {
     content: '';
     display: block;
-    width: 0.625rem; /* 10px */
+    width: 0.625rem; 
     height: 0.625rem;
     background-color: #333;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
-    margin-left: 0.9375rem; /* 15px */
+    margin-left: 0.9375rem; 
     transition: all 0.3s ease;
 }
 
@@ -105,24 +99,19 @@ body[data-ps-aberto="sim"] .timeline-section {
 .timeline-nav a span { opacity: 0; transform: translateX(-0.625rem); transition: all 0.3s ease; }
 .timeline-nav a:hover span, .timeline-nav a.active span { opacity: 1; transform: translateX(0); }
 
-/* =========================================
-   ESTRUTURA DA TIMELINE
-   ========================================= */
-
+/* --- COMPONENTES DA LINHA DO TEMPO --- */
 .timeline-section .container { 
     max-width: 1200px; 
     margin: 0 auto; 
     position: relative; 
-    padding: 0 1.25rem; /* 20px */
+    padding: 0 1.25rem; 
     width: 100%;
-    
-    /* COMPENSAÇÃO DA MARGEM DO MENU STICKY */
-    margin-top: -22rem; 
+    margin-top: -22rem; /* Compensação de margem do menu lateral */
 }
 
 .section-header { 
     text-align: center; 
-    margin-bottom: 7.5rem; /* 120px */
+    margin-bottom: 7.5rem; 
     position: relative; 
     z-index: 2; 
 }
@@ -146,6 +135,7 @@ body[data-ps-aberto="sim"] .timeline-section {
     opacity: 0.8; 
 }
 
+/* Linha central da timeline com gradiente de desvanecimento */
 .timeline-line { 
     position: absolute; 
     left: 50%; 
@@ -162,18 +152,19 @@ body[data-ps-aberto="sim"] .timeline-section {
     display: flex; 
     align-items: center; 
     justify-content: space-between; 
-    margin-bottom: 9.375rem; /* 150px */
+    margin-bottom: 9.375rem; 
     position: relative; 
     z-index: 1; 
 }
 
+/* Marcador central da timeline (Node) */
 .timeline-item::after { 
     content: ''; 
     position: absolute; 
     left: 50%; 
     top: 50%; 
     transform: translate(-50%, -50%); 
-    width: 1.25rem; /* 20px */
+    width: 1.25rem; 
     height: 1.25rem; 
     background-color: #0b0b0b; 
     border: 3px solid var(--primary-collor); 
@@ -189,7 +180,7 @@ body[data-ps-aberto="sim"] .timeline-section {
     transform: translate(-50%, -50%) scale(1.3); 
 }
 
-/* --- CARD DE TEXTO --- */
+/* --- BLOCOS DE CONTEÚDO (CARDS) --- */
 .timeline-item .content-box { 
     background: rgba(20, 20, 20, 0.6); 
     backdrop-filter: blur(10px); 
@@ -202,6 +193,7 @@ body[data-ps-aberto="sim"] .timeline-section {
 .timeline-item .content-box, .timeline-item .image-wrapper { width: 45%; }
 .timeline-item.left .content-box { border-right: 4px solid var(--primary-collor); text-align: right; }
 .timeline-item.right .content-box { border-left: 4px solid var(--primary-collor); text-align: left; }
+
 .timeline-item:hover .content-box { 
     transform: translateY(-0.3125rem); 
     background: rgba(30, 30, 30, 0.9); 
@@ -221,7 +213,6 @@ body[data-ps-aberto="sim"] .timeline-section {
     box-shadow: 0 0 0.9375rem rgba(55, 211, 102, 0.3); 
 }
 
-/* --- TÍTULO DO CARRO --- */
 .car-name {
     font-family: "Conthrax", sans-serif;
     color: var(--white-collor);
@@ -242,10 +233,12 @@ body[data-ps-aberto="sim"] .timeline-section {
     gap: 0.625rem; 
     font-size: 1.1rem; 
 }
+
 .timeline-item.left .specs li { justify-content: flex-end; }
 .timeline-item.right .specs li { justify-content: flex-start; }
 .specs li i { color: var(--primary-collor); }
 
+/* --- CONTROLE DE IMAGENS --- */
 .timeline-item .image-wrapper { 
     position: relative; 
     display: flex; 
@@ -260,6 +253,7 @@ body[data-ps-aberto="sim"] .timeline-section {
     max-width: 37.5rem; 
     height: auto; 
     object-fit: contain; 
+    /* Estilização técnica das imagens: grayscale para efeito de arquivo */
     filter: drop-shadow(0 0.9375rem 0.625rem rgba(0, 0, 0, 0.9)) grayscale(100%) contrast(1.2) brightness(0.7) sepia(20%) hue-rotate(90deg); 
     transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
     mix-blend-mode: normal; 
@@ -274,20 +268,19 @@ body[data-ps-aberto="sim"] .timeline-section {
 }
 
 .floor-shadow { display: none !important; }
+
+/* Bloco específico para itens de fundação/históricos iniciais */
 .timeline-item.foundation-item .image-wrapper { height: auto; padding: 1.25rem; }
 .foundation-icon { font-size: 4rem; color: #444; filter: drop-shadow(0 0 0 transparent); transition: all 0.6s ease; }
 .timeline-item:hover .foundation-icon { color: var(--primary-collor); transform: scale(1.2); filter: drop-shadow(0 0 1.875rem var(--primary-collor)); }
 
 /* =========================================
-   RESPONSIVIDADE (MOBILE - SOLUÇÃO FINAL ESTÁVEL)
+   REGRAS DE RESPONSIVIDADE (MOBILE ESTÁVEL)
    ========================================= */
 @media screen and (max-width: 992px) {
     
-    /* 1. PREPARAÇÃO DO CONTAINER */
     .timeline-section {
-        padding-bottom: 0; /* Removemos padding extra */
-        
-        /* Garante que o flexbox controle a ordem */
+        padding-bottom: 0;
         display: flex;
         flex-direction: column;
     }
@@ -296,63 +289,40 @@ body[data-ps-aberto="sim"] .timeline-section {
         scroll-margin-top: calc(1rem + 60px);
     }
 
-    /* 2. CONTEÚDO (CARROS) VEM PRIMEIRO */
     .timeline-section .container { 
         margin-top: 0; 
-        
-        /* TRUQUE: Força o conteúdo a ser o PRIMEIRO item visualmente */
         order: 1; 
-        
-        padding-bottom: 40px; /* Espaço para não bater na navegação */
+        padding-bottom: 40px; 
     }
 
-    /* 3. NAV MOBILE (ESTÁVEL E SEM FLICKER) */
+    /* Navegação mobile fixada na base (Sticky Bottom) */
     .timeline-nav {
-        /* TRUQUE: Força a navegação a ser o ÚLTIMO item visualmente */
         order: 2; 
-        
-        /* Agora podemos usar STICKY no BOTTOM com segurança */
         position: sticky; 
-        bottom: 30px; /* Gruda a 30px do fim da tela */
-        top: auto;    /* Anula qualquer config de topo */
-        
-        /* Centralização */
+        bottom: 30px; 
+        top: auto;   
         align-self: center;
         margin-left: auto;
         margin-right: auto;
-        
-        /* Removemos margens gigantes, pois agora ela está no fim natural do fluxo */
         margin-bottom: 20px; 
-        
-        /* Visual */
         height: auto;
         flex-direction: row;
         background: rgba(11, 11, 11, 0.95);
         backdrop-filter: blur(10px);
-        
         width: 95%; 
         max-width: 500px;
-        
         border-radius: 30px;
         border: 1px solid rgba(255, 255, 255, 0.15);
         box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        
         opacity: 1; 
         visibility: visible;
         pointer-events: auto;
         padding: 8px 10px;
-        
         transform: none; 
         z-index: 100;
-        
-        /* Otimização */
         will-change: transform;
-        transition: opacity 0.3s ease;
     }
     
-    .timeline-nav.visible { opacity: 1; visibility: visible; }
-
-    /* ESTILO DA LISTA SCROLLÁVEL */
     .timeline-nav ul { 
         background: transparent; 
         padding: 0; 
@@ -365,15 +335,12 @@ body[data-ps-aberto="sim"] .timeline-section {
         justify-content: flex-start;
         -webkit-overflow-scrolling: touch; 
         scrollbar-width: none; 
-        -ms-overflow-style: none;
     }
     
     .timeline-nav ul::-webkit-scrollbar { display: none; }
     .timeline-nav ul::before { display: none; } 
-    
     .timeline-nav li { margin: 0; flex-shrink: 0; }
 
-    /* BOTÕES */
     .timeline-nav a { 
         font-size: 0.85rem; 
         flex-direction: column-reverse; 
@@ -381,7 +348,6 @@ body[data-ps-aberto="sim"] .timeline-section {
         padding: 6px 12px;
         border-radius: 20px;
         border: 1px solid transparent;
-        transition: all 0.3s ease;
     }
     
     .timeline-nav a.active {
@@ -389,18 +355,16 @@ body[data-ps-aberto="sim"] .timeline-section {
         border-color: rgba(55, 211, 102, 0.3);
         color: var(--primary-collor);
         font-weight: bold;
-        transform: scale(1); 
     }
 
     .timeline-nav a::after { display: none; } 
     .timeline-nav a span { opacity: 1; transform: none; }
 
-    /* TIMELINE LAYOUT MOBILE */
+    /* Layout da linha temporal para dispositivos móveis */
     .timeline-line { 
         left: 1.25rem; 
         transform: translateX(-50%); 
         top: 13.75rem; 
-        background: linear-gradient(to bottom, transparent 0%, var(--primary-collor) 5%, var(--primary-collor) 90%, transparent 100%); 
     }
     
     .timeline-item { flex-direction: column !important; align-items: flex-start; padding-left: 3.75rem; margin-bottom: 5rem; }
@@ -416,13 +380,11 @@ body[data-ps-aberto="sim"] .timeline-section {
     .car-name { 
         font-size: clamp(0.9rem, 4vw, 1.2rem); 
         letter-spacing: -0.5px; 
-        word-break: normal; 
-        overflow-wrap: break-word;
     }
     
     .year-badge { font-size: 0.9rem; }
     .timeline-item.foundation-item .image-wrapper { display: none; }
     .timeline-item.foundation-item .content-box { margin-top: 0; }
-    .timeline-item .image-wrapper img { filter: drop-shadow(0 0.3125rem 0.3125rem rgba(0,0,0,0.5)) grayscale(0%) contrast(1.1) brightness(1.0); max-width: 100%; transform: none !important; }
+    .timeline-item .image-wrapper img { filter: drop-shadow(0 0.3125rem 0.3125rem rgba(0,0,0,0.5)) grayscale(0%) contrast(1.1) brightness(1.0); max-width: 100%; }
     .timeline-item .specs li { justify-content: flex-start !important; }
 }

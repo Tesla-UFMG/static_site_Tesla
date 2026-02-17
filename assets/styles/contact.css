@@ -1,43 +1,37 @@
 /* =========================================
-   SEÇÃO CONTATO (FINAL)
+   ESTRUTURA E LAYOUT - SEÇÃO CONTATO
    ========================================= */
 
 .section-contato {
     scroll-margin-top: 1rem;
-    
-    /* Altura automática */
     min-height: auto; 
-    
-    /* Padding generoso */
     padding: 6rem 2rem 6rem 2rem;
     
-    /* Fundo Dark Tech com Grid */
+    /* Configuração de fundo com grade técnica */
     background-color: var(--black-collor);
     background-image: 
         linear-gradient(rgba(55, 211, 102, 0.05) 1px, transparent 1px),
         linear-gradient(90deg, rgba(55, 211, 102, 0.05) 1px, transparent 1px);
     background-size: 40px 40px;
     
-    /* ALINHAMENTO CENTRAL TOTAL */
     display: flex;
     flex-direction: column;
     align-items: center; 
     justify-content: center;
-    
     color: var(--white-collor);
     position: relative;
     z-index: 22; 
     
-    /* Borda superior de finalização */
     border-top: 1px solid var(--primary-collor);
     box-shadow: 0 -10px 40px rgba(55, 211, 102, 0.1);
 }
 
+/* Compensação de scroll para interface com banner de recrutamento ativo */
 body[data-ps-aberto="sim"] .section-contato {
     scroll-margin-top: calc(1rem + 40px);
 }
 
-/* --- TÍTULO (CORRIGIDO) --- */
+/* --- TÍTULO DA SEÇÃO --- */
 .titulo-contato {
     font-family: "Conthrax", sans-serif;
     font-size: 3.5rem;
@@ -48,10 +42,8 @@ body[data-ps-aberto="sim"] .section-contato {
     letter-spacing: 2px;
     position: relative;
     text-shadow: 0 0 15px rgba(55, 211, 102, 0.6);
-    
-    /* GARANTIA DE CENTRALIZAÇÃO */
     text-align: center;
-    width: 100%; /* Garante que o bloco ocupe a largura para centralizar o texto dentro */
+    width: 100%; 
     margin-left: auto;
     margin-right: auto;
 }
@@ -62,14 +54,11 @@ body[data-ps-aberto="sim"] .section-contato {
     width: 100px;
     height: 4px;
     background-color: var(--primary-collor);
-    
-    /* Centraliza a barra decorativa */
     margin: 10px auto 0 auto;
-    
     border-radius: 2px;
 }
 
-/* --- CONTAINER GERAL --- */
+/* --- ORGANIZAÇÃO DO CONTEÚDO --- */
 .container-contato {
     display: flex;
     justify-content: center;
@@ -80,7 +69,7 @@ body[data-ps-aberto="sim"] .section-contato {
     flex-wrap: wrap;
 }
 
-/* --- MOLDURA DO FORMULÁRIO --- */
+/* --- FORMULÁRIO DE CONTATO --- */
 .formulario-contato {
     background-color: rgba(10, 10, 10, 0.95); 
     backdrop-filter: blur(10px);
@@ -110,7 +99,7 @@ body[data-ps-aberto="sim"] .section-contato {
     text-align: left;
 }
 
-/* --- CAMPOS --- */
+/* --- ENTRADA DE DADOS (INPUTS E TEXTAREA) --- */
 .formulario-contato input,
 .formulario-contato textarea {
     width: 100%;
@@ -134,6 +123,7 @@ body[data-ps-aberto="sim"] .section-contato {
     max-height: 400px;
 }
 
+/* Estados de foco para campos de entrada */
 .formulario-contato input:focus,
 .formulario-contato textarea:focus {
     outline: none;
@@ -142,7 +132,7 @@ body[data-ps-aberto="sim"] .section-contato {
     box-shadow: 0 0 10px rgba(55, 211, 102, 0.2);
 }
 
-/* --- BOTÃO ENVIAR --- */
+/* --- COMPONENTE DE ENVIO --- */
 .btn-enviar {
     width: 100%;
     padding: 1rem;
@@ -164,12 +154,10 @@ body[data-ps-aberto="sim"] .section-contato {
     box-shadow: 0 0 20px rgba(55, 211, 102, 0.5);
 }
 
-/* =========================================
-   MENSAGEM DE STATUS DO FORMULÁRIO (NOVO)
-   ========================================= */
+/* --- FEEDBACK DE PROCESSAMENTO (MENSAGENS DE STATUS) --- */
 
 #mensagem-status {
-    display: none; /* Fica escondido até o JS ativar */
+    display: none; 
     margin-top: 1.5rem;
     padding: 1rem;
     border-radius: 5px;
@@ -178,19 +166,17 @@ body[data-ps-aberto="sim"] .section-contato {
     font-weight: 500;
     text-align: center;
     width: 100%;
-    
-    /* Animação suave de entrada */
     animation: fadeInStatus 0.4s ease-out forwards;
 }
 
-/* ESTADO 1: ENVIANDO (Neutro) */
+/* Estado: Processamento ativo */
 #mensagem-status.enviando {
     background-color: rgba(255, 255, 255, 0.05);
     color: var(--white-collor);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* ESTADO 2: SUCESSO (Verde Neon) */
+/* Estado: Confirmação de êxito */
 #mensagem-status.sucesso {
     background-color: color-mix(in srgb, var(--primary-collor), transparent 90%);
     color: var(--primary-collor);
@@ -198,7 +184,7 @@ body[data-ps-aberto="sim"] .section-contato {
     box-shadow: 0 0 15px color-mix(in srgb, var(--primary-collor), transparent 70%);
 }
 
-/* ESTADO 3: ERRO (Vermelho Neon) */
+/* Estado: Falha na operação */
 #mensagem-status.erro {
     background-color: rgba(255, 50, 50, 0.1);
     color: #ff4d4d;
@@ -206,7 +192,6 @@ body[data-ps-aberto="sim"] .section-contato {
     box-shadow: 0 0 15px rgba(255, 50, 50, 0.3);
 }
 
-/* Animação de Fade e Subida */
 @keyframes fadeInStatus {
     from { 
         opacity: 0; 
@@ -218,7 +203,8 @@ body[data-ps-aberto="sim"] .section-contato {
     }
 }
 
-/* --- OUTRAS FORMAS --- */
+/* --- CANAIS ALTERNATIVOS DE CONTATO --- */
+
 .outras-formas-contato {
     width: 40%;
     min-width: 300px;
@@ -286,12 +272,13 @@ body[data-ps-aberto="sim"] .section-contato {
     line-height: 1.4;
 }
 
-/* RESPONSIVIDADE */
+/* =========================================
+   REGRAS DE RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================= */
+
 @media screen and (max-width: 900px) {
     .section-contato { 
         padding: 5rem 1rem 4rem 1rem; 
-        
-        /* Reforço de alinhamento no mobile */
         align-items: center; 
     }
 
@@ -299,6 +286,7 @@ body[data-ps-aberto="sim"] .section-contato {
         scroll-margin-top: calc(1rem + 60px);
     }
     
+    /* Reorganização de colunas para fluxo vertical */
     .container-contato { 
         flex-direction: column; 
         align-items: center; 
@@ -310,12 +298,10 @@ body[data-ps-aberto="sim"] .section-contato {
         min-width: 0; 
     }
     
-    /* Centraliza título secundário no mobile */
     .outras-formas-contato h3 { 
         text-align: center; 
     }
     
-    /* Ajuste de tamanho e alinhamento do título principal */
     .titulo-contato { 
         font-size: 2.5rem; 
         text-align: center;

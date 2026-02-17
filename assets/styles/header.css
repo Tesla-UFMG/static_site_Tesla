@@ -1,3 +1,7 @@
+/* =========================================
+   ESTRUTURA E LAYOUT - CABEÇALHO (HEADER)
+   ========================================= */
+
 :root {
     --primary-collor: #37D366;
     --second-collor: #00665E;
@@ -5,7 +9,7 @@
     --white-collor: #FFFFFF;
 }
 
-.header{
+.header {
     background-color: var(--black-collor);
     height: 6rem;
     display: flex;
@@ -17,6 +21,7 @@
     top: 0;
 }
 
+/* --- ELEMENTOS DE IDENTIDADE --- */
 .logo {
     flex: 1; 
 }
@@ -25,6 +30,7 @@
     width: 4rem;
 }
 
+/* --- NAVEGAÇÃO PRINCIPAL (DESKTOP) --- */
 .Navegacao-header {
     display: flex;
     justify-content: center;
@@ -38,23 +44,23 @@
     font-size: 1.2rem;
     text-decoration: none;
     transition: all 0.2s;
-
-    &:hover{
-        color: var(--primary-collor);
-    }
 }
 
+.items-navegacao:hover {
+    color: var(--primary-collor);
+}
+
+/* Estado ativo com indicador visual e glow */
 .items-navegacao.active {
     color: var(--primary-collor);
-    text-shadow: 0 0 10px rgba(55, 211, 102, 0.4); /* Glow leve */
+    text-shadow: 0 0 10px rgba(55, 211, 102, 0.4);
     position: relative;
 }
 
-/* Opcional: Um traço neon embaixo do link ativo */
 .items-navegacao.active::after {
     content: '';
     position: absolute;
-    bottom: -5px; /* Ajuste a distância */
+    bottom: -5px;
     left: 0;
     width: 100%;
     height: 2px;
@@ -69,123 +75,42 @@
 }
 
 /* =========================================
-   MENU MOBILE (RESPONSIVO)
+   SISTEMA DE MENU MÓVEL (HAMPBURGUER)
    ========================================= */
 
-/* Esconde o botão em telas grandes */
 #btn-mobile {
     display: none;
 }
 
-@media (max-width: 900px) {
-    /* Ajuste do Header para Mobile */
-    .header {
-        justify-content: space-between;
-        padding: 0 1.5rem;
-    }
+/* Desenho técnico das linhas do componente hambúrguer */
+#hamburguer {
+    display: block;
+    border-top: 2px solid var(--primary-collor);
+    width: 25px;
+    transition: 0.3s;
+}
 
-    /* Mostra o botão Hambúrguer */
-    #btn-mobile {
-        display: flex;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        border: none;
-        background: none;
-        cursor: pointer;
-        gap: 0.5rem;
-        color: var(--primary-collor); /* Verde Neon */
-        z-index: 2000;
-    }
-
-    /* Desenho das linhas do Hambúrguer */
-    #hamburguer {
-        display: block;
-        border-top: 2px solid var(--primary-collor);
-        width: 25px;
-        transition: 0.3s;
-    }
-    
-    #hamburguer::after, #hamburguer::before {
-        content: '';
-        display: block;
-        width: 25px;
-        height: 2px;
-        background: var(--primary-collor);
-        margin-top: 6px;
-        transition: 0.3s;
-        position: relative;
-    }
-
-    /* Estilo do Menu quando fechado (Escondido) */
-    .Navegacao-header {
-        display: block;
-        position: absolute;
-        width: 100%;
-        top: 90px; /* Altura do header */
-        right: 0;
-        background: rgba(13, 13, 13, 0.98); /* Fundo quase preto */
-        backdrop-filter: blur(10px);
-        height: 0; /* Começa fechado */
-        transition: 0.4s;
-        z-index: 1000;
-        visibility: hidden;
-        overflow-y: hidden;
-        border-bottom: 2px solid var(--primary-collor);
-    }
-
-    /* Estilo do Menu quando ABERTO (Classe .active via JS) */
-    .Navegacao-header.active {
-        height: calc(100vh - 90px); /* Ocupa a tela toda menos o header */
-        visibility: visible;
-        overflow-y: auto;
-        padding-top: 1rem; /* Dá um leve respiro no topo */
-        padding-bottom: 2rem; /* Garante que o último item não cole no fim da tela */
-    }
-
-    /* Links no Mobile (CORREÇÃO DE ESPAÇAMENTO) */
-    .items-navegacao {
-        padding: 0.8rem 0; /* Reduzido de 1.5rem para encurtar a altura do menu */
-        margin: 0 1.5rem; /* Margem lateral ligeiramente menor */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        display: block;
-        text-align: center;
-        font-size: 1.05rem; /* Fonte levemente menor para caber melhor */
-        font-family: "Conthrax", sans-serif;
-    }
-
-    .items-navegacao:hover {
-        background: rgba(55, 211, 102, 0.1);
-        color: var(--primary-collor);
-        padding-left: 10px; /* Efeito de movimento */
-    }
-
-    /* Animação do ícone X quando aberto */
-    .Navegacao-header.active ~ #btn-mobile #hamburguer {
-        border-top-color: transparent;
-    }
-    
-    .Navegacao-header.active ~ #btn-mobile #hamburguer::before {
-        transform: rotate(135deg);
-        top: 0px; 
-    }
-    
-    .Navegacao-header.active ~ #btn-mobile #hamburguer::after {
-        transform: rotate(-135deg);
-        top: -8px; 
-    }
+#hamburguer::after, #hamburguer::before {
+    content: '';
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: var(--primary-collor);
+    margin-top: 6px;
+    transition: 0.3s;
+    position: relative;
 }
 
 /* =========================================
-   SISTEMA DE PROCESSO SELETIVO (TOGGLE)
+   SISTEMA DE PROCESSO SELETIVO (BANNER)
    ========================================= */
 
-/* 1. LÓGICA DO INTERRUPTOR (Oculta por padrão) */
+/* Visibilidade condicionada ao data-attribute 'data-ps-aberto' no body */
 .ps-banner-global, 
 .ps-menu-btn {
     display: none; 
 }
 
-/* Quando data-ps-aberto="sim", os elementos aparecem */
 body[data-ps-aberto="sim"] .ps-banner-global {
     display: flex;
 }
@@ -196,22 +121,19 @@ body[data-ps-aberto="sim"] .ps-menu-btn {
     justify-content: center;
 }
 
-/* Desloca o Header para baixo para dar espaço ao Banner no Desktop */
+/* Deslocamento do Header para acomodação do banner superior */
 body[data-ps-aberto="sim"] .header {
     top: 40px; 
 }
 
-/* =========================================
-   ESTILIZAÇÃO DO BANNER (SYSTEM OVERRIDE)
-   ========================================= */
 .ps-banner-global {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 40px;
-    background-color: var(--primary-collor); /* Fundo verde neon */
-    z-index: 1000; /* Fica acima de TUDO */
+    background-color: var(--primary-collor);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
     box-shadow: 0 0 15px rgba(55, 211, 102, 0.4);
@@ -221,18 +143,14 @@ body[data-ps-aberto="sim"] .header {
     display: flex;
     align-items: center;
     gap: 15px;
-    color: var(--black-collor); /* Texto escuro para dar contraste no neon */
+    color: var(--black-collor);
     font-family: "Conthrax", sans-serif;
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.ps-banner-content p {
-    margin: 0;
-}
-
-/* Ponto pulsante simulando gravação/sistema ativo */
+/* Ponto pulsante de status ativo */
 .ps-pulse-dot {
     width: 10px;
     height: 10px;
@@ -242,7 +160,6 @@ body[data-ps-aberto="sim"] .header {
     animation: pulseRed 1.5s infinite;
 }
 
-/* Botão dentro do banner */
 .ps-btn-banner {
     background-color: var(--black-collor);
     color: var(--primary-collor);
@@ -263,9 +180,7 @@ body[data-ps-aberto="sim"] .header {
     transform: scale(1.05);
 }
 
-/* =========================================
-   ESTILIZAÇÃO DO BOTÃO NO HEADER
-   ========================================= */
+/* Botão de destaque integrado à navegação */
 .ps-menu-btn {
     color: var(--primary-collor) !important;
     border: 1px solid var(--primary-collor);
@@ -274,7 +189,6 @@ body[data-ps-aberto="sim"] .header {
     margin-left: 1rem;
     font-weight: bold;
     text-shadow: 0 0 10px rgba(55, 211, 102, 0.4);
-    box-shadow: inset 0 0 0 rgba(55, 211, 102, 0);
     transition: all 0.3s ease;
 }
 
@@ -285,52 +199,117 @@ body[data-ps-aberto="sim"] .header {
     text-shadow: none;
 }
 
-/* --- ANIMAÇÕES --- */
 @keyframes pulseRed {
     0% { transform: scale(0.95); opacity: 0.8; }
     50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 15px #ff0000; }
     100% { transform: scale(0.95); opacity: 0.8; }
 }
 
-/* --- RESPONSIVIDADE PARA O BANNER E MENU --- */
-@media screen and (max-width: 768px) {
+/* =========================================
+   REGRAS DE RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================= */
+
+@media (max-width: 900px) {
+    .header {
+        padding: 0 1.5rem;
+    }
+
+    #btn-mobile {
+        display: flex;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border: none;
+        background: none;
+        cursor: pointer;
+        gap: 0.5rem;
+        color: var(--primary-collor);
+        z-index: 2000;
+    }
+
+    /* Interface de Menu Overlay Mobile */
+    .Navegacao-header {
+        display: block;
+        position: absolute;
+        width: 100%;
+        top: 90px;
+        right: 0;
+        background: rgba(13, 13, 13, 0.98);
+        backdrop-filter: blur(10px);
+        height: 0;
+        transition: 0.4s;
+        z-index: 1000;
+        visibility: hidden;
+        overflow-y: hidden;
+        border-bottom: 2px solid var(--primary-collor);
+    }
+
+    .Navegacao-header.active {
+        height: calc(100vh - 90px);
+        visibility: visible;
+        overflow-y: auto;
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+    }
+
+    .items-navegacao {
+        padding: 0.8rem 0;
+        margin: 0 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: block;
+        text-align: center;
+        font-size: 1.05rem;
+        font-family: "Conthrax", sans-serif;
+    }
+
+    .items-navegacao:hover {
+        background: rgba(55, 211, 102, 0.1);
+        padding-left: 10px;
+    }
+
+    /* Transformação do ícone hambúrguer em 'X' no estado ativo */
+    .Navegacao-header.active ~ #btn-mobile #hamburguer {
+        border-top-color: transparent;
+    }
     
-    /* Aumenta o distanciamento do Header para caber as duas linhas do banner */
+    .Navegacao-header.active ~ #btn-mobile #hamburguer::before {
+        transform: rotate(135deg);
+        top: 0px; 
+    }
+    
+    .Navegacao-header.active ~ #btn-mobile #hamburguer::after {
+        transform: rotate(-135deg);
+        top: -8px; 
+    }
+}
+
+@media screen and (max-width: 768px) {
     body[data-ps-aberto="sim"] .header {
         top: 60px; 
     }
 
-    /* O banner dobra de altura e permite quebra de linha */
     .ps-banner-global {
         height: 60px;
         padding: 5px;
     }
 
     .ps-banner-content {
-        flex-wrap: wrap; /* CORREÇÃO: Permite que texto e botão formem 2 linhas */
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 2px 8px; /* Distância entre as linhas */
+        gap: 2px 8px;
     }
 
     .ps-banner-content p {
-        display: block; /* CORREÇÃO: Volta a exibir o texto */
         font-size: 0.65rem;
-        text-align: center;
     }
 
     .ps-btn-banner {
         font-size: 0.7rem;
         padding: 4px 15px;
-        margin-top: 2px;
     }
     
-    /* Melhoria no botão dentro do menu hambúrguer */
     .ps-menu-btn {
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 1rem;
-        width: 80%; /* O botão do PS ganha largura para se destacar como a ação principal */
+        margin: 1rem auto 0 auto;
+        width: 80%;
         text-align: center;
-        justify-content: center;
     }
 }
