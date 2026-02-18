@@ -146,7 +146,7 @@ body[data-ps-aberto="sim"] .section-competicao {
 /* --- ELEMENTOS INTERNOS E INTERAÇÃO --- */
 
 .item-texto p {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     font-size: 0.9rem;
     color: #ccc;
     line-height: 1.6;
@@ -213,7 +213,7 @@ body[data-ps-aberto="sim"] .section-competicao {
 }
 
 .prova-btn strong { font-family: "Conthrax", sans-serif; font-size: 0.8rem; color: #fff; display: block; }
-.prova-btn span { font-size: 0.65rem; font-family: 'Poppins', sans-serif; }
+.prova-btn span { font-size: 0.65rem; font-family: 'Helvetica', sans-serif; }
 
 /* Integração de Mapa Dinâmico */
 .map-header {
@@ -251,7 +251,7 @@ body[data-ps-aberto="sim"] .section-competicao {
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 .detail-list li {
-    font-family: 'Poppins', sans-serif; font-size: 0.95rem; color: #ccc;
+    font-family: 'Helvetica', sans-serif; font-size: 0.95rem; color: #ccc;
     border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px; margin-bottom: 10px;
 }
 

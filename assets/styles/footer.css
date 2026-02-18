@@ -47,7 +47,7 @@
 
 /* --- BLOCO DE CONTATOS E REDES SOCIAIS --- */
 .endereco-footer {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     color: #ccc;
     line-height: 1.6;
     margin-bottom: 0.5rem;
@@ -96,7 +96,7 @@
 .items-navegacao-footer {
     text-decoration: none;
     color: #bbb;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     font-size: 1rem;
     transition: all 0.3s ease;
     width: fit-content;
@@ -151,7 +151,7 @@
     width: 100%;
     color: #666;
     font-size: 0.85rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Helvetica', sans-serif;
 }
 
 /* --- REGRAS DE RESPONSIVIDADE --- */

@@ -40,7 +40,7 @@ body[data-ps-aberto="sim"] .timer-competicao {
 }
 
 .conquistas-label {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     color: #888;
     font-size: 0.9rem;
     letter-spacing: 3px;
@@ -120,7 +120,7 @@ body[data-ps-aberto="sim"] .timer-competicao {
 }
 
 .trophy-info .category {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     font-size: 0.8rem;
     color: #aaa;
     letter-spacing: 1px;
@@ -204,7 +204,7 @@ body[data-ps-aberto="sim"] .timer-competicao {
 }
 
 .inovacao-text p {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     font-size: 0.8rem;
     color: #ccc;
     margin: 0;
@@ -296,7 +296,7 @@ body[data-ps-aberto="sim"] .timer-competicao {
 }
 
 #timer span:last-child {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 2px;
