@@ -115,20 +115,19 @@ body[data-ps-aberto="sim"] .Navegacao-header {
    SISTEMA DE PROCESSO SELETIVO (BANNER)
    ========================================= */
 
-.ps-banner-global, 
-.ps-menu-btn {
-    display: none; 
+.ps-banner-global, .ps-menu-btn{
+    display: none !important; 
 }
 
 body[data-ps-aberto="sim"] .ps-banner-global {
-    display: flex;
+    display: flex !important;
 }
 
 body[data-ps-aberto="sim"] .ps-menu-btn {
-    display: flex;
+    display: flex !important;
     align-items: center; 
     justify-content: center;
-    white-space: nowrap; /* Impede quebra de linha no botão */
+    white-space: nowrap;
 }
 
 body[data-ps-aberto="sim"] .header {
@@ -309,8 +308,13 @@ body[data-ps-aberto="sim"] .header {
     }
     
     .ps-menu-btn {
+        display: none !important;
         margin: 1rem auto 0 auto;
         width: 80%;
         text-align: center;
+    }
+
+    body[data-ps-aberto="sim"] .ps-menu-btn {
+        display: flex !important; 
     }
 }
