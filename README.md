@@ -39,11 +39,14 @@ A arquitetura do projeto segue um padrão estático simples e direto:
 ```text
 📦 static_site_Tesla
  ┣ 📂 assets
- ┃ ┣ 📂 css            # Arquivos de estilo (home.css, etc.)
- ┃ ┣ 📂 images         # Imagens otimizadas separadas por escopo
- ┃ ┃ ┣ 📂 equipe       # Fotos das gestões e carros antigos
- ┃ ┃ ┣ 📂 patrocinadores # Logos (UFMG, Lab. Tesla, WEG, etc.)
- ┃ ┃ ┗ 📂 sobre        # Imagens da história da equipe
- ┃ ┗ 📂 js             # Lógica de funcionamento (main.js)
- ┣ 📜 index.html       # Página principal (Single Page Application)
- ┗ 📜 README.md        # Documentação do repositório
+ ┃ ┣ 📂 css                 # Arquivos de estilo (home.css, etc.)
+ ┃ ┣ 📂 images              # Imagens otimizadas separadas por escopo
+ ┃ ┃ ┣ 📂 carros            # Fotos dos nossos protótipos
+ ┃ ┃ ┣ 📂 equipe            # Fotos das gestões e carros antigos
+ ┃ ┃ ┣ 📂 inicio            # Fotos de fundo da Home
+ ┃ ┃ ┣ 📂 logos             # Logos oficiais da equipe utilizadas na página
+ ┃ ┃ ┣ 📂 patrocinadores    # Logos dos nossos parceiros (UFMG, Lab. Tesla, WEG, etc.)
+ ┃ ┃ ┗ 📂 sobre             # Imagens da história da equipe
+ ┃ ┗ 📂 js                  # Lógica de funcionamento (main.js)
+ ┣ 📜 index.html            # Página principal (Single Page Application)
+ ┗ 📜 README.md             # Documentação do repositório

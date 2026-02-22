@@ -20,7 +20,7 @@
     height: 100vh;
     height: 100lvh; 
     z-index: 0;
-    background-image: url('../images/NK\ Mineirao\ desfocado.jpg');
+    background-image: url('../images/inicio/NK\ Mineirao\ desfocado.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -366,7 +366,7 @@ body[data-ps-aberto="sim"] .div-texto-home {
 
 @media screen and (max-width: 992px) {
     .home-background {
-        background-image: url('../images/mobile_NK\ Mineirao\ desfocado.jpg');
+        background-image: url('../images/inicio/mobile_NK\ Mineirao\ desfocado.jpg');
     }
 
     .div-texto-home {
