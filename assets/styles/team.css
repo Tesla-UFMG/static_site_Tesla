@@ -10,7 +10,7 @@
 }
 
 .section-equipe {
-    scroll-margin-top: 4rem;
+    scroll-margin-top: 2rem;
     min-height: auto; 
     padding: 6rem 1rem 6rem 1rem;
     
@@ -32,7 +32,7 @@
 
 /* Ajuste de scroll para interface com banner de recrutamento ativo */
 body[data-ps-aberto="sim"] .section-equipe {
-    scroll-margin-top: calc(4rem + 40px);
+    scroll-margin-top: calc(2rem + 40px);
 }
 
 /* --- TÍTULO DA SEÇÃO --- */

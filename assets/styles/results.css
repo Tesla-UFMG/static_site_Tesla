@@ -15,7 +15,7 @@
     background-size: 3.125rem 3.125rem; 
     
     padding: 7.5rem 0 7.5rem 0;
-    scroll-margin-top: 4rem;
+    scroll-margin-top: 2rem;
     overflow: visible; 
     z-index: 10;
     margin-top: -0.3125rem; 
@@ -24,7 +24,7 @@
 
 /* Ajuste de scroll para interface com banner de recrutamento ativo */
 body[data-ps-aberto="sim"] .timeline-section {
-    scroll-margin-top: calc(4rem + 40px);
+    scroll-margin-top: calc(2rem + 40px);
 }
 
 /* --- NAVEGAÇÃO LATERAL (DESKTOP STICKY) --- */

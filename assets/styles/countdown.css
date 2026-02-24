@@ -5,7 +5,7 @@
 .timer-competicao {
     padding: 4rem 0; 
     background-color: var(--black-collor);
-    scroll-margin-top: 6rem;
+    scroll-margin-top: 4rem;
     
     /* Fundo com padrão de grade técnica sutil */
     background-image: 
@@ -22,7 +22,7 @@
 
 /* Compensação de scroll para banner de Processo Seletivo ativo */
 body[data-ps-aberto="sim"] .timer-competicao {
-    scroll-margin-top: calc(6rem + 40px);
+    scroll-margin-top: calc(4rem + 40px);
 }
 
 /* --- BLOCO DE CONQUISTAS E INOVAÇÕES --- */
