@@ -1,17 +1,19 @@
 /* =========================================
-   GERENCIAMENTO DE INTERAÇÃO E NAVEGAÇÃO - HEADER
+   GERENCIAMENTO DE INTERAÇÃO E NAVEGAÇÃO - HEADER E HOME
    ========================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
     
+    // --- CONFIGURAÇÕES DE PERFORMANCE ---
+    const ATIVAR_SCROLL_SNAP = false; 
+
     // --- ESTADO DE CONTROLE DE NAVEGAÇÃO ---
     let isNavigating = false;
     let navTimeout;
 
     /**
      * Listener para links internos:
-     * Gerencia a trava de navegação para evitar conflitos entre 
-     * o scroll suave do navegador e a lógica de Scroll Snap.
+     * Gerencia a trava de navegação para evitar conflitos.
      */
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', () => {
@@ -29,10 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.items-navegacao');
     const headerElement = document.querySelector('.header');
 
-    /**
-     * Atualiza a classe 'active' nos links de navegação baseada 
-     * na posição vertical (scrollY) do documento.
-     */
     function highlightMenu() {
         const headerOffset = headerElement ? headerElement.offsetHeight : 100;
         let current = '';
@@ -44,12 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Caso base: topo da página
         if (window.scrollY < 100) { 
             current = 'home';
         }
         
-        // Caso base: final da página (Footer/Última Seção)
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
             if(sections.length > 0) {
                  current = sections[sections.length - 1].getAttribute('id');
@@ -72,26 +68,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 2. CONTROLE DE NAVEGAÇÃO DA LOGO E BOTÃO INÍCIO ---
     const homeLinks = document.querySelectorAll('a[href="#home"]');
 
-    if (homeLinks.length > 0) {
-        homeLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                window.scrollTo({
-                    top: window.innerHeight, 
-                    behavior: 'smooth'
-                });
+    homeLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const targetPosition = window.innerHeight;
 
-                // Fechamento automático do menu mobile se a função existir
-                if (typeof toggleMenu === 'function') {
-                    const nav = document.getElementById('nav');
-                    if (nav && nav.classList.contains('active')) {
-                        toggleMenu();
-                    }
-                }
+            window.scrollTo({
+                top: targetPosition, 
+                behavior: 'smooth'
             });
+
+            if (typeof toggleMenu === 'function') {
+                const nav = document.getElementById('nav');
+                if (nav && nav.classList.contains('active')) {
+                    toggleMenu();
+                }
+            }
         });
-    }
+    });
 
 
     // --- 3. OBSERVAÇÃO DE INTERSECÇÃO (ANIMAÇÃO DE TEXTO) ---
@@ -114,11 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let isAnimating = false; 
     let animationTimeout; 
 
-    /**
-     * Monitora o scroll na Hero Section para forçar o enquadramento 
-     * (Snap) para o topo ou para o início da segunda seção.
-     */
     window.addEventListener('scroll', () => {
+        if (!ATIVAR_SCROLL_SNAP) return;
+
         const currentScroll = window.scrollY;
         const heroHeight = window.innerHeight;
         
@@ -129,35 +122,24 @@ document.addEventListener('DOMContentLoaded', () => {
             lastScrollTop = safeCurrentScroll;
         }
 
-        // Bloqueio de execução durante animações ativas ou navegação via menu
         if (isAnimating || isNavigating) return;
 
         if (currentScroll < heroHeight) {
-
-            // Condição: Deslocamento descendente inicial
             if (direction === 'down' && currentScroll > 5 && currentScroll < (heroHeight - 5)) {
-                
                 isAnimating = true;
-                
                 window.scrollTo({
                     top: heroHeight, 
                     behavior: 'smooth'
                 });
-
                 clearTimeout(animationTimeout);
                 animationTimeout = setTimeout(() => { isAnimating = false; }, 800);
             } 
-            
-            // Condição: Retorno ascendente à Hero Section
             else if (direction === 'up' && currentScroll < (heroHeight - 5) && currentScroll > 5) {
-                
                 isAnimating = true;
-                
                 window.scrollTo({
                     top: 0, 
                     behavior: 'smooth'
                 });
-
                 clearTimeout(animationTimeout);
                 animationTimeout = setTimeout(() => { isAnimating = false; }, 800);
             }
