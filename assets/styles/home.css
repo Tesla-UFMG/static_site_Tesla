@@ -20,7 +20,7 @@
     height: 100vh;
     height: 100lvh; 
     z-index: 0;
-    background-image: url('../images/inicio/NK\ Mineirao\ desfocado.jpg');
+    background-image: url('../images/inicio/NK\ Mineirao\ desfocado.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -307,17 +307,28 @@ body[data-ps-aberto="sim"] .div-texto-home {
 }
 
 /* Estados de interação para Desktop (Hover) */
-.redes-sociais-home a:first-child:hover .contatos-home {
+
+/* Instagram */
+.redes-sociais-home a:nth-child(1):hover .contatos-home {
     background-color: #E1306C !important;
     border-color: #E1306C !important;
     box-shadow: 0 0 30px rgba(225, 48, 108, 0.5) !important;
     transform: translateY(-4px);
 }
 
-.redes-sociais-home a:last-child:hover .contatos-home {
+/* LinkedIn */
+.redes-sociais-home a:nth-child(2):hover .contatos-home {
     background-color: #0077B5 !important;
     border-color: #0077B5 !important;
     box-shadow: 0 0 30px rgba(0, 119, 181, 0.5) !important;
+    transform: translateY(-4px);
+}
+
+/* TikTok (Novo) */
+.redes-sociais-home a:nth-child(3):hover .contatos-home {
+    background-color: #000000 !important;
+    border-color: #ff0050 !important; /* Cor neon do TikTok */
+    box-shadow: 0 0 30px rgba(255, 0, 80, 0.6) !important;
     transform: translateY(-4px);
 }
 
@@ -366,7 +377,7 @@ body[data-ps-aberto="sim"] .div-texto-home {
 
 @media screen and (max-width: 992px) {
     .home-background {
-        background-image: url('../images/inicio/mobile_NK\ Mineirao\ desfocado.jpg');
+        background-image: url('../images/inicio/mobile_NK\ Mineirao\ desfocado.webp');
     }
 
     .div-texto-home {
